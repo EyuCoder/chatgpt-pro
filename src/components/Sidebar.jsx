@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import useDarkMode from '../hooks/useDarkMode'
 import { FaRobot } from 'react-icons/fa'
 import {
   MdClose, MdMenu, MdAdd, MdOutlineNightlight,
@@ -32,14 +33,7 @@ const Sidebar = () => {
       </div>
 
       <div className="flex flex-col justify-end h-screen">
-        <div className="nav-item-wrapper">
-          <span className="nav-item">
-            <div className="nav-icons">
-              <MdOutlineWbSunny />
-            </div>
-            <h1 className={`${!open && "hidden"}`}>Light mode</h1>
-          </span>
-        </div>
+        <DarkMode open={open} />
         <div className="nav-item-wrapper">
           <span className="nav-item">
             <div className="nav-icons">
@@ -58,6 +52,33 @@ const Sidebar = () => {
         </div>
       </div>
     </div >
+  )
+}
+
+const DarkMode = (props) => {
+  const [darkTheme, setDarkTheme] = useDarkMode();
+  const handleMode = () => setDarkTheme(!darkTheme);
+  return (
+    <div className="nav-item-wrapper">
+      <span className="nav-item" onClick={handleMode}>
+        {darkTheme ? (
+          <>
+            <div className="nav-icons">
+              <MdOutlineWbSunny />
+            </div>
+            <h1 className={`${!props.open && "hidden"}`}>Light mode</h1>
+          </>
+        ) : (
+          <>
+            <div className="nav-icons">
+              <MdOutlineNightlight />
+            </div>
+            <h1 className={`${!props.open && "hidden"}`}>Night mode</h1>
+          </>
+        )}
+
+      </span>
+    </div>
   )
 }
 
