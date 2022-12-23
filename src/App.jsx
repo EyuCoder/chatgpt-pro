@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import Sidebar from './components/Sidebar'
+import Chatview from './components/Chatview'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
 
   return (
-    <div className="text-3xl font-bold underline text-center p-10">
-      Hello I'M Evil ChatGPT 😈
+    <div className="flex">
+      <Sidebar />
+      <Chatview />
     </div>
-  )
-}
-
-export default App
+  );
+};
+export default App;

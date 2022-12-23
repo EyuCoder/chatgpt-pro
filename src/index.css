@@ -1,3 +1,58 @@
+@import-normalize;
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@layer components {
+
+  .app-bar{
+    @apply flex justify-around items-center;
+  }
+  
+  .app-title{
+    @apply text-white font-medium text-xl duration-200;
+  }
+  
+  .close-btn {
+    @apply cursor-pointer duration-500 text-gray-300
+    justify-end;
+  }
+
+  .app-logo{
+    @apply cursor-pointer duration-500 text-gray-300;
+  }
+
+  .nav-item-wrapper{
+    @apply flex justify-around;
+  }
+
+  .nav-item {
+    @apply p-4 flex h-12 items-center gap-x-4 w-screen 
+    rounded-md cursor-pointer 
+    hover:bg-light-white 
+    text-gray-300 text-base;
+  }
+
+  .nav-icons{
+    @apply cursor-pointer duration-500 text-gray-300
+    text-xl;
+  }
+}
+
+
+
+::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-500 dark:bg-green-400;
+}
