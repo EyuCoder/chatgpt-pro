@@ -45,6 +45,38 @@
     @apply cursor-pointer duration-500 text-gray-300
     text-xl;
   }
+
+
+  /* CHATVIEW */
+  .chatview{
+    @apply h-screen flex-1 p-7 relative bg-slate-50 dark:bg-slate-700;
+  }
+
+  .chatview__chatarea {
+    @apply h-[80vh] overflow-y-scroll flex flex-col shadow-md;
+  }
+  
+  .chatview__chatarea::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+  
+  .chatview__chatarea::-webkit-scrollbar-thumb {
+    background: #6649b8;
+  }
+  
+  form{
+    @apply flex items-center justify-center m-5 absolute bottom-0 left-0 right-0;
+    textarea: @apply resize-none;
+  }
+  
+  .chatview__textarea-message{
+   @apply w-screen min-h-[3.5rem] p-2 bg-orange-300 overflow-y-auto mr-2 resize-y rounded-xl;
+  }
+
+  .chatview__btn-send{
+    @apply flex-1 h-16 w-16 py-2 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
 }
 
 

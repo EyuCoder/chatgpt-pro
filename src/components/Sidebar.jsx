@@ -6,11 +6,11 @@ import {
   MdOutlineWbSunny, MdOutlineLogout, MdOutlineQuestionAnswer
 } from 'react-icons/md'
 
-const Sidebar = () => {
+const SideBar = () => {
   const [open, setOpen] = useState(true);
 
   return (
-    <div className={` ${open ? "w-72" : "w-20 "} flex flex-col gap-y-4 h-screen bg-dark-purple p-5 pt-8 relative duration-300`}>
+    <section className={` ${open ? "w-72" : "w-20 "} flex flex-col gap-y-4 h-screen bg-dark-purple p-5 pt-8 relative duration-300`}>
       <div className="app-bar">
         <div className={`app-logo ${!open && "scale-0 hidden"} duration-200`}>
           <FaRobot className='w-8 h-8' />
@@ -51,7 +51,7 @@ const Sidebar = () => {
           </span>
         </div>
       </div>
-    </div >
+    </section >
   )
 }
 
@@ -82,4 +82,4 @@ const DarkMode = (props) => {
   )
 }
 
-export default Sidebar
+export default SideBar

@@ -1,12 +1,12 @@
-import Sidebar from './components/Sidebar'
-import Chatview from './components/Chatview'
+import SideBar from './components/SideBar'
+import ChatView from './components/ChatView'
 
 const App = () => {
 
   return (
-    <div className="flex">
-      <Sidebar />
-      <Chatview />
+    <div className="flex transition duration-500 ease-in-out">
+      <SideBar />
+      <ChatView />
     </div>
   );
 };
