@@ -14,9 +14,9 @@
     "url": "https://github.com/eyucoder"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"npm run server\" \"vite\"",
     "build": "vite build",
-    "server": "nodemon server/server.js",
+    "server": "cd server && nodemon server.js",
     "client": "dev",
     "preview": "vite preview"
   },

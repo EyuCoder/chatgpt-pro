@@ -12,7 +12,7 @@ const ChatMessage = (props) => {
   return (
     <div key={id} className={`${ai && 'flex-row-reverse'} message`}>
       <div className='message__wrapper'>
-        <ReactMarkdown className='message__markdown'
+        <ReactMarkdown className={`message__markdown ${ai ? 'text-left' : 'text-right'}`}
           children={text}
           remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
           components={{
@@ -28,7 +28,7 @@ const ChatMessage = (props) => {
           }} />
 
 
-        <div className='message__createdAt'>{format(createdAt)}</div>
+        <div className={`${ai ? 'text-left' : 'text-right'} message__createdAt`}>{format(createdAt)}</div>
       </div>
 
       <div className="message__pic">
