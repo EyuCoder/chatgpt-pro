@@ -27,9 +27,9 @@ app.post('/', async (req, res) => {
 
     const response = await openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Hello`,
+      prompt: `${prompt}. make sure to reply in markdown`,
       temperature: 0.5,
-      max_tokens: 5000,
+      max_tokens: 3000,
       top_p: 1,
       frequency_penalty: 0.5,
       presence_penalty: 0,
@@ -38,6 +38,7 @@ app.post('/', async (req, res) => {
     res.status(200).send({
       bot: response.data.choices[0].text
     });
+    console.log(response.data.choices[0].text)
 
   } catch (error) {
     console.error(error)
@@ -45,4 +46,4 @@ app.post('/', async (req, res) => {
   }
 })
 
-app.listen(3001, () => console.log('server is running on port: 3001'))
+app.listen(5000, () => console.log('server is running on port: 5000'))

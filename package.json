@@ -1,17 +1,26 @@
 {
   "name": "chatgpt-clone",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "a ChatGPT clone using OpenAIs AI Model",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eyucoder/chatgpt-clone"
+  },
+  "author": {
+    "name": "eyucoder",
+    "email": "eyueldaniel0921@gmail.com",
+    "url": "https://github.com/eyucoder"
+  },
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"vite\"",
+    "dev": "vite",
     "build": "vite build",
     "server": "nodemon server/server.js",
     "client": "dev",
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.2.1",
     "concurrently": "^7.6.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -23,7 +32,8 @@
     "react-icons": "^4.7.1",
     "react-markdown": "^8.0.4",
     "react-syntax-highlighter": "^15.5.0",
-    "remark-gfm": "^3.0.1"
+    "remark-gfm": "^3.0.1",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
@@ -33,5 +43,21 @@
     "postcss": "^8.4.20",
     "tailwindcss": "^3.2.4",
     "vite": "^4.0.0"
-  }
+  },
+  "keywords": [
+    "openai",
+    "chatgpt",
+    "text-davinci-003",
+    "gpt",
+    "gpt3",
+    "machine learning",
+    "conversational ai",
+    "conversation",
+    "chatbot",
+    "chat",
+    "bot",
+    "ai",
+    "ml",
+    "bot"
+  ]
 }
