@@ -14,19 +14,12 @@
     "url": "https://github.com/eyucoder"
   },
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"vite\"",
+    "dev": "vite",
     "build": "vite build",
-    "server": "cd server && nodemon server.js",
-    "client": "dev",
     "preview": "vite preview"
   },
   "dependencies": {
     "concurrently": "^7.6.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "nodemon": "^2.0.20",
-    "openai": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
