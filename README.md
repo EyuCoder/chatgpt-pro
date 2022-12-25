@@ -33,6 +33,7 @@ npm run dev
 ## credits
 - [OpenAI](https://openai.com) for creating [ChatGPT](https://openai.com/blog/chatgpt/)
 
-## License
+## 📝 License MIT © [Eyuel](https://linkedin.com/in/eyuel-daniel)
 
-MIT © [Eyuel Daniel](https://linkedin.com/in/eyuel-daniel)
+>This project is released under the MIT license.
+See [LICENSE](./LICENSE) for details.
