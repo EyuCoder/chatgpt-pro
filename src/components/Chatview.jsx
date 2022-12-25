@@ -7,6 +7,7 @@ import { ChatContext } from '../context/chatContext';
  */
 const ChatView = () => {
   const messagesEndRef = useRef();
+  const inputRef = useRef();
   const [formValue, setFormValue] = useState('');
   const [messages, addMessage] = useContext(ChatContext);
 
@@ -76,6 +77,13 @@ const ChatView = () => {
     scrollToBottom()
   }, [messages]);
 
+  /**
+   * Focuses the TextArea input to when the component is first rendered.
+   */
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   return (
     <div className="chatview">
       <main className='chatview__chatarea'>
@@ -87,7 +95,7 @@ const ChatView = () => {
         <span ref={messagesEndRef}></span>
       </main>
       <form className='form' onSubmit={sendMessage}>
-        <textarea className='chatview__textarea-message' value={formValue} onChange={(e) => setFormValue(e.target.value)} />
+        <textarea ref={inputRef} className='chatview__textarea-message' value={formValue} onChange={(e) => setFormValue(e.target.value)} />
         <button type="submit" className='chatview__btn-send' disabled={!formValue}>Send</button>
       </form>
     </div>
