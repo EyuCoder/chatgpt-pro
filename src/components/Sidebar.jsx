@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import useDarkMode from '../hooks/useDarkMode'
-import { FaRobot } from 'react-icons/fa'
 import {
   MdClose, MdMenu, MdAdd, MdOutlineNightlight,
   MdOutlineWbSunny, MdOutlineLogout, MdOutlineQuestionAnswer
@@ -13,7 +12,7 @@ const SideBar = () => {
     <section className={` ${open ? "w-72" : "w-20 "} sidebar`}>
       <div className="sidebar__app-bar">
         <div className={`sidebar__app-logo ${!open && "scale-0 hidden"}`}>
-          <FaRobot className='w-8 h-8' />
+          <span className='w-8 h-8'><img src="/bot.ico" alt="" /></span>
         </div>
         <h1 className={`sidebar__app-title ${!open && "scale-0 hidden"}`}>
           ChatGPT
