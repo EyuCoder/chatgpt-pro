@@ -12,8 +12,9 @@ npm install
 ```
 
 ## Configuration
-1. rename `.env.example` to `.env`
-2. add your openai api key inside `.env`
+1. `cd server`
+2. rename `.env.example` to `.env`
+3. add your openai api key inside `.env`
 
 ## run
 ```bash
@@ -28,3 +29,10 @@ npm run dev
   - react-icons
   - react-markdown
   - express
+
+## credits
+- [OpenAI](https://openai.com) for creating [ChatGPT](https://openai.com/blog/chatgpt/)
+
+## License
+
+MIT © [Eyuel Daniel](https://linkedin.com/in/eyuel-daniel)
