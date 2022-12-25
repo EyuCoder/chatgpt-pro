@@ -31,7 +31,7 @@ npm run dev
   - express
 
 ## credits
-- [OpenAI](https://openai.com) for creating [ChatGPT](https://openai.com/blog/chatgpt/)
+- [OpenAI](https://openai.com) for creating [ChatGPT](https://chat.openai.com/chat)
 
 ## 📝 License © [Eyuel](https://linkedin.com/in/eyuel-daniel)
 
