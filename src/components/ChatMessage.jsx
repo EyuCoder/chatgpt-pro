@@ -6,6 +6,16 @@ import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import remarkGfm from 'remark-gfm'
 import { format } from 'timeago.js'
 
+/**
+ * A chat message component that displays a message with a timestamp and an icon.
+ *
+ * @param {Object} props - The properties for the component.
+ * @param {Object} props.message - The message object to display.
+ * @param {string} props.message.id - The unique ID of the message.
+ * @param {string} props.message.createdAt - The timestamp of the message.
+ * @param {string} props.message.text - The text content of the message.
+ * @param {boolean} [props.message.ai=false] - Whether the message was sent by an AI or the user.
+ */
 const ChatMessage = (props) => {
   const { id, createdAt, text, ai = false } = props.message
 
