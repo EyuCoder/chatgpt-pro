@@ -12,9 +12,10 @@ npm install
 ```
 
 ## Configuration
-1. `cd server`
-2. rename `.env.example` to `.env`
-3. add your openai api key inside `.env`
+1. obtain you openai api key from [here](https://openai.com)
+2. `cd server`
+3. rename `.env.example` to `.env`
+4. add your openai api key inside `.env`
 
 ## run
 ```bash
