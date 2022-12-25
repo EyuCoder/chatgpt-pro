@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import useDarkMode from '../hooks/useDarkMode'
 import {
   MdClose, MdMenu, MdAdd, MdOutlineNightlight,
   MdOutlineWbSunny, MdOutlineLogout, MdOutlineQuestionAnswer
 } from 'react-icons/md'
+import { ChatContext } from '../context/chatContext';
 
 /**
  * A sidebar component that displays a list of nav items and a toggle 
@@ -13,6 +14,11 @@ import {
  */
 const SideBar = () => {
   const [open, setOpen] = useState(true);
+  const [messages, addMessage, clearMessages] = useContext(ChatContext);
+  /**
+   * Toggles the dark mode.
+   */
+  const clearChat = () => clearMessages()
 
   return (
     <section className={` ${open ? "w-72" : "w-20 "} sidebar`}>
@@ -29,7 +35,7 @@ const SideBar = () => {
         </div>
       </div>
       <div className="nav">
-        <span className='nav__item  bg-light-white'>
+        <span className='nav__item  bg-light-white' onClick={clearChat}>
           <div className='nav__icons'>
             <MdAdd />
           </div>

@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import ChatMessage from './ChatMessage';
-import useMessageCollection from '../hooks/useMessageCollection';
+import { ChatContext } from '../context/chatContext';
 
 /**
  * A chat view component that displays a list of messages and a form for sending new messages.
@@ -8,7 +8,7 @@ import useMessageCollection from '../hooks/useMessageCollection';
 const ChatView = () => {
   const messagesEndRef = useRef();
   const [formValue, setFormValue] = useState('');
-  const { messages, addMessage } = useMessageCollection([]);
+  const [messages, addMessage] = useContext(ChatContext);
 
   /**
    * Scrolls the chat area to the bottom.
@@ -79,6 +79,7 @@ const ChatView = () => {
   return (
     <div className="chatview">
       <main className='chatview__chatarea'>
+
         {messages.map((message, index) => (
           <ChatMessage key={index} message={message} />
         ))}
