@@ -3,7 +3,6 @@
   "private": true,
   "version": "1.0.0",
   "description": "a ChatGPT clone using OpenAIs AI Model",
-  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/eyucoder/chatgpt-clone"
@@ -14,7 +13,8 @@
     "url": "https://github.com/eyucoder"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"npm run server\" \"vite\"",
+    "server": "cd server && npm run start",
     "build": "vite build",
     "preview": "vite preview"
   },

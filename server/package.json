@@ -8,7 +8,7 @@
     "node": "v18.12.1"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon server",
     "server": "nodemon server"
   },
   "keywords": [],
