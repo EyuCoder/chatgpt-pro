@@ -3,6 +3,10 @@ import cors from 'cors';
 import { Configuration, OpenAIApi } from 'openai';
 import * as dotenv from 'dotenv';
 
+import Filter from 'bad-words';
+
+const filter = new Filter();
+
 // Load environment variables from .env file
 try {
   dotenv.config();
@@ -53,9 +57,12 @@ app.post('/', async (req, res) => {
   try {
     // Call OpenAI API
     const prompt = req.body.prompt;
+    const cleanPrompt = filter.isProfane(prompt) ? filter.clean(prompt) : prompt;
+    console.log(cleanPrompt);
+
     const response = await openai.createCompletion({
       model: 'text-davinci-003',
-      prompt: `${prompt}.
+      prompt: `${cleanPrompt}.
       I want you to reply to my questions in a well formatted markdown format.
       `,
       temperature: 0.5,
