@@ -6,9 +6,8 @@ import eslint from '@rollup/plugin-eslint'
 export default defineConfig({
   plugins: [
     {
-      ...eslint(),
-      enforce: 'pre',
-      apply: 'build',
+      ...eslint({ include: '/src/**/*.+(js|ts|jsx|tsx)' }),
+      enforce: 'pre'
     },
     react()
   ],
