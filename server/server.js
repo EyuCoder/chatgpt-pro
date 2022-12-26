@@ -55,8 +55,9 @@ app.post('/', async (req, res) => {
     const prompt = req.body.prompt;
     const response = await openai.createCompletion({
       model: 'text-davinci-003',
-      prompt: `I want you to reply to my questions in a well formatted markdown format.
-      ${prompt}.`,
+      prompt: `${prompt}.
+      I want you to reply to my questions in a well formatted markdown format.
+      `,
       temperature: 0.5,
       max_tokens: 3000,
       top_p: 1,
