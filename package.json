@@ -13,7 +13,8 @@
     "url": "https://github.com/eyucoder"
   },
   "scripts": {
-    "dev": "concurrently \"npm run server\" \"vite\"",
+    "dev": "vite",
+    "start": "concurrently \"npm run server\" \"vite\"",
     "server": "cd server && npm run start",
     "build": "vite build",
     "preview": "vite preview"
@@ -29,6 +30,7 @@
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
+    "@rollup/plugin-eslint": "^9.0.1",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
     "@vitejs/plugin-react": "^3.0.0",
