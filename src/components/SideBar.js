@@ -11,7 +11,7 @@ import DarkMode from './DarkMode';
  */
 const SideBar = () => {
   const [open, setOpen] = useState(true);
-  const [messages, addMessage, clearMessages] = useContext(ChatContext);
+  const [, , clearMessages] = useContext(ChatContext);
   /**
    * Toggles the dark mode.
    */
