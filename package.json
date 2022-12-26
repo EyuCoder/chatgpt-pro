@@ -1,58 +1,45 @@
 {
-  "name": "chatgpt-clone",
+  "name": "react-template",
+  "version": "0.1.0",
   "private": true,
-  "version": "1.0.0",
-  "description": "a ChatGPT clone using OpenAIs AI Model",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/eyucoder/chatgpt-clone"
-  },
-  "author": {
-    "name": "eyucoder",
-    "email": "eyueldaniel0921@gmail.com",
-    "url": "https://github.com/eyucoder"
-  },
-  "scripts": {
-    "dev": "vite",
-    "start": "concurrently \"npm run server\" \"vite\"",
-    "server": "cd server && npm run start",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
   "dependencies": {
-    "concurrently": "^7.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-markdown": "^8.0.4",
+    "react-scripts": "5.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "remark-gfm": "^3.0.1",
     "timeago.js": "^4.0.2"
   },
+  "scripts": {
+    "start": "react-scripts start",
+    "server": "nodemon server/server.js",
+    "dev": "concurrently \"npm start\" \"npm run server\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
-    "@rollup/plugin-eslint": "^9.0.1",
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.9",
-    "@vitejs/plugin-react": "^3.0.0",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.20",
-    "tailwindcss": "^3.2.4",
-    "vite": "^4.0.0"
-  },
-  "keywords": [
-    "openai",
-    "chatgpt",
-    "text-davinci-003",
-    "gpt",
-    "gpt3",
-    "machine learning",
-    "conversational ai",
-    "conversation",
-    "chatbot",
-    "chat",
-    "bot",
-    "ai",
-    "ml",
-    "bot"
-  ]
+    "tailwindcss": "^3.2.4"
+  }
 }
