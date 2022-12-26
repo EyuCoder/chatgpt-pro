@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { MdClose, MdMenu, MdAdd, MdOutlineLogout, MdOutlineQuestionAnswer } from 'react-icons/md';
 import { ChatContext } from '../context/chatContext';
 import DarkMode from './DarkMode';
+import { auth } from '../firebase'
 
 /**
  * A sidebar component that displays a list of nav items and a toggle 
@@ -16,6 +17,7 @@ const SideBar = () => {
    * Toggles the dark mode.
    */
   const clearChat = () => clearMessages()
+  const SignOut = () => auth.currentUser && auth.signOut()
 
   return (
     <section className={` ${open ? "w-72" : "w-20 "} sidebar`}>
@@ -51,7 +53,7 @@ const SideBar = () => {
           </span>
         </div>
         <div className="nav">
-          <span className="nav__item">
+          <span className="nav__item" onClick={SignOut}>
             <div className="nav__icons">
               <MdOutlineLogout />
             </div>

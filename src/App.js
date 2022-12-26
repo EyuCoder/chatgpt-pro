@@ -1,15 +1,23 @@
-import SideBar from './components/SideBar';
-import ChatView from './components/ChatView';
+import Home from './pages/Home';
+import SignIn from './pages/SignIn';
 import { ChatContextProvider } from './context/chatContext';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
+import { auth } from './firebase';
+
 
 const App = () => {
+  const [user] = useAuthState(auth);
   return (
     <ChatContextProvider>
-      <div className="flex transition duration-500 ease-in-out">
-        <SideBar />
-        <ChatView />
+      <div>
+
+        {user ? <Home /> : <SignIn />}
+
       </div>
-    </ChatContextProvider>
+    </ChatContextProvider >
   );
-};
+}
+
+
 export default App;

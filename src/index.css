@@ -122,6 +122,20 @@
     @apply h-10 w-10 bg-slate-200 mr-4 rounded-full flex items-center justify-center text-xl;
   }
 
+  /* Signin Page */
+
+  .signin{
+    @apply flex flex-col justify-center items-center h-screen w-screen overflow-hidden bg-slate-600;
+  }
+
+  .signin__btn{
+    @apply bg-slate-100 hover:bg-slate-300 duration-300 justify-center text-black font-bold p-2 rounded-sm shadow-lg;
+  }
+  
+  .signin__tos{
+    @apply text-white text-center font-bold p-2;
+  }
+
 }
 
 ::-webkit-scrollbar {
