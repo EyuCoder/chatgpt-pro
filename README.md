@@ -1,5 +1,7 @@
 # ChatGPT clone
 
+*you can checkout the app [here](https://chatgpt.eyucoder.com/)*
+
 > a demo of the App
 
   <img src="screenshots/demo.gif" width="800px" alt="android icon"/>
