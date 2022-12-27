@@ -1,4 +1,4 @@
-# ChatGPT clone
+# ChatGPT clone with DALL.E image generation model
 
 *you can checkout the app [here](https://chatgpt.eyucoder.com/)*
 
@@ -32,6 +32,9 @@ npm run dev
   - react-icons
   - react-markdown
   - express
+
+
+***Give it a ⭐ if you liked it 😜***
 
 ## credits
 - [OpenAI](https://openai.com) for creating [ChatGPT](https://chat.openai.com/chat)
