@@ -50,7 +50,7 @@ const ChatView = () => {
     const newMsg = formValue
     const aiModel = selected
 
-    const BASE_URL = 'http://localhost:3001/'
+    const BASE_URL = 'https://chatgpt-clone-kbwx.onrender.com/'
     const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
     const POST_URL = BASE_URL + PATH;
 
