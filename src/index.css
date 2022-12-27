@@ -15,7 +15,7 @@
 
   /* SideBar */
   .sidebar{
-    @apply flex flex-col gap-y-4 h-screen bg-slate-600 p-5 pt-8 relative duration-300;
+    @apply flex flex-col gap-y-4 h-screen bg-dark-grey p-5 pt-8 relative duration-500;
   }
 
   .sidebar__app-bar{
@@ -23,12 +23,11 @@
   }
   
   .sidebar__app-title{
-    @apply text-white font-medium text-xl duration-200;
+    @apply text-white font-medium text-xl duration-500;
   }
   
   .sidebar__btn-close {
-    @apply cursor-pointer duration-500 text-gray-300
-    justify-end;
+    @apply cursor-pointer duration-500 text-white justify-end;
   }
 
   .sidebar__btn-icon{
@@ -36,7 +35,7 @@
   }
 
   .sidebar__app-logo{
-    @apply cursor-pointer duration-500 text-gray-300;
+    @apply cursor-pointer duration-500 text-white;
   }
 
 /* SideBar Nav */
@@ -48,11 +47,11 @@
     @apply p-4 flex h-12 items-center gap-x-4 w-screen 
     rounded-md cursor-pointer 
     hover:bg-light-white
-    text-gray-300 text-base;
+    text-white text-base;
   }
 
   .nav__icons{
-    @apply cursor-pointer duration-500 text-gray-300
+    @apply cursor-pointer duration-500 text-white
     text-xl;
   }
 
@@ -63,51 +62,54 @@
 
   /* CHATVIEW */
   .chatview{
-    @apply h-screen flex-1 p-7 duration-500 overflow-hidden relative bg-slate-50 dark:bg-slate-700;
+    @apply h-screen flex-1 p-7 duration-500 overflow-hidden relative bg-slate-200
+  dark:bg-light-grey;
   }
 
   .chatview__chatarea {
-    @apply h-[80vh] overflow-y-scroll flex flex-col shadow-md;
-  }
-  
-  .chatview__chatarea::-webkit-scrollbar {
-    width: 0.25rem;
-  }
-  
-  .chatview__chatarea::-webkit-scrollbar-thumb {
-    background: #6649b8;
+    @apply h-[80vh] w-full overflow-y-scroll flex flex-col m-2 shadow-md;
   }
   
   .form{
-    @apply flex items-center justify-center m-5 absolute bottom-0 left-0 right-0
-    text-black dark:text-slate-200 duration-500;
+    @apply flex justify-between flex-col items-stretch sm:flex-row m-2 absolute bottom-0 left-0 right-0
+    text-black dark:text-white duration-500;
   }
 
+  .dropdown {
+    @apply h-16 px-4 rounded-xl bg-transparent hover:bg-slate-200 hover:dark:bg-dark-grey border border-light-grey
+    dark:border-dark-grey focus:ring-offset-indigo-200 text-black dark:text-white transition 
+    ease-in-out duration-500 text-center text-base font-semibold shadow-md 
+    focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .message__img {
+    @apply rounded-lg shadow-lg bg-cover bg-gray-400 h-[512px] w-[512px] duration-500 ease-out;
+    }
   .chatview__textarea-message{
-    @apply text-xl w-screen max-h-[20rem] min-h-[3.5rem] p-2 dark:bg-slate-600 border border-spacing-2 border-slate-500 overflow-y-auto mr-2
+    @apply text-xl bg-transparent h-16 sm:w-screen max-h-[20rem] min-h-[4rem] p-2 dark:bg-light-grey
+    border border-light-grey dark:border-dark-grey overflow-y-hidden mx-2
     resize-y rounded-xl;
   }
 
   .chatview__btn-send{
-    @apply flex-1 h-16 w-16 py-2 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700
-    focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition 
-    ease-in duration-200 text-center text-base font-semibold shadow-md 
+    @apply h-16 px-4 rounded-xl bg-transparent hover:bg-slate-200 hover:dark:bg-dark-grey border border-light-grey
+    dark:border-dark-grey focus:ring-offset-indigo-200 text-black dark:text-white transition 
+    ease-in-out duration-500 text-center text-base font-semibold shadow-md 
     focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 
   .chatview__btn-send:disabled{
-    @apply bg-slate-400 hover:bg-slate-500 focus:ring-offset-indigo-200
-    text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md
+    @apply hover:bg-light-grey transition ease-in duration-500 text-center text-base font-semibold shadow-md
   }
 
 
   /* ChatMessage */
   .message{
-    @apply  gap-2 p-5 m-5 flex items-start justify-between;
+    @apply  gap-2 p-5 m-2 flex items-start justify-between;
   }
 
   .message__wrapper{
-    @apply flex-1 w-96 flex-wrap overflow-hidden;
+    @apply flex-1 w-screen flex-wrap overflow-hidden;
   }
 
   .message__markdown{
@@ -129,7 +131,10 @@
   }
 
   .signin__btn{
-    @apply bg-slate-100 hover:bg-slate-300 duration-300 justify-center text-black font-bold p-2 rounded-sm shadow-lg;
+    @apply h-16 px-4 rounded-xl bg-slate-100 hover:bg-slate-300 border
+     border-light-grey focus:ring-offset-indigo-200 text-black transition 
+    ease-in-out duration-500 text-center text-base font-semibold shadow-md 
+    focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
   
   .signin__tos{
@@ -139,9 +144,9 @@
 }
 
 ::-webkit-scrollbar {
-  background-color: transparent;
+  @apply bg-transparent w-1;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 dark:bg-green-400 rounded-xl;
+  @apply bg-light-grey dark:bg-dark-grey rounded-xl;
 }

@@ -43,10 +43,10 @@ app.get('/', (req, res) => {
 });
 
 /**
- * POST /
+ * POST /davinci
  * Returns a response from OpenAI's text completion model.
  */
-app.post('/', async (req, res) => {
+app.post('/davinci', async (req, res) => {
   // Validate request body
   if (!req.body.prompt) {
     return res.status(400).send({
@@ -62,9 +62,10 @@ app.post('/', async (req, res) => {
 
     const response = await openai.createCompletion({
       model: 'text-davinci-003',
-      prompt: `${cleanPrompt}.
-      I want you to reply to my questions in a well formatted markdown format.
-      `,
+      prompt: `
+I want you to reply to all my questions in markdown format. 
+Q: ${cleanPrompt}?.
+A: `,
       temperature: 0.5,
       max_tokens: 3000,
       top_p: 1,
@@ -72,9 +73,37 @@ app.post('/', async (req, res) => {
       presence_penalty: 0,
     });
 
+    console.log(response.data.choices[0].text)
     // Return response from OpenAI API
     res.status(200).send({
       bot: response.data.choices[0].text,
+    });
+  } catch (error) {
+    // Log error and return a generic error message
+    console.error(error);
+    res.status(500).send({
+      error: 'Something went wrong',
+    });
+  }
+});
+
+/**
+ * POST /dalle
+ * Returns a response from OpenAI's image generation model.
+ */
+app.post('/dalle', async (req, res) => {
+  const prompt = req.body.prompt;
+
+  try {
+    const response = await openai.createImage({
+      prompt: `${prompt}`,
+      n: 1,
+      size: "512x512",
+    });
+
+    console.log(response.data.data[0].url)
+    res.status(200).send({
+      bot: response.data.data[0].url
     });
   } catch (error) {
     // Log error and return a generic error message

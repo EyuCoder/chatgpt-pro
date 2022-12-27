@@ -9,6 +9,8 @@ const ChatView = () => {
   const messagesEndRef = useRef();
   const inputRef = useRef();
   const [formValue, setFormValue] = useState('');
+  const options = ['ChatGPT', 'DALL·E']
+  const [selected, setSelected] = useState(options[0])
   const [messages, addMessage] = useContext(ChatContext);
 
   /**
@@ -24,13 +26,14 @@ const ChatView = () => {
    * @param {string} newValue - The text of the new message.
    * @param {boolean} [ai=false] - Whether the message was sent by an AI or the user.
    */
-  const updateMessage = (newValue, ai = false) => {
+  const updateMessage = (newValue, ai = false, selected) => {
     const id = Date.now() + Math.floor(Math.random() * 1000000)
     const newMsg = {
       id: id,
       createdAt: Date.now(),
       text: newValue,
-      ai: ai
+      ai: ai,
+      selected: `${selected}`
     }
 
     addMessage(newMsg);
@@ -45,10 +48,16 @@ const ChatView = () => {
     e.preventDefault();
 
     const newMsg = formValue
-    setFormValue('')
-    updateMessage(newMsg)
+    const aiModel = selected
 
-    const response = await fetch('https://chatgpt-clone-kbwx.onrender.com/', {
+    const BASE_URL = 'http://localhost:3001/'
+    const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
+    const POST_URL = BASE_URL + PATH;
+
+    setFormValue('')
+    updateMessage(newMsg, false, aiModel)
+
+    const response = await fetch(POST_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -61,7 +70,7 @@ const ChatView = () => {
     const data = await response.json();
     if (response.ok) {
       // The request was successful
-      data.bot && updateMessage(data.bot, true);
+      data.bot && updateMessage(data.bot, true, aiModel);
     } else {
       // The request failed
       window.alert(`openAI is returning an error: ${response.status + response.statusText} 
@@ -95,6 +104,10 @@ const ChatView = () => {
         <span ref={messagesEndRef}></span>
       </main>
       <form className='form' onSubmit={sendMessage}>
+        <select value={selected} onChange={(e) => setSelected(e.target.value)} className="dropdown" >
+          <option>{options[0]}</option>
+          <option>{options[1]}</option>
+        </select>
         <textarea ref={inputRef} className='chatview__textarea-message' value={formValue} onChange={(e) => setFormValue(e.target.value)} />
         <button type="submit" className='chatview__btn-send' disabled={!formValue}>Send</button>
       </form>

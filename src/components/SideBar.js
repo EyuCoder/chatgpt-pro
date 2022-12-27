@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { MdClose, MdMenu, MdAdd, MdOutlineLogout, MdOutlineQuestionAnswer } from 'react-icons/md';
 import { ChatContext } from '../context/chatContext';
+import bot from '../assets/bot.ico'
 import DarkMode from './DarkMode';
 import { auth } from '../firebase'
 
@@ -23,7 +24,7 @@ const SideBar = () => {
     <section className={` ${open ? "w-72" : "w-20 "} sidebar`}>
       <div className="sidebar__app-bar">
         <div className={`sidebar__app-logo ${!open && "scale-0 hidden"}`}>
-          <span className='w-8 h-8'><img src="/bot.ico" alt="" /></span>
+          <span className='w-8 h-8'><img src={bot} alt="" /></span>
         </div>
         <h1 className={`sidebar__app-title ${!open && "scale-0 hidden"}`}>
           ChatGPT
@@ -45,12 +46,12 @@ const SideBar = () => {
       <div className="nav__bottom">
         <DarkMode open={open} />
         <div className="nav">
-          <span className="nav__item">
+          <a href='https://github.com/EyuCoder/chatgpt-clone' className="nav__item">
             <div className="nav__icons">
               <MdOutlineQuestionAnswer />
             </div>
             <h1 className={`${!open && "hidden"}`}>Update & FAQ</h1>
-          </span>
+          </a>
         </div>
         <div className="nav">
           <span className="nav__item" onClick={SignOut}>
