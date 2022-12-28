@@ -6,6 +6,7 @@
 
   <img src="screenshots/demo.gif" width="800px" alt="android icon"/>
 
+**Give it a ⭐ if you liked it 😜**
 
 ## install
 
@@ -24,17 +25,15 @@ npm install
 npm run dev
 ```
 
-
 ***Tech used***
-  - openai
-  - react with vite
+  - openai API
+  - react
   - tailwindcss
   - react-icons
   - react-markdown
+  - redis
   - express
 
-
-***Give it a ⭐ if you liked it 😜***
 
 ## credits
 - [OpenAI](https://openai.com) for creating [ChatGPT](https://chat.openai.com/chat)

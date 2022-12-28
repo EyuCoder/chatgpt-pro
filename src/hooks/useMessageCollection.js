@@ -1,23 +1,4 @@
 import { useState } from 'react'
-import { firestore, auth } from '../firebase'
-import { collection, addDoc } from "firebase/firestore";
-
-/**
- * Saves a message to the "messages" collection in Firestore.
- *
- * @param {Object} msg - The message to save.
- * @return {Promise} A promise that resolves when the message has been saved.
- */
-const saveToFirestore = async (msg) => {
-  const email = auth.currentUser.email;
-  try {
-    await addDoc(collection(firestore, "messages"), { ...msg, email });
-    // console.log("Document written with ID: ", docRef.id);
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
-}
-
 
 /**
  * A custom hook for managing the conversation between the user and the AI.
@@ -40,7 +21,6 @@ const useMessageCollection = () => {
   */
   const addMessage = (message) => {
     setMessages((prev) => [...prev, message]);
-    saveToFirestore(message);
   }
 
   const clearMessages = () => setMessages([initialMsg])
