@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from 'react'
 import ChatMessage from './ChatMessage';
 import { ChatContext } from '../context/chatContext';
 import { auth } from '../firebase'
-import { MdComputer } from 'react-icons/md'
+import Thinking from './Thinking';
 
 /**
  * A chat view component that displays a list of messages and a form for sending new messages.
@@ -111,18 +111,7 @@ const ChatView = () => {
           <ChatMessage key={index} message={message} />
         ))}
 
-        {thinking && <div className='message' ref={messagesEndRef}>
-          <div className='message__wrapper flex'>
-            <div className="message__pic">
-              <MdComputer />
-            </div>
-            <div className='text-left message__createdAt'>
-              <div className="animate-pulse duration-1000 h-12 w-12 text-white">
-                thinking...
-              </div>
-            </div>
-          </div>
-        </div>}
+        {thinking && <Thinking />}
 
         <span ref={messagesEndRef}></span>
       </main>

@@ -133,6 +133,10 @@
     @apply h-10 w-10 bg-slate-200 mr-4 rounded-full flex items-center justify-center text-xl;
   }
 
+  .message__thinking{
+    @apply animate-pulse duration-1000 h-12 w-12 dark:text-white text-black text-xl
+  }
+
   /* Signin Page */
 
   .signin{
