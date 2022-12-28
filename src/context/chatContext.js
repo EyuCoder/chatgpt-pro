@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 import useMessageCollection from '../hooks/useMessageCollection';
 
 /**
@@ -16,9 +16,10 @@ const ChatContext = createContext({});
  */
 const ChatContextProvider = (props) => {
   const [messages, setMessages, clearMessages] = useMessageCollection([]);
+  const [limit, setLimit] = useState(-1);
 
   return (
-    <ChatContext.Provider value={[messages, setMessages, clearMessages]}>
+    <ChatContext.Provider value={[messages, setMessages, clearMessages, limit, setLimit]}>
       {props.children}
     </ChatContext.Provider>
   )

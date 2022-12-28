@@ -2,8 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import { Configuration, OpenAIApi } from 'openai';
 import * as dotenv from 'dotenv';
-
 import Filter from 'bad-words';
+import { rateLimitMiddleware } from './middlewares/rateLimitMiddleware.js';
+
 
 const filter = new Filter();
 
@@ -26,11 +27,16 @@ const openai = new OpenAIApi(configuration);
 // Create Express app
 const app = express();
 
+
 // Parse JSON in request body
 app.use(express.json());
 
 // Enable CORS
 app.use(cors());
+
+// ratelimiter middleware function
+app.use('/davinci', rateLimitMiddleware);
+app.use('/dalle', rateLimitMiddleware);
 
 /**
  * GET /
@@ -67,16 +73,17 @@ I want you to reply to all my questions in markdown format.
 Q: ${cleanPrompt}?.
 A: `,
       temperature: 0.5,
-      max_tokens: 3000,
-      top_p: 1,
+      max_tokens: 500,
+      top_p: 0.5,
       frequency_penalty: 0.5,
-      presence_penalty: 0,
+      presence_penalty: 0.2,
     });
 
     console.log(response.data.choices[0].text)
     // Return response from OpenAI API
     res.status(200).send({
       bot: response.data.choices[0].text,
+      limit: res.body.limit
     });
   } catch (error) {
     // Log error and return a generic error message
@@ -98,12 +105,13 @@ app.post('/dalle', async (req, res) => {
     const response = await openai.createImage({
       prompt: `${prompt}`,
       n: 1,
-      size: "512x512",
+      size: "256x256",
     });
 
     console.log(response.data.data[0].url)
     res.status(200).send({
-      bot: response.data.data[0].url
+      bot: response.data.data[0].url,
+      limit: res.body.limit
     });
   } catch (error) {
     // Log error and return a generic error message

@@ -13,7 +13,7 @@ import { auth } from '../firebase'
  */
 const SideBar = () => {
   const [open, setOpen] = useState(true);
-  const [, , clearMessages] = useContext(ChatContext);
+  const [, , clearMessages, limit] = useContext(ChatContext);
   /**
    * Toggles the dark mode.
    */
@@ -27,7 +27,7 @@ const SideBar = () => {
           <span className='w-8 h-8'><img src={bot} alt="" /></span>
         </div>
         <h1 className={`sidebar__app-title ${!open && "scale-0 hidden"}`}>
-          ChatGPT
+          GPT3-Chatbot
         </h1>
         <div className='sidebar__btn-close' onClick={() => setOpen(!open)}>
           {open ? <MdClose className='sidebar__btn-icon' /> : <MdMenu className='sidebar__btn-icon' />}
@@ -42,6 +42,13 @@ const SideBar = () => {
           <h1 className={`${!open && "hidden"}`}>New chat</h1>
         </span>
       </div>
+      {limit >= 0 &&
+        <div className="nav__msg">
+          <p className='nav__p'>
+            you have {limit} requests left today.
+
+          </p>
+        </div>}
 
       <div className="nav__bottom">
         <DarkMode open={open} />

@@ -59,6 +59,14 @@
     @apply flex flex-col justify-end h-screen;
   }
 
+  .nav__msg{
+    @apply flex bg-yellow-900 rounded-xl p-4 text-white;
+  }
+
+  .nav__p{
+    @apply font-mono;
+  }
+
 
   /* CHATVIEW */
   .chatview{
@@ -84,7 +92,8 @@
 
   .message__img {
     @apply rounded-lg shadow-lg bg-cover bg-gray-400 h-[512px] w-[512px] duration-500 ease-out;
-    }
+  }
+
   .chatview__textarea-message{
     @apply text-xl bg-transparent h-16 sm:w-screen max-h-[20rem] min-h-[4rem] p-2 dark:bg-light-grey
     border border-light-grey dark:border-dark-grey overflow-y-hidden mx-2

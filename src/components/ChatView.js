@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import ChatMessage from './ChatMessage';
 import { ChatContext } from '../context/chatContext';
+import { auth } from '../firebase'
+import { MdComputer } from 'react-icons/md'
 
 /**
  * A chat view component that displays a list of messages and a form for sending new messages.
@@ -9,9 +11,11 @@ const ChatView = () => {
   const messagesEndRef = useRef();
   const inputRef = useRef();
   const [formValue, setFormValue] = useState('');
+  const [thinking, setThinking] = useState(false);
   const options = ['ChatGPT', 'DALL·E']
   const [selected, setSelected] = useState(options[0])
-  const [messages, addMessage] = useContext(ChatContext);
+  const [messages, addMessage, , , setLimit] = useContext(ChatContext);
+  const email = auth.currentUser.email;
 
   /**
    * Scrolls the chat area to the bottom.
@@ -54,6 +58,7 @@ const ChatView = () => {
     const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
     const POST_URL = BASE_URL + PATH;
 
+    setThinking(true)
     setFormValue('')
     updateMessage(newMsg, false, aiModel)
 
@@ -63,20 +68,25 @@ const ChatView = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        prompt: newMsg
+        prompt: newMsg,
+        email: email
       })
     });
 
     const data = await response.json();
     if (response.ok) {
       // The request was successful
+      setLimit(data.limit)
       data.bot && updateMessage(data.bot, true, aiModel);
     } else {
       // The request failed
       window.alert(`openAI is returning an error: ${response.status + response.statusText} 
       please try again later`);
       console.log(`Request failed with status code ${response.status}`);
+      setThinking(false)
     }
+
+    setThinking(false)
   }
 
   /**
@@ -84,7 +94,7 @@ const ChatView = () => {
    */
   useEffect(() => {
     scrollToBottom()
-  }, [messages]);
+  }, [messages, thinking]);
 
   /**
    * Focuses the TextArea input to when the component is first rendered.
@@ -100,6 +110,19 @@ const ChatView = () => {
         {messages.map((message, index) => (
           <ChatMessage key={index} message={message} />
         ))}
+
+        {thinking && <div className='message' ref={messagesEndRef}>
+          <div className='message__wrapper flex'>
+            <div className="message__pic">
+              <MdComputer />
+            </div>
+            <div className='text-left message__createdAt'>
+              <div class="animate-pulse duration-1000 h-12 w-12 text-white">
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>}
 
         <span ref={messagesEndRef}></span>
       </main>
