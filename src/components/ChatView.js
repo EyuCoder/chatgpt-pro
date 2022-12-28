@@ -118,7 +118,7 @@ const ChatView = () => {
             </div>
             <div className='text-left message__createdAt'>
               <div className="animate-pulse duration-1000 h-12 w-12 text-white">
-                Loading...
+                thinking...
               </div>
             </div>
           </div>
