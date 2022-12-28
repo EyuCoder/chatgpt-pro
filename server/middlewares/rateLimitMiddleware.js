@@ -35,7 +35,7 @@ export const rateLimitMiddleware = (req, res, next) => {
     // const rateUsageLeft = rateLimit - parseInt(count, 10);
     const rateUsageLeft = rateLimit - (count ? parseInt(count, 10) : 0);
 
-    // Set the rate usage left in the response header
+    // Set the rate usage left in the response body
     res.body = {};
     res.body.limit = rateUsageLeft - 1;
 
@@ -43,7 +43,8 @@ export const rateLimitMiddleware = (req, res, next) => {
 
     // If the request count is above the rate limit, return an error
     if (count && rateUsageLeft <= 0) {
-      return res.status(429).send('Too Many Requests');
+      res.body.limit = 0
+      return res.status(429).send(res.body);
     }
 
     // Increment the request count for the email address

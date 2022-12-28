@@ -74,10 +74,14 @@ const ChatView = () => {
     });
 
     const data = await response.json();
+    setLimit(data.limit)
+
+    console.log(response.status)
     if (response.ok) {
       // The request was successful
-      setLimit(data.limit)
       data.bot && updateMessage(data.bot, true, aiModel);
+    } else if (response.status === 429) {
+      setThinking(false)
     } else {
       // The request failed
       window.alert(`openAI is returning an error: ${response.status + response.statusText} 
