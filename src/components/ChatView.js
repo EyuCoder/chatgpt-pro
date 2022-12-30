@@ -16,6 +16,7 @@ const ChatView = () => {
   const [selected, setSelected] = useState(options[0])
   const [messages, addMessage, , , setLimit] = useContext(ChatContext);
   const email = auth.currentUser.email;
+  const picUrl = auth.currentUser.photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'
 
   /**
    * Scrolls the chat area to the bottom.
@@ -112,7 +113,7 @@ const ChatView = () => {
       <main className='chatview__chatarea'>
 
         {messages.map((message, index) => (
-          <ChatMessage key={index} message={message} />
+          <ChatMessage key={index} message={{ ...message, picUrl }} />
         ))}
 
         {thinking && <Thinking />}

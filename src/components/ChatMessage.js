@@ -13,13 +13,14 @@ import Image from './Image'
  * @param {Object} props - The properties for the component.
  */
 const ChatMessage = (props) => {
-  const { id, createdAt, text, ai = false, selected } = props.message
+  const { id, createdAt, text, ai = false, selected, picUrl } = props.message
+  console.log(picUrl)
 
   return (
     <div key={id} className={`${ai && 'flex-row-reverse'} message`}>
       {
         selected === 'DALL·E' && ai ?
-          <Image text={text} />
+          <Image url={text} />
           :
           <div className='message__wrapper'>
             <ReactMarkdown className={`message__markdown ${ai ? 'text-left' : 'text-right'}`}
@@ -42,7 +43,10 @@ const ChatMessage = (props) => {
           </div>}
 
       <div className="message__pic">
-        {ai ? <MdComputer /> : <MdPersonOutline />}
+        {
+          ai ? <MdComputer /> :
+            <img className='cover w-10 h-10 rounded-full' loading='lazy' src={picUrl} alt='profile pic' />
+        }
       </div>
     </div>
   )

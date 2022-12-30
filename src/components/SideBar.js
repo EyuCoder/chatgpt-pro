@@ -13,12 +13,19 @@ import { auth } from '../firebase'
  */
 const SideBar = () => {
   const [open, setOpen] = useState(true);
-  const [, , clearMessages, limit] = useContext(ChatContext);
+  const [, , clearMessages, limit, setLimit] = useContext(ChatContext);
   /**
    * Toggles the dark mode.
    */
   const clearChat = () => clearMessages()
-  const SignOut = () => auth.currentUser && auth.signOut()
+  const SignOut = () => {
+    if (auth.currentUser) {
+      auth.signOut()
+      clearChat()
+      setLimit(-1)
+      window.sessionStorage.clear()
+    }
+  }
 
   return (
     <section className={` ${open ? "w-72" : "w-20 "} sidebar`}>
