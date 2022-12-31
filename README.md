@@ -19,6 +19,7 @@ npm install
 2. `cd server`
 3. rename `.env.example` to `.env`
 4. add your openai api key inside `.env`
+5. make sure you have added `.env` to your `.gitignore` file
 
 ## run
 ```bash
