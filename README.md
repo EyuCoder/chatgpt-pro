@@ -9,8 +9,10 @@
 **Give it a ⭐ if you liked it 😜**
 
 ## install
-
 ```bash
+npm install
+
+cd server
 npm install
 ```
 
