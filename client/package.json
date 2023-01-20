@@ -1,0 +1,78 @@
+{
+  "name": "react-template",
+  "version": "1.0.1",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eyucoder/chatgpt-clone"
+  },
+  "author": {
+    "name": "eyucoder",
+    "email": "eyueldaniel0921@gmail.com",
+    "url": "https://github.com/eyucoder"
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0",
+    "firebase": "^9.15.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-firebase-hooks": "^5.1.1",
+    "react-icons": "^4.7.1",
+    "react-markdown": "^8.0.4",
+    "react-scripts": "5.0.1",
+    "react-syntax-highlighter": "^15.5.0",
+    "remark-gfm": "^3.0.1",
+    "timeago.js": "^4.0.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "server": "nodemon ../server/server.js",
+    "dev": "concurrently \"npm start\" \"npm run server\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "dotenv-webpack": "^8.0.1",
+    "postcss": "^8.4.20",
+    "tailwindcss": "^3.2.4"
+  },
+  "keywords": [
+    "openai",
+    "chatgpt",
+    "text-davinci-003",
+    "dalle",
+    "dall.e",
+    "dalle2",
+    "gpt",
+    "gpt3",
+    "image generation",
+    "machine learning",
+    "conversational ai",
+    "conversation",
+    "chatbot",
+    "chat",
+    "bot",
+    "ai",
+    "ml",
+    "bot"
+  ]
+}

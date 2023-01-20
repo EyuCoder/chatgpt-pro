@@ -6,24 +6,34 @@
 
 https://user-images.githubusercontent.com/26358650/212903093-08c58f9b-25b5-440d-89e7-7a4b1f36df5a.mp4
 
-<img src="screenshots/demo.gif" width="500px" alt="android icon"/>
+<img src="_pics/demo.gif" width="700px" alt="android icon"/>
 
 **Give it a ⭐ if you liked it 😜**
 
 ## install
-```bash
-npm install
 
-cd server
-npm install
+### client
+```bash
+cd client && npm i
+```
+### server
+```bash
+cd server && npm i
 ```
 
 ## Configuration
+### Server
 1. obtain your openai api key from [here](https://openai.com)
 2. `cd server`
-3. rename `.env.example` to `.env`
+3. copy `.env.example` to `.env`
 4. add your openai api key inside `.env`
 5. make sure you have added `.env` to your `.gitignore` file
+
+### Client
+1. `cd client`
+2. copy `.env.example` to `.env`
+3. add your fiirebase config and server url
+4. make sure you have added `.env` to your `.gitignore` file
 
 ## run
 ```bash
