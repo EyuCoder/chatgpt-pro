@@ -11,8 +11,10 @@ https://user-images.githubusercontent.com/26358650/212903093-08c58f9b-25b5-440d-
 **Give it a ⭐ if you liked it 😜**
 
 ## install
-
 ```bash
+npm install
+
+cd server
 npm install
 ```
 
