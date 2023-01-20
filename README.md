@@ -34,8 +34,20 @@ cd server && npm i
 4. make sure you have added `.env` to your `.gitignore` file
 
 ## run
+### to run client and server concurrently
 ```bash
+cd client
 npm run dev
+```
+### to run client only
+```bash
+cd client
+npm start
+```
+### to run server only
+```bash
+cd server
+npm start
 ```
 
 ***Tech used***
