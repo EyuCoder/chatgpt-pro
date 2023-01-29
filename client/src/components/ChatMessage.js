@@ -39,7 +39,7 @@ const ChatMessage = (props) => {
               }} />
 
 
-            <div className={`${ai ? 'text-left' : 'text-right'} message__createdAt`}>{moment(createdAt).fromNow()}</div>
+            <div className={`${ai ? 'text-left' : 'text-right'} message__createdAt`}>{moment(createdAt).calendar()}</div>
           </div>}
 
       <div className="message__pic">
