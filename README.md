@@ -50,6 +50,11 @@ cd server
 npm start
 ```
 
+## To setup locally with no firebase and redis change branch to [local_setup](https://github.com/EyuCoder/chatgpt-clone/tree/local_setup)
+```bash
+git checkout local_setup
+```
+
 ***Tech used***
   - openai API
   - react
