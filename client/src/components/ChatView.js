@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from 'react'
 import ChatMessage from './ChatMessage'
 import { ChatContext } from '../context/chatContext'
-import { auth } from '../firebase'
 import Thinking from './Thinking'
 
 /**
@@ -14,9 +13,7 @@ const ChatView = () => {
   const [thinking, setThinking] = useState(false)
   const options = ['ChatGPT', 'DALL·E']
   const [selected, setSelected] = useState(options[0])
-  const [messages, addMessage, , , setLimit] = useContext(ChatContext)
-  const email = auth.currentUser.email
-  const picUrl = auth.currentUser.photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'
+  const [messages, addMessage] = useContext(ChatContext)
 
   /**
    * Scrolls the chat area to the bottom.
@@ -70,12 +67,10 @@ const ChatView = () => {
       },
       body: JSON.stringify({
         prompt: newMsg,
-        email: email
       })
     })
 
     const data = await response.json()
-    setLimit(data.limit)
 
     console.log(response.status)
     if (response.ok) {
@@ -113,7 +108,7 @@ const ChatView = () => {
       <main className='chatview__chatarea'>
 
         {messages.map((message, index) => (
-          <ChatMessage key={index} message={{ ...message, picUrl }} />
+          <ChatMessage key={index} message={{ ...message }} />
         ))}
 
         {thinking && <Thinking />}

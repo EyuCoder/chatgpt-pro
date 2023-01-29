@@ -3,7 +3,6 @@ import { MdClose, MdMenu, MdAdd, MdOutlineLogout, MdOutlineQuestionAnswer } from
 import { ChatContext } from '../context/chatContext'
 import bot from '../assets/bot.ico'
 import DarkMode from './DarkMode'
-import { auth } from '../firebase'
 
 /**
  * A sidebar component that displays a list of nav items and a toggle 
@@ -13,18 +12,14 @@ import { auth } from '../firebase'
  */
 const SideBar = () => {
   const [open, setOpen] = useState(true)
-  const [, , clearMessages, limit, setLimit] = useContext(ChatContext)
+  const [, , clearMessages] = useContext(ChatContext)
   /**
    * Toggles the dark mode.
    */
   const clearChat = () => clearMessages()
   const SignOut = () => {
-    if (auth.currentUser) {
-      auth.signOut()
-      clearChat()
-      setLimit(-1)
-      window.sessionStorage.clear()
-    }
+    clearChat()
+    window.sessionStorage.clear()
   }
 
   return (
@@ -49,13 +44,6 @@ const SideBar = () => {
           <h1 className={`${!open && "hidden"}`}>New chat</h1>
         </span>
       </div>
-      {limit >= 0 &&
-        <div className={`nav__msg ${!open && "scale-0 hidden"}`}>
-          <p className='nav__p'>
-            you have {limit} requests left today.
-
-          </p>
-        </div>}
 
       <div className="nav__bottom">
         <DarkMode open={open} />

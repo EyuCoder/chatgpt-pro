@@ -3,9 +3,6 @@ import cors from 'cors'
 import { Configuration, OpenAIApi } from 'openai'
 import * as dotenv from 'dotenv'
 import Filter from 'bad-words'
-import { rateLimitMiddleware } from './middlewares/rateLimitMiddleware.js'
-
-const allowedOrigins = ['http://eyucoder.com', 'https://chatgpt.eyucoder.com', 'http://localhost']
 
 const filter = new Filter()
 
@@ -34,10 +31,6 @@ app.use(express.json())
 
 // Enable CORS
 app.use(cors())
-
-// ratelimiter middleware function
-app.use('/davinci', rateLimitMiddleware)
-app.use('/dalle', rateLimitMiddleware)
 
 /**
  * GET /
@@ -84,7 +77,6 @@ A: `,
     // Return response from OpenAI API
     res.status(200).send({
       bot: response.data.choices[0].text,
-      limit: res.body.limit
     })
   } catch (error) {
     // Log error and return a generic error message
@@ -100,6 +92,7 @@ A: `,
  * Returns a response from OpenAI's image generation model.
  */
 app.post('/dalle', async (req, res) => {
+
   const prompt = req.body.prompt
 
   try {
@@ -112,7 +105,6 @@ app.post('/dalle', async (req, res) => {
     console.log(response.data.data[0].url)
     res.status(200).send({
       bot: response.data.data[0].url,
-      limit: res.body.limit
     })
   } catch (error) {
     // Log error and return a generic error message

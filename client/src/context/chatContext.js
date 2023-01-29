@@ -1,11 +1,11 @@
-import { createContext, useState } from 'react';
-import useMessageCollection from '../hooks/useMessageCollection';
+import { createContext } from 'react'
+import useMessageCollection from '../hooks/useMessageCollection'
 
 /**
  * ChatContext is a context object that is used to share collection of messages
  * between components
  */
-const ChatContext = createContext({});
+const ChatContext = createContext({})
 
 /**
  * ChatContextProvider is a functional component that serves as a provider for the ChatContext.
@@ -15,11 +15,10 @@ const ChatContext = createContext({});
  * @returns {JSX.Element} A ChatContext.Provider element.
  */
 const ChatContextProvider = (props) => {
-  const [messages, setMessages, clearMessages] = useMessageCollection([]);
-  const [limit, setLimit] = useState(-1);
+  const [messages, setMessages, clearMessages] = useMessageCollection([])
 
   return (
-    <ChatContext.Provider value={[messages, setMessages, clearMessages, limit, setLimit]}>
+    <ChatContext.Provider value={[messages, setMessages, clearMessages]}>
       {props.children}
     </ChatContext.Provider>
   )
