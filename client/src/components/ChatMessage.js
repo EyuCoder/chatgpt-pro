@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import remarkGfm from 'remark-gfm'
-import { format } from 'timeago.js'
+import moment from 'moment'
 import Image from './Image'
 
 /**
@@ -39,7 +39,7 @@ const ChatMessage = (props) => {
               }} />
 
 
-            <div className={`${ai ? 'text-left' : 'text-right'} message__createdAt`}>{format(createdAt)}</div>
+            <div className={`${ai ? 'text-left' : 'text-right'} message__createdAt`}>{moment(createdAt).fromNow()}</div>
           </div>}
 
       <div className="message__pic">
