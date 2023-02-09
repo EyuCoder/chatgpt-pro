@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { MdClose, MdMenu, MdAdd, MdOutlineLogout, MdOutlineQuestionAnswer } from 'react-icons/md'
 import { ChatContext } from '../context/chatContext'
 import bot from '../assets/bot.ico'
@@ -14,9 +14,19 @@ import { auth } from '../firebase'
 const SideBar = () => {
   const [open, setOpen] = useState(true)
   const [, , clearMessages, limit, setLimit] = useContext(ChatContext)
-  /**
-   * Toggles the dark mode.
-   */
+
+  function handleResize() {
+    window.innerWidth <= 640 ? setOpen(false) : setOpen(true)
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize)
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
+
   const clearChat = () => clearMessages()
   const SignOut = () => {
     if (auth.currentUser) {
@@ -28,9 +38,9 @@ const SideBar = () => {
   }
 
   return (
-    <section className={` ${open ? "w-72" : "w-20 "} sidebar`}>
+    <section className={` ${open ? "w-72" : "w-16"} sidebar`}>
       <div className="sidebar__app-bar">
-        <div className={`sidebar__app-logo ${!open && "scale-0 hidden"}`}>
+        <div className={`sidebar__app-logo ${!open && "scale-0 hidden"} `}>
           <span className='w-8 h-8'><img src={bot} alt="" /></span>
         </div>
         <h1 className={`sidebar__app-title ${!open && "scale-0 hidden"}`}>

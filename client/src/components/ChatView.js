@@ -15,7 +15,7 @@ const ChatView = () => {
   const options = ['ChatGPT', 'DALL·E']
   const [selected, setSelected] = useState(options[0])
   const [messages, addMessage, , , setLimit] = useContext(ChatContext)
-  const email = auth.currentUser.email
+  const user = auth.currentUser.uid
   const picUrl = auth.currentUser.photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'
 
   /**
@@ -70,7 +70,7 @@ const ChatView = () => {
       },
       body: JSON.stringify({
         prompt: newMsg,
-        email: email
+        user: user
       })
     })
 

@@ -15,7 +15,7 @@
 
   /* SideBar */
   .sidebar{
-    @apply flex flex-col gap-y-4 h-screen bg-dark-grey p-5 pt-8 relative duration-500;
+    @apply flex flex-col gap-y-4 h-screen bg-dark-grey p-5 pt-8 relative duration-300;
   }
 
   .sidebar__app-bar{
@@ -23,11 +23,11 @@
   }
   
   .sidebar__app-title{
-    @apply text-white font-medium text-xl duration-500;
+    @apply text-white font-medium text-xl duration-300;
   }
   
   .sidebar__btn-close {
-    @apply cursor-pointer duration-500 text-white justify-end;
+    @apply cursor-pointer duration-300 text-white justify-end;
   }
 
   .sidebar__btn-icon{
@@ -35,7 +35,7 @@
   }
 
   .sidebar__app-logo{
-    @apply cursor-pointer duration-500 text-white;
+    @apply cursor-pointer duration-300 text-white;
   }
 
 /* SideBar Nav */
@@ -51,7 +51,7 @@
   }
 
   .nav__icons{
-    @apply cursor-pointer duration-500 text-white
+    @apply cursor-pointer duration-300 text-white
     text-xl;
   }
 
@@ -70,52 +70,52 @@
 
   /* CHATVIEW */
   .chatview{
-    @apply h-screen flex-1 p-2 duration-500 overflow-hidden relative bg-slate-200
+    @apply flex flex-col h-screen duration-300 overflow-hidden relative bg-slate-200
   dark:bg-light-grey;
   }
 
   .chatview__chatarea {
-    @apply h-[85vh] w-full overflow-y-scroll flex flex-col m-2 shadow-md;
+    @apply flex-grow w-full overflow-y-scroll flex flex-col m-2 shadow-md;
   }
   
   .form{
-    @apply flex justify-between flex-col items-stretch sm:flex-row m-2 absolute bottom-0 left-0 right-0
-    text-black dark:text-white duration-500;
+    @apply flex justify-between flex-col items-stretch sm:flex-row m-2 bottom-0 left-0 right-0
+    text-black dark:text-white duration-300;
   }
 
   .dropdown {
-    @apply h-16 px-4 rounded-xl bg-transparent hover:bg-slate-200 hover:dark:bg-dark-grey border border-light-grey
+    @apply dark:bg-light-grey h-16 px-4 rounded-xl bg-light-white hover:bg-slate-200 hover:dark:bg-dark-grey border border-light-grey
     dark:border-dark-grey focus:ring-offset-indigo-200 text-black dark:text-white transition 
-    ease-in-out duration-500 text-center text-base font-semibold shadow-md 
+    ease-in-out duration-300 text-center text-base font-semibold shadow-md 
     focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 
   .message__img {
-    @apply rounded-lg shadow-lg bg-cover bg-gray-400 h-[512px] w-[512px] duration-500 ease-out;
+    @apply rounded-lg shadow-lg bg-cover bg-gray-400 h-[512px] w-[512px] duration-300 ease-out;
   }
 
   .chatview__textarea-message{
-    @apply text-xl bg-transparent h-16 sm:w-screen max-h-[20rem] min-h-[4rem] p-2 dark:bg-light-grey
+    @apply bg-light-white text-xl h-16 sm:w-screen max-h-[20rem] min-h-[4rem] p-2 dark:bg-light-grey
     border border-light-grey dark:border-dark-grey overflow-y-hidden mx-2
     focus:ring-offset-indigo-200 focus:ring-2 focus:ring-offset-2
     resize-y rounded-xl;
   }
 
   .chatview__btn-send{
-    @apply h-16 px-4 rounded-xl bg-transparent hover:bg-slate-200 hover:dark:bg-dark-grey border border-light-grey
+    @apply h-16 px-4 rounded-xl hover:bg-slate-200 hover:dark:bg-dark-grey border border-light-grey
     dark:border-dark-grey focus:ring-offset-indigo-200 text-black dark:text-white transition 
-    ease-in-out duration-500 text-center text-base font-semibold shadow-md 
+    ease-in-out duration-300 text-center text-base font-semibold shadow-md 
     focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 
   .chatview__btn-send:disabled{
-    @apply hover:bg-light-grey transition ease-in duration-500 text-center text-base font-semibold shadow-md
+    @apply hover:bg-light-grey transition ease-in duration-300 text-center text-base font-semibold shadow-md
   }
 
 
   /* ChatMessage */
   .message{
-    @apply  gap-2 p-5 m-2 flex items-start justify-between;
+    @apply  gap-2 py-2 m-2 flex items-start justify-between;
   }
 
   .message__wrapper{
@@ -131,7 +131,7 @@
   }
 
   .message__pic{
-    @apply h-10 w-10 bg-slate-200 mr-4 rounded-full flex items-center justify-center text-xl;
+    @apply h-10 w-10 bg-slate-200 mx-2 rounded-full flex items-center justify-center text-xl;
   }
 
   .message__thinking{
@@ -151,7 +151,7 @@
   .signin__btn{
     @apply h-12 px-4 rounded-xl bg-slate-100 hover:bg-slate-300 border
      border-light-grey focus:ring-offset-indigo-200 text-black transition 
-    ease-in-out duration-500 text-center text-base font-semibold shadow-md 
+    ease-in-out duration-300 text-center text-base font-semibold shadow-md 
     focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
   
