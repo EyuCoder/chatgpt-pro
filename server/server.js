@@ -63,7 +63,7 @@ app.post('/davinci', async (req, res) => {
 
   try {
     // Call OpenAI API
-    const prompt = req.body.prompt
+    const { prompt, user } = req.body
     const cleanPrompt = filter.isProfane(prompt) ? filter.clean(prompt) : prompt
     console.log(cleanPrompt)
 
@@ -73,6 +73,7 @@ app.post('/davinci', async (req, res) => {
 I want you to reply to all my questions in markdown format. 
 Q: ${cleanPrompt}?.
 A: `,
+      user: user,
       temperature: 0.5,
       max_tokens: 500,
       top_p: 0.5,
@@ -81,6 +82,7 @@ A: `,
     })
 
     console.log(response.data.choices[0].text)
+    console.log(user)
     // Return response from OpenAI API
     res.status(200).send({
       bot: response.data.choices[0].text,
@@ -100,11 +102,12 @@ A: `,
  * Returns a response from OpenAI's image generation model.
  */
 app.post('/dalle', async (req, res) => {
-  const prompt = req.body.prompt
+  const { prompt, user } = req.body
 
   try {
     const response = await openai.createImage({
       prompt: `${prompt}`,
+      user: user,
       n: 1,
       size: "256x256",
     })
