@@ -67,12 +67,14 @@ app.post('/davinci', async (req, res) => {
     const cleanPrompt = filter.isProfane(prompt) ? filter.clean(prompt) : prompt
     console.log(cleanPrompt)
 
-    const response = await openai.createCompletion({
-      model: 'text-davinci-003',
-      prompt: `
-I want you to reply to all my questions in markdown format. 
-Q: ${cleanPrompt}?.
-A: `,
+    const response = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        {"role": "system", "content": "you're an a AI assistant that replies to all my questions in markdown format."},
+        {"role": "user", "content": "hi"},
+        {"role": "assistant", "content": "Hi! How can I help you?"},
+        {"role": "user", "content": `${cleanPrompt}?`}
+    ],
       user: user,
       temperature: 0.5,
       max_tokens: 500,
@@ -81,11 +83,11 @@ A: `,
       presence_penalty: 0.2,
     })
 
-    console.log(response.data.choices[0].text)
+    console.log(response.data.choices[0].message.content)
     console.log(user)
     // Return response from OpenAI API
     res.status(200).send({
-      bot: response.data.choices[0].text,
+      bot: response.data.choices[0].message.content,
       limit: res.body.limit
     })
   } catch (error) {
