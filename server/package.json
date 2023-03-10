@@ -4,9 +4,6 @@
   "description": "a ChatGPT clone using OpenAIs AI Model",
   "main": "server.js",
   "type": "module",
-  "engines": {
-    "node": "v18.12.1"
-  },
   "scripts": {
     "start": "nodemon server",
     "server": "nodemon server"
