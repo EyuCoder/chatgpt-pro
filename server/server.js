@@ -75,10 +75,10 @@ app.post('/davinci', async (req, res) => {
       presence_penalty: 0.2,
     })
 
-    console.log(response.data.choices[0].text)
+    console.log(response.data.choices[0].message.content)
     // Return response from OpenAI API
     res.status(200).send({
-      bot: response.data.choices[0].text,
+      bot: response.data.choices[0].message.content,
     })
   } catch (error) {
     // Log error and return a generic error message
