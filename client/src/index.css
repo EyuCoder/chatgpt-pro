@@ -75,7 +75,7 @@
   }
 
   .chatview__chatarea {
-    @apply flex-grow w-full overflow-y-scroll flex flex-col m-2 shadow-md;
+    @apply flex-grow w-full overflow-y-scroll flex flex-col shadow-md;
   }
   
   .form{
@@ -117,7 +117,7 @@
 
   /* ChatMessage */
   .message{
-    @apply  py-5 gap-2 mr-2 flex items-start justify-between;
+    @apply  py-5 gap-2 flex items-start justify-between;
   }
 
   .message__wrapper{
