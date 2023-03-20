@@ -133,7 +133,7 @@
   }
 
   .message__pic{
-    @apply h-10 w-10 bg-slate-200 mx-2 rounded-full flex items-center justify-center text-xl;
+    @apply h-8 w-8 bg-slate-200 mx-2 rounded-full flex items-center justify-center text-xl;
   }
 
   .message__thinking{
