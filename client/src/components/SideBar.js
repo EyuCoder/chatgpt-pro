@@ -16,7 +16,7 @@ const SideBar = () => {
   const [, , clearMessages, limit, setLimit] = useContext(ChatContext)
 
   function handleResize() {
-    window.innerWidth <= 640 ? setOpen(false) : setOpen(true)
+    window.innerWidth <= 720 ? setOpen(false) : setOpen(true)
   }
 
   useEffect(() => {

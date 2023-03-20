@@ -133,14 +133,14 @@ const ChatView = () => {
           <option>{options[0]}</option>
           <option>{options[1]}</option>
         </select>
+        <div className='flex items-stretch w-full justify-between'>
         <textarea ref={inputRef} className='chatview__textarea-message' value={formValue} 
         onKeyDown={handleKeyDown}
         onChange={(e) => setFormValue(e.target.value)} />
         <button type="submit" className='chatview__btn-send' disabled={!formValue}>
-          
           <MdSend size={30}/>
-          
-          </button>
+        </button>
+        </div>
       </form>
     </div>
   )

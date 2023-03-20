@@ -97,14 +97,14 @@
   }
 
   .chatview__textarea-message{
-    @apply bg-light-white dark:bg-light-grey text-xl h-16 sm:w-screen max-h-[20rem] min-h-[4rem] p-2 
+    @apply bg-light-white ml-0 sm:ml-2 dark:bg-light-grey text-xl h-16 sm:w-full grow max-h-[20rem] min-h-[4rem] p-2 
     border-2 border-slate-400 dark:border-slate-500 overflow-y-hidden mx-2
     focus:ring-offset-indigo-200 focus:ring-2 focus:ring-offset-2
     resize-y rounded-xl;
   }
 
   .chatview__btn-send{
-    @apply h-16 px-4 rounded-full hover:bg-slate-200 hover:dark:bg-dark-grey border-2 border-slate-400
+    @apply h-16 w-16 px-4 rounded-full hover:bg-slate-200 hover:dark:bg-dark-grey border-2 border-slate-400
     dark:border-slate-500 focus:ring-offset-indigo-200 text-black dark:text-white transition 
     ease-in-out duration-300 text-center text-base font-semibold shadow-md 
     focus:outline-none focus:ring-2 focus:ring-offset-2;
