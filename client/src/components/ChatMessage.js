@@ -17,7 +17,7 @@ const ChatMessage = (props) => {
   console.log(picUrl)
 
   return (
-    <div key={id} className={`${ai && 'flex-row-reverse'} message`}>
+    <div key={id} className={`${ai && 'flex-row-reverse bg-light-white'} message`}>
       {
         selected === 'DALL·E' && ai ?
           <Image url={text} />

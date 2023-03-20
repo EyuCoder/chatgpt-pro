@@ -38,21 +38,20 @@ const SideBar = () => {
   }
 
   return (
-    <section className={` ${open ? "w-72" : "w-16"} sidebar`}>
+    <section className={` ${open ? "w-64" : "w-16"} sidebar`}>
       <div className="sidebar__app-bar">
-        <div className={`sidebar__app-logo ${!open && "scale-0 hidden"} `}>
+        <div className={`sidebar__app-logo ${!open && "scale-0 hidden"}`}>
           <span className='w-8 h-8'><img src={bot} alt="" /></span>
         </div>
         <h1 className={`sidebar__app-title ${!open && "scale-0 hidden"}`}>
-          GPT3-Chatbot
+          ChatGPT
         </h1>
-        <div className='sidebar__btn-close' onClick={() => setOpen(!open)}>
+        <div className={`sidebar__btn-close`} onClick={() => setOpen(!open)}>
           {open ? <MdClose className='sidebar__btn-icon' /> : <MdMenu className='sidebar__btn-icon' />}
-
         </div>
       </div>
       <div className="nav">
-        <span className='nav__item  bg-light-white' onClick={clearChat}>
+        <span className='nav__item border-neutral-600 border' onClick={clearChat}>
           <div className='nav__icons'>
             <MdAdd />
           </div>

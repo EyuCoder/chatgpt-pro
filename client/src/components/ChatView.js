@@ -3,6 +3,7 @@ import ChatMessage from './ChatMessage'
 import { ChatContext } from '../context/chatContext'
 import { auth } from '../firebase'
 import Thinking from './Thinking'
+import { MdSend } from 'react-icons/md'
 
 /**
  * A chat view component that displays a list of messages and a form for sending new messages.
@@ -93,6 +94,13 @@ const ChatView = () => {
 
     setThinking(false)
   }
+  
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      // 👇 Get input value
+      sendMessage(e)
+    }
+  };
 
   /**
    * Scrolls the chat area to the bottom when the messages array is updated.
@@ -125,8 +133,14 @@ const ChatView = () => {
           <option>{options[0]}</option>
           <option>{options[1]}</option>
         </select>
-        <textarea ref={inputRef} className='chatview__textarea-message' value={formValue} onChange={(e) => setFormValue(e.target.value)} />
-        <button type="submit" className='chatview__btn-send' disabled={!formValue}>Send</button>
+        <textarea ref={inputRef} className='chatview__textarea-message' value={formValue} 
+        onKeyDown={handleKeyDown}
+        onChange={(e) => setFormValue(e.target.value)} />
+        <button type="submit" className='chatview__btn-send' disabled={!formValue}>
+          
+          <MdSend size={30}/>
+          
+          </button>
       </form>
     </div>
   )
