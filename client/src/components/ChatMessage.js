@@ -14,8 +14,7 @@ import Image from './Image'
  */
 const ChatMessage = (props) => {
   const { id, createdAt, text, ai = false, selected, picUrl } = props.message
-  console.log(picUrl)
-
+  
   return (
     <div key={id} className={`${ai && 'flex-row-reverse bg-light-white'} message`}>
       {
