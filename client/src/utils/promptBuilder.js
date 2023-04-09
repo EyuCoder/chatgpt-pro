@@ -1,11 +1,10 @@
 import tokenizer from '../utils/tokenizer'
 
 const promptBuilder = (messages, systemRole) => {
+  const tokenLimit = parseInt(process.env.REACT_APP_TOKEN_LIMIT, 10)
   const convo = []
   convo.unshift(systemRole)
   let totalTokens = tokenizer(systemRole.content)
-
-  console.log('here is the whole shenanigan', messages)
 
   // eslint-disable-next-line array-callback-return
   messages.map((msg) => {
@@ -19,7 +18,8 @@ const promptBuilder = (messages, systemRole) => {
     }
 
     while (true) {
-      if (totalTokens + newMsgToken < 2000) {
+      console.log('limit', tokenLimit)
+      if (totalTokens + newMsgToken < tokenLimit) {
         console.log('TOKENS', totalTokens + newMsgToken)
         convo.push(message)
         totalTokens += newMsgToken

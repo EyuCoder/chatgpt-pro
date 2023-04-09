@@ -157,6 +157,7 @@ const ChatView = () => {
         </select>
         <div className="flex items-stretch w-full justify-between">
           <textarea
+            maxLength={1000}
             ref={inputRef}
             className="chatview__textarea-message"
             value={formValue}
