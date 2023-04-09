@@ -2,10 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import { Configuration, OpenAIApi } from 'openai'
 import * as dotenv from 'dotenv'
-import Filter from 'bad-words'
 import { rateLimitMiddleware } from './middlewares/rateLimitMiddleware.js'
-
-const filter = new Filter()
 
 // Load environment variables from .env file
 try {
@@ -61,12 +58,11 @@ app.post('/davinci', async (req, res) => {
   try {
     // Call OpenAI API
     const { prompt, user } = req.body
-    const cleanPrompt = filter.isProfane(prompt) ? filter.clean(prompt) : prompt
-    console.log(cleanPrompt)
+    console.log('PROMPT', prompt.slice(1))
 
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
-      messages: cleanPrompt,
+      messages: prompt,
       user: user,
       temperature: 0.5,
       max_tokens: 500,

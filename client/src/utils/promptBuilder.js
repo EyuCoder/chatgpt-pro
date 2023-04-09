@@ -7,8 +7,9 @@ const promptBuilder = (messages, systemRole) => {
 
   console.log('here is the whole shenanigan', messages)
 
-  messages.foreach((msg) => {
-    console.log('FUCK', msg.text)
+  // eslint-disable-next-line array-callback-return
+  messages.map((msg) => {
+    console.log('ITEM', msg.text)
 
     const newMsgToken = tokenizer(msg.text)
     const role = msg.ai ? 'assistant' : 'user'
@@ -18,7 +19,7 @@ const promptBuilder = (messages, systemRole) => {
     }
 
     while (true) {
-      if (totalTokens + newMsgToken < 3500) {
+      if (totalTokens + newMsgToken < 2000) {
         console.log('TOKENS', totalTokens + newMsgToken)
         convo.push(message)
         totalTokens += newMsgToken
