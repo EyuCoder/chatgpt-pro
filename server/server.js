@@ -70,7 +70,7 @@ app.post('/davinci', async (req, res) => {
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       messages: [
-        {"role": "system", "content": "you're an a AI assistant that replies to all my questions in markdown format."},
+        {"role": "system", "content": "you're an AI assistant that replies to all my questions in markdown format."},
         {"role": "user", "content": "hi"},
         {"role": "assistant", "content": "Hi! How can I help you?"},
         {"role": "user", "content": `${cleanPrompt}?`}
