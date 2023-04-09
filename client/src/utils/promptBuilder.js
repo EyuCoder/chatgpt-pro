@@ -7,7 +7,7 @@ const promptBuilder = (messages, systemRole) => {
 
   console.log('here is the whole shenanigan', messages)
 
-  messages.map((msg) => {
+  messages.foreach((msg) => {
     console.log('FUCK', msg.text)
 
     const newMsgToken = tokenizer(msg.text)
