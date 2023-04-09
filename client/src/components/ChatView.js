@@ -57,7 +57,7 @@ const ChatView = () => {
       content: `you're an a AI assistant that replies to all my questions in markdown format.`,
     }
 
-    console.log('CLEAN', [...messages, newMsg])
+    // console.log('CLEAN', [...messages, newMsg])
     return promptBuilder([...messages, newMsg], systemRole)
   }
 
@@ -117,8 +117,7 @@ const ChatView = () => {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      // 👇 Get input value
-      sendMessage(e)
+      if (e.target.value) sendMessage(e)
     }
   }
 
