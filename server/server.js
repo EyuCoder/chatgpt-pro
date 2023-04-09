@@ -5,8 +5,6 @@ import * as dotenv from 'dotenv'
 import Filter from 'bad-words'
 import { rateLimitMiddleware } from './middlewares/rateLimitMiddleware.js'
 
-const allowedOrigins = ['http://eyucoder.com', 'https://chatgpt.eyucoder.com', 'http://localhost']
-
 const filter = new Filter()
 
 // Load environment variables from .env file
@@ -27,7 +25,6 @@ const openai = new OpenAIApi(configuration)
 
 // Create Express app
 const app = express()
-
 
 // Parse JSON in request body
 app.use(express.json())
@@ -69,12 +66,7 @@ app.post('/davinci', async (req, res) => {
 
     const response = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
-      messages: [
-        {"role": "system", "content": "you're an a AI assistant that replies to all my questions in markdown format."},
-        {"role": "user", "content": "hi"},
-        {"role": "assistant", "content": "Hi! How can I help you?"},
-        {"role": "user", "content": `${cleanPrompt}?`}
-    ],
+      messages: cleanPrompt,
       user: user,
       temperature: 0.5,
       max_tokens: 500,
@@ -88,7 +80,7 @@ app.post('/davinci', async (req, res) => {
     // Return response from OpenAI API
     res.status(200).send({
       bot: response.data.choices[0].message.content,
-      limit: res.body.limit
+      limit: res.body.limit,
     })
   } catch (error) {
     // Log error and return a generic error message
@@ -111,13 +103,13 @@ app.post('/dalle', async (req, res) => {
       prompt: `${prompt}`,
       user: user,
       n: 1,
-      size: "256x256",
+      size: '256x256',
     })
 
     console.log(response.data.data[0].url)
     res.status(200).send({
       bot: response.data.data[0].url,
-      limit: res.body.limit
+      limit: res.body.limit,
     })
   } catch (error) {
     // Log error and return a generic error message
