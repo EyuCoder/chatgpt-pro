@@ -12,10 +12,8 @@
     "url": "https://github.com/eyucoder"
   },
   "dependencies": {
-    "bad-words": "^3.0.4",
     "concurrently": "^7.6.0",
     "firebase": "^9.15.0",
-    "gpt3-tokenizer": "^1.1.5",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
