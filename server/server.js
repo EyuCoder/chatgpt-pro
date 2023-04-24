@@ -24,7 +24,9 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 // Create Express app
+
 const app = express();
+
 
 // Parse JSON in request body
 app.use(express.json());
@@ -78,6 +80,7 @@ app.post('/davinci', async (req, res) => {
         { role: 'assistant', content: 'Hi! How can I help you?' },
         { role: 'user', content: `${cleanPrompt}?` },
       ],
+
       user: user,
       temperature: 0.5,
       max_tokens: 500,
@@ -93,6 +96,7 @@ app.post('/davinci', async (req, res) => {
       bot: response.data.choices[0].message.content,
       limit: res.body.limit,
     });
+
   } catch (error) {
     // Log error and return a generic error message
     console.error(error);
@@ -117,11 +121,13 @@ app.post('/dalle', async (req, res) => {
       size: '256x256',
     });
 
+
     console.log(response.data.data[0].url);
     res.status(200).send({
       bot: response.data.data[0].url,
       limit: res.body.limit,
     });
+
   } catch (error) {
     // Log error and return a generic error message
     console.error(error);
