@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
-import useLocalStorage from '../hooks/useLocalStorage';
+import React, { useEffect, useState } from 'react';
 import { checkApiKey } from '../utils/checkKeys';
 
 const Setting = ({ modalOpen, setModalOpen }) => {
-  const [apiKey, setApikey] = useLocalStorage('api-key');
-  const [loading, setLoading] = useLocalStorage(false);
-  const [errorMsg, setErrorMsg] = useLocalStorage('');
-  const [input, setInput] = useLocalStorage('');
+  const apiKey = window.localStorage.getItem('api-key');
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [input, setInput] = useState('');
 
   const saveKey = async (e) => {
     e.preventDefault();
@@ -16,6 +15,7 @@ const Setting = ({ modalOpen, setModalOpen }) => {
 
     await checkApiKey(keys)
       .then(() => {
+        window.localStorage.setItem('api-key', keys);
         console.log('works');
         setModalOpen(false);
       })
@@ -24,21 +24,26 @@ const Setting = ({ modalOpen, setModalOpen }) => {
         setErrorMsg('error: incorrect keys');
       });
 
-    setApikey(keys);
     setLoading(false);
+  };
+
+  const removeApiKey = () => {
+    window.localStorage.removeItem('api-key');
+    setInput('');
   };
 
   useEffect(() => {
     if (modalOpen) {
       setInput(apiKey);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [modalOpen]);
+  }, [apiKey, modalOpen]);
 
   return (
     <form
       onSubmit={saveKey}
       className='flex flex-col items-center justify-center gap-2'>
+      <p className='text-lg font-semibold'>Use your own API-key.</p>
+      <p>keys are saving in your own browser</p>
       <input
         value={input}
         onChange={(e) => setInput(e.target.value)}
@@ -48,6 +53,14 @@ const Setting = ({ modalOpen, setModalOpen }) => {
       <button disabled={loading} className='w-full max-w-xs btn btn-outline'>
         {loading ? <span className='loading' /> : 'save to localStorage'}
       </button>
+      {apiKey && input && (
+        <span
+          onClick={removeApiKey}
+          disabled={loading}
+          className='w-full max-w-xs btn btn-error'>
+          remove keys
+        </span>
+      )}
       <p>{errorMsg}</p>
     </form>
   );

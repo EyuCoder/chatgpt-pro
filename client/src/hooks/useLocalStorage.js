@@ -18,11 +18,12 @@ const useLocalStorage = (key, initialValue) => {
       console.log(error);
       return initialValue;
     }
-  })
+  });
 
   const setValue = (value) => {
     try {
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
 
       setStoredValue(valueToStore);
 
@@ -31,7 +32,11 @@ const useLocalStorage = (key, initialValue) => {
       console.log(error);
     }
   };
-  return [storedValue, setValue];
+
+  const removeValue = (value) => {
+    window.localStorage.removeItem(value);
+  };
+  return [storedValue, setValue, removeValue];
 };
 
-export default useLocalStorage
+export default useLocalStorage;
