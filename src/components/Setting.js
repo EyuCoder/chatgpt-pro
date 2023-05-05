@@ -43,7 +43,7 @@ const Setting = ({ modalOpen, setModalOpen }) => {
       onSubmit={saveKey}
       className='flex flex-col items-center justify-center gap-2'>
       <p className='text-lg font-semibold'>Use your own API-key.</p>
-      <p>keys are saving in your own browser</p>
+      <p>keys are saved in your own browser</p>
       <input
         value={input}
         onChange={(e) => setInput(e.target.value)}
