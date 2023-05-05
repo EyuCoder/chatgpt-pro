@@ -3,6 +3,11 @@ import ChatMessage from './ChatMessage';
 import { ChatContext } from '../context/chatContext';
 import Thinking from './Thinking';
 import { MdSend } from 'react-icons/md';
+import Filter from 'bad-words';
+import { davinci } from '../utils/davinci';
+import { dalle } from '../utils/dalle';
+import Modal from './Modal';
+import Setting from './Setting';
 
 /**
  * A chat view component that displays a list of messages and a form for sending new messages.
@@ -14,7 +19,8 @@ const ChatView = () => {
   const [thinking, setThinking] = useState(false);
   const options = ['ChatGPT', 'DALL·E'];
   const [selected, setSelected] = useState(options[0]);
-  const [messages, addMessage, , , setLimit] = useContext(ChatContext);
+  const [messages, addMessage] = useContext(ChatContext);
+  const [modalOpen, setModalOpen] = useState(false);
 
   /**
    * Scrolls the chat area to the bottom.
@@ -50,44 +56,37 @@ const ChatView = () => {
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    const newMsg = formValue;
-    const aiModel = selected;
+    const key = window.localStorage.getItem('api-key');
+    if (!key) {
+      setModalOpen(true);
+      return;
+    }
 
-    const BASE_URL = process.env.REACT_APP_BASE_URL;
-    const PATH = aiModel === options[0] ? 'davinci' : 'dalle';
-    const POST_URL = BASE_URL + PATH;
+    const filter = new Filter();
+    const cleanPrompt = filter.isProfane(formValue)
+      ? filter.clean(formValue)
+      : formValue;
+
+    const newMsg = cleanPrompt;
+    const aiModel = selected;
 
     setThinking(true);
     setFormValue('');
     updateMessage(newMsg, false, aiModel);
 
-    const response = await fetch(POST_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        prompt: newMsg,
-      }),
-    });
-
-    const data = await response.json();
-    setLimit(data.limit);
-
-    console.log(response.status);
-    if (response.ok) {
-      // The request was successful
-      data.bot && updateMessage(data.bot, true, aiModel);
-    } else if (response.status === 429) {
-      setThinking(false);
-    } else {
-      // The request failed
-      window.alert(`openAI is returning an error: ${
-        response.status + response.statusText
-      } 
-      please try again later`);
-      console.log(`Request failed with status code ${response.status}`);
-      setThinking(false);
+    console.log(selected);
+    try {
+      if (aiModel === options[0]) {
+        const response = await davinci(cleanPrompt);
+        const data = response.data.choices[0].message.content;
+        data && updateMessage(data, true, aiModel);
+      } else {
+        const response = await dalle(cleanPrompt);
+        const data = response.data.data[0].url;
+        data && updateMessage(data, true, aiModel);
+      }
+    } catch (err) {
+      window.alert(`Error: ${err} please try again later`);
     }
 
     setThinking(false);
@@ -149,6 +148,9 @@ const ChatView = () => {
           </button>
         </div>
       </form>
+      <Modal title='Setting' modalOpen={modalOpen} setModalOpen={setModalOpen}>
+        <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
+      </Modal>
     </div>
   );
 };

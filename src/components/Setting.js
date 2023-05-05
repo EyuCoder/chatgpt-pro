@@ -51,7 +51,11 @@ const Setting = ({ modalOpen, setModalOpen }) => {
         className='w-full max-w-xs input input-bordered'
       />
       <button disabled={loading} className='w-full max-w-xs btn btn-outline'>
-        {loading ? <span className='loading' /> : 'save to localStorage'}
+        {loading ? (
+          <span className='w-56 progress progress-info' />
+        ) : (
+          'save to localStorage'
+        )}
       </button>
       {apiKey && input && (
         <span

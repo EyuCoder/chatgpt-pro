@@ -1,6 +1,6 @@
 {
-  "name": "react-template",
-  "version": "1.0.1",
+  "name": "chatgpt",
+  "version": "2.0.0",
   "private": true,
   "repository": {
     "type": "git",
@@ -12,6 +12,7 @@
     "url": "https://github.com/eyucoder"
   },
   "dependencies": {
+    "bad-words": "^3.0.4",
     "daisyui": "^2.51.6",
     "moment": "^2.29.4",
     "openai": "^3.2.1",

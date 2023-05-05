@@ -4,9 +4,9 @@ import {
   MdMenu,
   MdAdd,
   MdOutlineLogout,
-  MdOutlineQuestionAnswer,
   MdOutlineCoffee,
 } from 'react-icons/md';
+import { BsGithub } from 'react-icons/bs';
 import { ChatContext } from '../context/chatContext';
 import bot from '../assets/bot.ico';
 import DarkMode from './DarkMode';
@@ -84,12 +84,14 @@ const SideBar = () => {
         </div>
         <div className='nav'>
           <a
+            rel='noreferrer'
+            target='_blank'
             href='https://github.com/EyuCoder/chatgpt-clone'
             className='nav__item'>
             <div className='nav__icons'>
-              <MdOutlineQuestionAnswer />
+              <BsGithub />
             </div>
-            <h1 className={`${!open && 'hidden'}`}>Update & FAQ</h1>
+            <h1 className={`${!open && 'hidden'}`}>Clone on Github</h1>
           </a>
         </div>
         <div onClick={() => setModalOpen(true)} className='nav'>
