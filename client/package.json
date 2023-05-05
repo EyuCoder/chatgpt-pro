@@ -12,12 +12,11 @@
     "url": "https://github.com/eyucoder"
   },
   "dependencies": {
-    "concurrently": "^7.6.0",
-    "firebase": "^9.15.0",
+    "daisyui": "^2.51.6",
     "moment": "^2.29.4",
+    "openai": "^3.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-firebase-hooks": "^5.1.1",
     "react-icons": "^4.7.1",
     "react-markdown": "^8.0.4",
     "react-scripts": "5.0.1",
@@ -26,8 +25,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "server": "nodemon ../server/server.js",
-    "dev": "concurrently \"npm start\" \"npm run server\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

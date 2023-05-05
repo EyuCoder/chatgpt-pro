@@ -12,34 +12,33 @@
 }
 
 @layer components {
-
   /* SideBar */
-  .sidebar{
+  .sidebar {
     @apply flex flex-col gap-y-4 h-screen bg-dark-grey p-2 pt-4 relative duration-300;
   }
 
-  .sidebar__app-bar{
+  .sidebar__app-bar {
     @apply flex justify-center gap-4 items-center;
   }
-  
-  .sidebar__app-title{
+
+  .sidebar__app-title {
     @apply text-white font-medium text-xl duration-300;
   }
-  
+
   .sidebar__btn-close {
     @apply cursor-pointer duration-300 text-white justify-end;
   }
 
-  .sidebar__btn-icon{
+  .sidebar__btn-icon {
     @apply w-8 h-8;
   }
 
-  .sidebar__app-logo{
+  .sidebar__app-logo {
     @apply cursor-pointer duration-300 text-white;
   }
 
-/* SideBar Nav */
-  .nav{
+  /* SideBar Nav */
+  .nav {
     @apply flex justify-around;
   }
 
@@ -50,26 +49,25 @@
     text-white text-base;
   }
 
-  .nav__icons{
+  .nav__icons {
     @apply cursor-pointer duration-300 text-white
     text-xl;
   }
 
-  .nav__bottom{
+  .nav__bottom {
     @apply flex flex-col justify-end h-screen;
   }
 
-  .nav__msg{
+  .nav__msg {
     @apply flex bg-yellow-900 rounded-xl p-4 text-white;
   }
 
-  .nav__p{
+  .nav__p {
     @apply font-mono;
   }
 
-
   /* CHATVIEW */
-  .chatview{
+  .chatview {
     @apply flex flex-col h-screen duration-300 overflow-hidden relative bg-slate-200
   dark:bg-light-grey;
   }
@@ -77,8 +75,8 @@
   .chatview__chatarea {
     @apply flex-grow w-full overflow-y-scroll flex flex-col shadow-md;
   }
-  
-  .form{
+
+  .form {
     @apply flex justify-between flex-col items-stretch sm:flex-row m-2 bottom-0 left-0 right-0
     text-black dark:text-white duration-300;
   }
@@ -96,71 +94,69 @@
     @apply rounded-lg shadow-lg bg-cover bg-gray-400 h-[512px] w-[512px] duration-300 ease-out;
   }
 
-  .chatview__textarea-message{
+  .chatview__textarea-message {
     @apply bg-light-white ml-0 sm:ml-2 dark:bg-light-grey text-xl h-16 sm:w-full grow max-h-[20rem] min-h-[4rem] p-2 
     border-2 border-slate-400 dark:border-slate-500 overflow-y-hidden mx-2
     focus:ring-offset-indigo-200 focus:ring-2 focus:ring-offset-2
     resize-y rounded-xl;
   }
 
-  .chatview__btn-send{
+  .chatview__btn-send {
     @apply h-16 w-16 px-4 rounded-full hover:bg-slate-200 hover:dark:bg-dark-grey border-2 border-slate-400
     dark:border-slate-500 focus:ring-offset-indigo-200 text-black dark:text-white transition 
     ease-in-out duration-300 text-center text-base font-semibold shadow-md 
     focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
 
-  .chatview__btn-send:disabled{
-    @apply opacity-40 transition ease-in duration-300 text-center text-base font-semibold shadow-md
+  .chatview__btn-send:disabled {
+    @apply opacity-40 transition ease-in duration-300 text-center text-base font-semibold shadow-md;
   }
-
 
   /* ChatMessage */
-  .message{
-    @apply  py-5 gap-2 flex items-start justify-between;
+  .message {
+    @apply py-5 gap-2 flex items-start justify-end;
   }
 
-  .message__wrapper{
-    @apply flex-1 w-screen flex-wrap overflow-hidden;
+  .message__wrapper {
+    @apply flex-grow w-screen flex-wrap overflow-hidden;
   }
 
-  .message__markdown{
+  .message__markdown {
     @apply text-xl text-slate-700 dark:text-slate-200;
   }
 
-  .message__createdAt{
+  .message__createdAt {
     @apply text-sm font-thin italic text-slate-600 dark:text-slate-300;
   }
 
-  .message__pic{
+  .message__pic {
     @apply h-8 w-8 bg-slate-200 mx-2 rounded-full flex items-center justify-center text-xl;
   }
 
-  .message__thinking{
-    @apply animate-pulse duration-1000 h-12 w-12 dark:text-white text-black text-xl
+  .message__thinking {
+    @apply animate-pulse duration-1000 h-12 w-12 dark:text-white text-black text-xl;
   }
 
   /* Signin Page */
 
-  .signin{
+  .signin {
     @apply flex flex-col justify-center items-center h-screen w-screen overflow-hidden bg-dark-grey;
   }
 
-  .signin__container{
+  .signin__container {
     @apply border-4 rounded-2xl h-72 w-72 p-5 flex flex-col justify-center items-center;
   }
 
-  .signin__btn{
+  .signin__btn {
     @apply h-12 px-4 rounded-xl bg-slate-100 hover:bg-slate-300 border
      border-light-grey focus:ring-offset-indigo-200 text-black transition 
     ease-in-out duration-300 text-center text-base font-semibold shadow-md 
     focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
-  
-  .signin__tos{
+
+  .signin__tos {
     @apply text-white text-center font-bold p-2;
   }
-
 }
 
 ::-webkit-scrollbar {

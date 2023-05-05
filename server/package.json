@@ -1,6 +1,6 @@
 {
   "name": "server",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "description": "a ChatGPT clone using OpenAIs AI Model",
   "main": "server.js",
   "type": "module",

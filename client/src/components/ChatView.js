@@ -1,30 +1,27 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
-import ChatMessage from './ChatMessage'
-import { ChatContext } from '../context/chatContext'
-import { auth } from '../firebase'
-import Thinking from './Thinking'
-import { MdSend } from 'react-icons/md'
+import React, { useState, useRef, useEffect, useContext } from 'react';
+import ChatMessage from './ChatMessage';
+import { ChatContext } from '../context/chatContext';
+import Thinking from './Thinking';
+import { MdSend } from 'react-icons/md';
 
 /**
  * A chat view component that displays a list of messages and a form for sending new messages.
  */
 const ChatView = () => {
-  const messagesEndRef = useRef()
-  const inputRef = useRef()
-  const [formValue, setFormValue] = useState('')
-  const [thinking, setThinking] = useState(false)
-  const options = ['ChatGPT', 'DALL·E']
-  const [selected, setSelected] = useState(options[0])
-  const [messages, addMessage, , , setLimit] = useContext(ChatContext)
-  const user = auth.currentUser.uid
-  const picUrl = auth.currentUser.photoURL || 'https://api.adorable.io/avatars/23/abott@adorable.png'
+  const messagesEndRef = useRef();
+  const inputRef = useRef();
+  const [formValue, setFormValue] = useState('');
+  const [thinking, setThinking] = useState(false);
+  const options = ['ChatGPT', 'DALL·E'];
+  const [selected, setSelected] = useState(options[0]);
+  const [messages, addMessage, , , setLimit] = useContext(ChatContext);
 
   /**
    * Scrolls the chat area to the bottom.
    */
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   /**
    * Adds a new message to the chat.
@@ -33,17 +30,17 @@ const ChatView = () => {
    * @param {boolean} [ai=false] - Whether the message was sent by an AI or the user.
    */
   const updateMessage = (newValue, ai = false, selected) => {
-    const id = Date.now() + Math.floor(Math.random() * 1000000)
+    const id = Date.now() + Math.floor(Math.random() * 1000000);
     const newMsg = {
       id: id,
       createdAt: Date.now(),
       text: newValue,
       ai: ai,
-      selected: `${selected}`
-    }
+      selected: `${selected}`,
+    };
 
-    addMessage(newMsg)
-  }
+    addMessage(newMsg);
+  };
 
   /**
    * Sends our prompt to our API and get response to our request from openai.
@@ -51,18 +48,18 @@ const ChatView = () => {
    * @param {Event} e - The submit event of the form.
    */
   const sendMessage = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const newMsg = formValue
-    const aiModel = selected
+    const newMsg = formValue;
+    const aiModel = selected;
 
-    const BASE_URL = process.env.REACT_APP_BASE_URL
-    const PATH = aiModel === options[0] ? 'davinci' : 'dalle'
-    const POST_URL = BASE_URL + PATH
+    const BASE_URL = process.env.REACT_APP_BASE_URL;
+    const PATH = aiModel === options[0] ? 'davinci' : 'dalle';
+    const POST_URL = BASE_URL + PATH;
 
-    setThinking(true)
-    setFormValue('')
-    updateMessage(newMsg, false, aiModel)
+    setThinking(true);
+    setFormValue('');
+    updateMessage(newMsg, false, aiModel);
 
     const response = await fetch(POST_URL, {
       method: 'POST',
@@ -71,34 +68,35 @@ const ChatView = () => {
       },
       body: JSON.stringify({
         prompt: newMsg,
-        user: user
-      })
-    })
+      }),
+    });
 
-    const data = await response.json()
-    setLimit(data.limit)
+    const data = await response.json();
+    setLimit(data.limit);
 
-    console.log(response.status)
+    console.log(response.status);
     if (response.ok) {
       // The request was successful
-      data.bot && updateMessage(data.bot, true, aiModel)
+      data.bot && updateMessage(data.bot, true, aiModel);
     } else if (response.status === 429) {
-      setThinking(false)
+      setThinking(false);
     } else {
       // The request failed
-      window.alert(`openAI is returning an error: ${response.status + response.statusText} 
-      please try again later`)
-      console.log(`Request failed with status code ${response.status}`)
-      setThinking(false)
+      window.alert(`openAI is returning an error: ${
+        response.status + response.statusText
+      } 
+      please try again later`);
+      console.log(`Request failed with status code ${response.status}`);
+      setThinking(false);
     }
 
-    setThinking(false)
-  }
-  
+    setThinking(false);
+  };
+
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       // 👇 Get input value
-      sendMessage(e)
+      sendMessage(e);
     }
   };
 
@@ -106,22 +104,21 @@ const ChatView = () => {
    * Scrolls the chat area to the bottom when the messages array is updated.
    */
   useEffect(() => {
-    scrollToBottom()
-  }, [messages, thinking])
+    scrollToBottom();
+  }, [messages, thinking]);
 
   /**
    * Focuses the TextArea input to when the component is first rendered.
    */
   useEffect(() => {
-    inputRef.current.focus()
-  }, [])
+    inputRef.current.focus();
+  }, []);
 
   return (
-    <div className="chatview">
+    <div className='chatview'>
       <main className='chatview__chatarea'>
-
         {messages.map((message, index) => (
-          <ChatMessage key={index} message={{ ...message, picUrl }} />
+          <ChatMessage key={index} message={{ ...message }} />
         ))}
 
         {thinking && <Thinking />}
@@ -129,21 +126,31 @@ const ChatView = () => {
         <span ref={messagesEndRef}></span>
       </main>
       <form className='form' onSubmit={sendMessage}>
-        <select value={selected} onChange={(e) => setSelected(e.target.value)} className="dropdown" >
+        <select
+          value={selected}
+          onChange={(e) => setSelected(e.target.value)}
+          className='dropdown'>
           <option>{options[0]}</option>
           <option>{options[1]}</option>
         </select>
-        <div className='flex items-stretch w-full justify-between'>
-        <textarea ref={inputRef} className='chatview__textarea-message' value={formValue} 
-        onKeyDown={handleKeyDown}
-        onChange={(e) => setFormValue(e.target.value)} />
-        <button type="submit" className='chatview__btn-send' disabled={!formValue}>
-          <MdSend size={30}/>
-        </button>
+        <div className='flex items-stretch justify-between w-full'>
+          <textarea
+            ref={inputRef}
+            className='chatview__textarea-message'
+            value={formValue}
+            onKeyDown={handleKeyDown}
+            onChange={(e) => setFormValue(e.target.value)}
+          />
+          <button
+            type='submit'
+            className='chatview__btn-send'
+            disabled={!formValue}>
+            <MdSend size={30} />
+          </button>
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default ChatView
+export default ChatView;
