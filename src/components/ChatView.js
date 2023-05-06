@@ -77,11 +77,11 @@ const ChatView = () => {
     console.log(selected);
     try {
       if (aiModel === options[0]) {
-        const response = await davinci(cleanPrompt);
+        const response = await davinci(cleanPrompt, key);
         const data = response.data.choices[0].message.content;
         data && updateMessage(data, true, aiModel);
       } else {
-        const response = await dalle(cleanPrompt);
+        const response = await dalle(cleanPrompt, key);
         const data = response.data.data[0].url;
         data && updateMessage(data, true, aiModel);
       }

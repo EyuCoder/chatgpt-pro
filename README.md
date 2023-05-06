@@ -2,7 +2,9 @@
 
 ## One-Click Deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/EyuCoder/chatgpt-clone&project-name=chatgpt-and-dalle&repo-name=chatgpt-clone)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/EyuCoder/chatgpt-clone)
+
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/EyuCoder/chatgpt-clone&project-name=chatgpt-and-dalle&repo-name=chatgpt-clone)
 
 _you can checkout the app [here](https://chatgpt.eyucoder.com/)_
 

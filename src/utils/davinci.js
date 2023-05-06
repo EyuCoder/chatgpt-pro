@@ -1,6 +1,12 @@
-import { openai } from './openAi';
+import { Configuration, OpenAIApi } from 'openai';
 
-export const davinci = async (prompt) => {
+export const davinci = async (prompt, key) => {
+  const configuration = new Configuration({
+    apiKey: key,
+  });
+
+  const openai = new OpenAIApi(configuration);
+
   const response = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
     messages: [
