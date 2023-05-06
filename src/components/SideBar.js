@@ -3,10 +3,10 @@ import {
   MdClose,
   MdMenu,
   MdAdd,
-  MdOutlineLogout,
   MdOutlineCoffee,
+  MdOutlineVpnKey,
 } from 'react-icons/md';
-import { BsGithub } from 'react-icons/bs';
+import { AiOutlineGithub } from 'react-icons/ai';
 import { ChatContext } from '../context/chatContext';
 import bot from '../assets/bot.ico';
 import DarkMode from './DarkMode';
@@ -89,7 +89,7 @@ const SideBar = () => {
             href='https://github.com/EyuCoder/chatgpt-clone'
             className='nav__item'>
             <div className='nav__icons'>
-              <BsGithub />
+              <AiOutlineGithub />
             </div>
             <h1 className={`${!open && 'hidden'}`}>Clone on Github</h1>
           </a>
@@ -97,7 +97,7 @@ const SideBar = () => {
         <div onClick={() => setModalOpen(true)} className='nav'>
           <span htmlFor='setting-modal' className='nav__item'>
             <div className='nav__icons'>
-              <MdOutlineLogout />
+              <MdOutlineVpnKey />
             </div>
             <h1 className={`${!open && 'hidden'}`}>OpenAI Key</h1>
           </span>

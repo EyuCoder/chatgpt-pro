@@ -60,7 +60,7 @@ const ChatMessage = (props) => {
           <MdComputer />
         ) : (
           <img
-            className='w-8 h-8 rounded-full cover'
+            className='rounded-full'
             loading='lazy'
             src={person}
             alt='profile pic'

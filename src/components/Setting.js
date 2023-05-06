@@ -44,6 +44,17 @@ const Setting = ({ modalOpen, setModalOpen }) => {
       className='flex flex-col items-center justify-center gap-2'>
       <p className='text-lg font-semibold'>Use your own API-key.</p>
       <p>keys are saved in your own browser</p>
+      <p className='italic'>
+        Get OpenAI API key{' '}
+        <a
+          className='text-blue-600'
+          rel='noreferrer'
+          target='_blank'
+          href='https://platform.openai.com/account/api-keys'>
+          here
+        </a>
+        .
+      </p>
       <input
         value={input}
         onChange={(e) => setInput(e.target.value)}

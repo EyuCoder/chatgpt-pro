@@ -91,7 +91,7 @@
   }
 
   .message__img {
-    @apply rounded-lg shadow-lg bg-cover bg-gray-400 h-[512px] w-[512px] duration-300 ease-out;
+    @apply rounded-lg shadow-lg bg-cover bg-gray-400 w-[512px] duration-300 ease-out;
   }
 
   .chatview__textarea-message {
