@@ -4,6 +4,7 @@ import ChatView from './components/ChatView';
 import { useEffect, useState } from 'react';
 import Modal from './components/Modal';
 import Setting from './components/Setting';
+import GoogleAnalytics from './components/GoogleAnalytics';
 
 const App = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -23,6 +24,7 @@ const App = () => {
         <SideBar />
         <ChatView />
       </div>
+      <GoogleAnalytics />
     </ChatContextProvider>
   );
 };
