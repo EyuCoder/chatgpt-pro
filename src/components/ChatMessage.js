@@ -2,7 +2,7 @@ import React from 'react';
 import { MdComputer } from 'react-icons/md';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import remarkGfm from 'remark-gfm';
 import moment from 'moment';
 import Image from './Image';
@@ -34,7 +34,7 @@ const ChatMessage = (props) => {
                 return !inline && match ? (
                   <SyntaxHighlighter
                     children={String(children).replace(/\n$/, '')}
-                    style={atomDark}
+                    style={oneDark}
                     language={match[1]}
                     PreTag='div'
                     {...props}
