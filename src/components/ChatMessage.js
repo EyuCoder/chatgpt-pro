@@ -57,14 +57,17 @@ const ChatMessage = (props) => {
 
       <div className='message__pic'>
         {ai ? (
-          <MdComputer />
+          <div className='avatar'>
+            <div className='w-8 border rounded-full'>
+              <MdComputer className='w-6 h-full mx-auto' />
+            </div>
+          </div>
         ) : (
-          <img
-            className='rounded-full'
-            loading='lazy'
-            src={person}
-            alt='profile pic'
-          />
+          <div className='avatar'>
+            <div className='w-8 border rounded-full'>
+              <img src={person} alt='profile pic' />
+            </div>
+          </div>
         )}
       </div>
     </div>
