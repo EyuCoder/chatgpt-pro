@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { checkApiKey } from '../utils/checkKeys';
 
 const Setting = ({ modalOpen, setModalOpen }) => {
-  const apiKey = window.localStorage.getItem('api-key');
+  const apiKey = window.localStorage.getItem('api-key') || '';
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [input, setInput] = useState('');
