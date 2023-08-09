@@ -3,7 +3,7 @@ import ChatMessage from './ChatMessage';
 import { ChatContext } from '../context/chatContext';
 import Thinking from './Thinking';
 import { MdSend } from 'react-icons/md';
-import Filter from 'bad-words';
+import { replaceProfanities } from 'no-profanity';
 import { davinci } from '../utils/davinci';
 import { dalle } from '../utils/dalle';
 import Modal from './Modal';
@@ -62,10 +62,7 @@ const ChatView = () => {
       return;
     }
 
-    const filter = new Filter();
-    const cleanPrompt = filter.isProfane(formValue)
-      ? filter.clean(formValue)
-      : formValue;
+    const cleanPrompt = replaceProfanities(formValue)
 
     const newMsg = cleanPrompt;
     const aiModel = selected;
