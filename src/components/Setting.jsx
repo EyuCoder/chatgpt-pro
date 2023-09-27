@@ -65,7 +65,10 @@ const Setting = ({ modalOpen, setModalOpen }) => {
       />
       <button disabled={loading} className='w-full max-w-xs btn btn-outline'>
         {loading ? (
-          <span className='w-56 progress progress-info' />
+          <>
+            <span className='loading loading-spinner' />
+            <p>Checking Api Key</p>
+          </>
         ) : (
           'save to localStorage'
         )}
