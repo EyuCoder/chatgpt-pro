@@ -12,9 +12,9 @@
     "url": "https://github.com/eyucoder"
   },
   "dependencies": {
-    "bad-words": "^3.0.4",
     "daisyui": "^2.51.6",
     "moment": "^2.29.4",
+    "no-profanity": "^1.4.2",
     "openai": "^3.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
