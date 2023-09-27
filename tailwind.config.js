@@ -29,6 +29,7 @@ export default {
         },
         dark: {
           ...dark['[data-theme=dark]'],
+          neutral: '#171c21',
           'neutral-content': '#94a3b8',
         },
       },
