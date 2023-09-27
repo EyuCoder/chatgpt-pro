@@ -26,13 +26,13 @@ _you can checkout the app [here](https://chatgpt.eyucoder.com/)_
 ## install
 
 ```bash
-npm i
+npm install
 ```
 
 ## start app
 
 ```bash
-npm start
+npm run dev
 ```
 
 **_Tech used_**
