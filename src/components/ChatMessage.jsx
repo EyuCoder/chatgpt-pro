@@ -4,7 +4,6 @@ import { MdComputer } from 'react-icons/md';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import remarkGfm from 'remark-gfm';
 import moment from 'moment';
 import Image from './Image';
 import person from '../assets/person.png';
@@ -28,7 +27,6 @@ const ChatMessage = (props) => {
           <ReactMarkdown
             className={`message__markdown ${ai ? 'text-left' : 'text-right'}`}
             children={text}
-            remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
             components={{
               code({ inline, className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || 'language-js');
@@ -81,7 +79,7 @@ ChatMessage.propTypes = {
   message: PropTypes.shape({
     id: PropTypes.number.isRequired,
     createdAt: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
+    text: PropTypes.string,
     ai: PropTypes.bool,
     selected: PropTypes.string,
   }).isRequired,
