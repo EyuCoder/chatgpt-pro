@@ -8,14 +8,14 @@ import PropTypes from 'prop-types';
  */
 const Image = (props) => {
   return (
-    <div className='message__wrapper'>
+    <>
       <img
-        className='message__img'
+        className='bg-cover rounded-lg shadow-lg'
         src={props.url}
-        alt='dalle generated'
+        alt='dalle generated picture'
         loading='lazy'
       />
-    </div>
+    </>
   );
 };
 

@@ -10,7 +10,7 @@ import Markdown from './Markdown';
  *
  * @param {Object} props - The properties for the component.
  */
-const ChatMessage = (props) => {
+const Message = (props) => {
   const { id, createdAt, text, ai = false, selected } = props.message;
 
   return (
@@ -48,9 +48,9 @@ const ChatMessage = (props) => {
   );
 };
 
-export default ChatMessage;
+export default Message;
 
-ChatMessage.propTypes = {
+Message.propTypes = {
   message: PropTypes.shape({
     id: PropTypes.number.isRequired,
     createdAt: PropTypes.number.isRequired,

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useContext } from 'react';
-import ChatMessage from './ChatMessage';
+import Message from './Message';
 import { ChatContext } from '../context/chatContext';
 import Thinking from './Thinking';
 import { MdSend } from 'react-icons/md';
@@ -111,10 +111,10 @@ const ChatView = () => {
   }, []);
 
   return (
-    <main className='relative flex flex-col h-screen p-1 overflow-hidden bg-slate-200 dark:bg-light-grey'>
+    <main className='relative flex flex-col h-screen p-1 overflow-hidden dark:bg-light-grey'>
       <section className='flex flex-col flex-grow w-full px-10 overflow-y-scroll md:px-32'>
         {messages.map((message, index) => (
-          <ChatMessage key={index} message={{ ...message }} />
+          <Message key={index} message={{ ...message }} />
         ))}
 
         {thinking && <Thinking />}
@@ -122,7 +122,7 @@ const ChatView = () => {
         <span ref={messagesEndRef}></span>
       </section>
       <form
-        className='flex flex-col px-10 md:px-32 join sm:flex-row'
+        className='flex flex-col px-10 mb-2 md:px-32 join sm:flex-row'
         onSubmit={sendMessage}>
         <select
           value={selected}

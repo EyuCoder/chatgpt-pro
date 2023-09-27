@@ -9,7 +9,7 @@ import {
 import { AiOutlineGithub } from 'react-icons/ai';
 import { ChatContext } from '../context/chatContext';
 import bot from '../assets/logo.svg';
-import DarkMode from './DarkMode';
+import ToggleTheme from './ToggleTheme';
 import Modal from './Modal';
 import Setting from './Setting';
 
@@ -33,12 +33,11 @@ const SideBar = () => {
   }, []);
 
   const clearChat = () => clearMessages();
-
   return (
     <section
-      className={` ${
+      className={`${
         open ? 'w-72' : 'w-16'
-      } flex flex-col items-center gap-y-4 h-screen pt-4 relative duration-100`}>
+      } bg-black bg-opacity-20 flex flex-col items-center gap-y-4 h-screen pt-4 relative duration-100 shadow-md`}>
       <div className='flex items-center justify-between w-full px-2 mx-auto'>
         <div
           className={` ${
@@ -65,7 +64,7 @@ const SideBar = () => {
 
       <ul className='absolute bottom-0 w-full gap-1 menu rounded-box'>
         <li>
-          <DarkMode open={open} />
+          <ToggleTheme open={open} />
         </li>
         <li>
           <a
