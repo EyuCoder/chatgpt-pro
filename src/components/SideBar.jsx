@@ -81,7 +81,7 @@ const SideBar = () => {
             target='_blank'
             href='https://github.com/EyuCoder/chatgpt-clone'>
             <AiOutlineGithub size={15} />
-            <p className={`${!open && 'hidden'}`}>Clone on Github</p>
+            <p className={`${!open && 'hidden'}`}>Github</p>
           </a>
         </li>
         <li>

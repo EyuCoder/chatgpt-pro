@@ -27,7 +27,7 @@ const Message = (props) => {
           }`}>
           <div className='chat-bubble'>
             <Markdown markdownText={text} />
-            <div className={`${ai ? 'text-left' : 'text-right'} `}>
+            <div className={`${ai ? 'text-left' : 'text-right'} text-xs`}>
               {moment(createdAt).calendar()}
             </div>
           </div>
