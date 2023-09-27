@@ -56,7 +56,7 @@ const SideBar = () => {
 
       <ul className='w-full menu rounded-box'>
         <li>
-          <a onClick={clearChat}>
+          <a className='border border-slate-500' onClick={clearChat}>
             <MdAdd size={15} />
             <p className={`${!open && 'hidden'}`}>New chat</p>
           </a>

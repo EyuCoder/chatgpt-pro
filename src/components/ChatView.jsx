@@ -111,8 +111,8 @@ const ChatView = () => {
   }, []);
 
   return (
-    <div className='chatview'>
-      <main className='px-10 chatview__chatarea md:px-32'>
+    <main className='relative flex flex-col h-screen p-1 overflow-hidden bg-slate-200 dark:bg-light-grey'>
+      <section className='flex flex-col flex-grow w-full px-10 overflow-y-scroll md:px-32'>
         {messages.map((message, index) => (
           <ChatMessage key={index} message={{ ...message }} />
         ))}
@@ -120,27 +120,24 @@ const ChatView = () => {
         {thinking && <Thinking />}
 
         <span ref={messagesEndRef}></span>
-      </main>
-      <form className='px-10 form md:px-32' onSubmit={sendMessage}>
+      </section>
+      <form className='px-10 form md:px-32 join' onSubmit={sendMessage}>
         <select
           value={selected}
           onChange={(e) => setSelected(e.target.value)}
-          className='dropdown'>
+          className='w-full sm:w-40 select select-bordered join-item'>
           <option>{options[0]}</option>
           <option>{options[1]}</option>
         </select>
         <div className='flex items-stretch justify-between w-full'>
           <textarea
             ref={inputRef}
-            className='chatview__textarea-message'
+            className='w-full grow input input-bordered join-item max-h-[20rem] min-h-[3rem]'
             value={formValue}
             onKeyDown={handleKeyDown}
             onChange={(e) => setFormValue(e.target.value)}
           />
-          <button
-            type='submit'
-            className='chatview__btn-send'
-            disabled={!formValue}>
+          <button type='submit' className='join-item btn' disabled={!formValue}>
             <MdSend size={30} />
           </button>
         </div>
@@ -148,7 +145,7 @@ const ChatView = () => {
       <Modal title='Setting' modalOpen={modalOpen} setModalOpen={setModalOpen}>
         <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </Modal>
-    </div>
+    </main>
   );
 };
 

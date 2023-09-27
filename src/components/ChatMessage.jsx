@@ -36,7 +36,7 @@ const ChatMessage = (props) => {
       )}
 
       <div className='avatar'>
-        <div className='w-8 border rounded-full'>
+        <div className='w-8 border rounded-full border-slate-400'>
           {ai ? (
             <MdComputer className='w-6 h-full m-auto' />
           ) : (
