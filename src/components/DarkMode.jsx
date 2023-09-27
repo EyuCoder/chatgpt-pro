@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import useDarkMode from '../hooks/useDarkMode';
 import { MdOutlineNightlight, MdOutlineWbSunny } from 'react-icons/md';
 
@@ -15,27 +16,30 @@ const DarkMode = (props) => {
    */
   const handleMode = () => setDarkTheme(!darkTheme);
   return (
-    <div className="nav">
-      <span className="nav__item" onClick={handleMode}>
+    <div className='nav'>
+      <span className='nav__item' onClick={handleMode}>
         {darkTheme ? (
           <>
-            <div className="nav__icons">
+            <div className='nav__icons'>
               <MdOutlineWbSunny />
             </div>
-            <h1 className={`${!props.open && "hidden"}`}>Light mode</h1>
+            <h1 className={`${!props.open && 'hidden'}`}>Light mode</h1>
           </>
         ) : (
           <>
-            <div className="nav__icons">
+            <div className='nav__icons'>
               <MdOutlineNightlight />
             </div>
-            <h1 className={`${!props.open && "hidden"}`}>Night mode</h1>
+            <h1 className={`${!props.open && 'hidden'}`}>Night mode</h1>
           </>
         )}
-
       </span>
     </div>
-  )
-}
+  );
+};
 
 export default DarkMode;
+
+DarkMode.propTypes = {
+  open: PropTypes.bool.isRequired,
+};

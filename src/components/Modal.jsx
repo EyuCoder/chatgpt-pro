@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Modal = ({ title, children, modalOpen = false, setModalOpen }) => {
   return (
     <div>
@@ -24,3 +26,10 @@ const Modal = ({ title, children, modalOpen = false, setModalOpen }) => {
 };
 
 export default Modal;
+
+Modal.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  modalOpen: PropTypes.bool.isRequired,
+  setModalOpen: PropTypes.func.isRequired,
+};

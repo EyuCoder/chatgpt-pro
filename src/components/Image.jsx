@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * A component that displays an image.
@@ -20,3 +20,6 @@ const Image = (props) => {
 };
 
 export default Image;
+Image.propTypes = {
+  url: PropTypes.string.isRequired,
+};

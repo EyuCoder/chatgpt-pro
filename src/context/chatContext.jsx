@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { createContext } from 'react';
 import useMessageCollection from '../hooks/useMessageCollection';
 
@@ -25,3 +26,7 @@ const ChatContextProvider = (props) => {
 };
 
 export { ChatContext, ChatContextProvider };
+
+ChatContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
