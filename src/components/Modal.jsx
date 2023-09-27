@@ -28,8 +28,8 @@ const Modal = ({ title, children, modalOpen = false, setModalOpen }) => {
 export default Modal;
 
 Modal.propTypes = {
-  title: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
+  title: PropTypes.string,
+  children: PropTypes.node,
   modalOpen: PropTypes.bool.isRequired,
   setModalOpen: PropTypes.func.isRequired,
 };

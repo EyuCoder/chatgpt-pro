@@ -112,7 +112,7 @@ const ChatView = () => {
 
   return (
     <div className='chatview'>
-      <main className='chatview__chatarea'>
+      <main className='px-10 chatview__chatarea md:px-32'>
         {messages.map((message, index) => (
           <ChatMessage key={index} message={{ ...message }} />
         ))}
@@ -121,7 +121,7 @@ const ChatView = () => {
 
         <span ref={messagesEndRef}></span>
       </main>
-      <form className='form' onSubmit={sendMessage}>
+      <form className='px-10 form md:px-32' onSubmit={sendMessage}>
         <select
           value={selected}
           onChange={(e) => setSelected(e.target.value)}

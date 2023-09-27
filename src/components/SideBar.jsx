@@ -37,13 +37,13 @@ const SideBar = () => {
   return (
     <section
       className={` ${
-        open ? 'w-64' : 'w-16'
+        open ? 'w-72' : 'w-16'
       } flex flex-col items-center   gap-y-4 h-screen pt-4 relative duration-300`}>
-      <div className='flex items-center justify-between mx-auto w-full p-2'>
+      <div className='flex items-center justify-between w-full px-2 mx-auto'>
         <div
           className={` ${
             !open && 'scale-0 hidden'
-          } flex flex-row items-center gap-4 mx-auto w-full`}>
+          } flex flex-row items-center gap-2 mx-auto w-full`}>
           <img src={bot} alt='logo' className='w-6 h-6' />
           <h1 className={` ${!open && 'scale-0 hidden'}`}>ChatGPT</h1>
         </div>
@@ -54,7 +54,7 @@ const SideBar = () => {
         </div>
       </div>
 
-      <ul className='menu rounded-box w-full'>
+      <ul className='w-full menu rounded-box'>
         <li>
           <a onClick={clearChat}>
             <MdAdd size={15} />
@@ -63,7 +63,7 @@ const SideBar = () => {
         </li>
       </ul>
 
-      <ul className='absolute bottom-0 menu gap-1 rounded-box w-full'>
+      <ul className='absolute bottom-0 w-full gap-1 menu rounded-box'>
         <li>
           <DarkMode open={open} />
         </li>

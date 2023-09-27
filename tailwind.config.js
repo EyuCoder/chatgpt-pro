@@ -12,6 +12,10 @@ export default {
         'light-grey': '#353740',
       },
     },
+    default: 'daisy',
+  },
+  daisyui: {
+    themes: ['light', 'dark'],
   },
   plugins: [daisyui],
 };

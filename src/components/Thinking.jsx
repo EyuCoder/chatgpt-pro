@@ -2,14 +2,14 @@ import { MdComputer } from 'react-icons/md';
 
 const Thinking = () => {
   return (
-    <div className='message'>
-      <div className='message__wrapper flex'>
-        <div className='message__pic'>
-          <MdComputer />
+    <div className='flex items-end mt-4'>
+      <div className='avatar'>
+        <div className='w-8 border rounded-full'>
+          <MdComputer className='w-6 h-full m-auto' />
         </div>
-        <div className='text-left message__createdAt'>
-          <div className='message__thinking'>thinking...</div>
-        </div>
+      </div>
+      <div className='chat chat-start '>
+        <div className='chat-bubble animate-pulse'>thinking...</div>
       </div>
     </div>
   );
