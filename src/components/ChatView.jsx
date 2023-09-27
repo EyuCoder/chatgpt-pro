@@ -121,7 +121,9 @@ const ChatView = () => {
 
         <span ref={messagesEndRef}></span>
       </section>
-      <form className='px-10 form md:px-32 join' onSubmit={sendMessage}>
+      <form
+        className='flex flex-col px-10 md:px-32 join sm:flex-row'
+        onSubmit={sendMessage}>
         <select
           value={selected}
           onChange={(e) => setSelected(e.target.value)}
