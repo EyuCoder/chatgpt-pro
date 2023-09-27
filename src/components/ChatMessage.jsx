@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/no-children-prop */
+import PropTypes from 'prop-types';
 import { MdComputer } from 'react-icons/md';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
@@ -29,7 +30,7 @@ const ChatMessage = (props) => {
             children={text}
             remarkPlugins={[[remarkGfm, { singleTilde: false }]]}
             components={{
-              code({ node, inline, className, children, ...props }) {
+              code({ inline, className, children, ...props }) {
                 const match = /language-(\w+)/.exec(className || 'language-js');
                 return !inline && match ? (
                   <SyntaxHighlighter
@@ -75,3 +76,13 @@ const ChatMessage = (props) => {
 };
 
 export default ChatMessage;
+
+ChatMessage.propTypes = {
+  message: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    createdAt: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
+    ai: PropTypes.bool,
+    selected: PropTypes.string,
+  }).isRequired,
+};

@@ -22,6 +22,6 @@ const useDarkMode = () => {
   }, [enabled, isEnabled]);
 
   return [enabled, setEnabled];
-}
+};
 
-export default useDarkMode
+export default useDarkMode;

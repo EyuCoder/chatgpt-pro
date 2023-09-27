@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import ChatMessage from './ChatMessage';
 import { ChatContext } from '../context/chatContext';
 import Thinking from './Thinking';
@@ -62,7 +62,7 @@ const ChatView = () => {
       return;
     }
 
-    const cleanPrompt = replaceProfanities(formValue)
+    const cleanPrompt = replaceProfanities(formValue);
 
     const newMsg = cleanPrompt;
     const aiModel = selected;

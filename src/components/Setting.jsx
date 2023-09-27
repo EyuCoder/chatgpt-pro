@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { checkApiKey } from '../utils/checkKeys';
+
+import PropTypes from 'prop-types';
 
 const Setting = ({ modalOpen, setModalOpen }) => {
   const apiKey = window.localStorage.getItem('api-key') || '';
@@ -82,3 +84,8 @@ const Setting = ({ modalOpen, setModalOpen }) => {
 };
 
 export default Setting;
+
+Setting.propTypes = {
+  modalOpen: PropTypes.bool.isRequired,
+  setModalOpen: PropTypes.func.isRequired,
+};
