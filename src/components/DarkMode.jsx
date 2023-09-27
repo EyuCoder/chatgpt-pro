@@ -9,15 +9,19 @@ import { MdOutlineNightlight, MdOutlineWbSunny } from 'react-icons/md';
  * @param {boolean} props.open - Whether the sidebar is open or not.
  */
 const DarkMode = (props) => {
-  const [darkTheme, setDarkTheme] = useDarkMode();
+  const [theme, setTheme] = useDarkMode();
 
   /**
    * Toggles the dark mode.
    */
-  const handleMode = () => setDarkTheme(!darkTheme);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
   return (
-    <a onClick={handleMode}>
-      {darkTheme ? (
+    <a onClick={toggleTheme}>
+      {theme ? (
         <>
           <MdOutlineWbSunny size={15} />
           <p className={`${!props.open && 'hidden'}`}>Light mode</p>
