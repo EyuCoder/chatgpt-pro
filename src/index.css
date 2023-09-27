@@ -12,60 +12,6 @@
 }
 
 @layer components {
-  /* SideBar */
-  .sidebar {
-    @apply flex flex-col gap-y-4 h-screen bg-dark-grey p-2 pt-4 relative duration-300;
-  }
-
-  .sidebar__app-bar {
-    @apply flex justify-center gap-4 items-center;
-  }
-
-  .sidebar__app-title {
-    @apply text-white font-medium text-xl duration-300;
-  }
-
-  .sidebar__btn-close {
-    @apply cursor-pointer duration-300 text-white justify-end;
-  }
-
-  .sidebar__btn-icon {
-    @apply w-8 h-8;
-  }
-
-  .sidebar__app-logo {
-    @apply cursor-pointer duration-300 text-white;
-  }
-
-  /* SideBar Nav */
-  .nav {
-    @apply flex justify-around;
-  }
-
-  .nav__item {
-    @apply px-4 py-3 flex items-center gap-x-4 w-screen 
-    rounded-md cursor-pointer 
-    hover:bg-light-white
-    text-white text-base;
-  }
-
-  .nav__icons {
-    @apply cursor-pointer duration-300 text-white
-    text-xl;
-  }
-
-  .nav__bottom {
-    @apply flex flex-col justify-end h-screen;
-  }
-
-  .nav__msg {
-    @apply flex bg-yellow-900 rounded-xl p-4 text-white;
-  }
-
-  .nav__p {
-    @apply font-mono;
-  }
-
   /* CHATVIEW */
   .chatview {
     @apply flex flex-col h-screen duration-300 overflow-hidden relative bg-slate-200
