@@ -1,4 +1,3 @@
-/* eslint-disable react/no-children-prop */
 import PropTypes from 'prop-types';
 import { MdComputer, MdPerson } from 'react-icons/md';
 import moment from 'moment';
