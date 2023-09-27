@@ -37,7 +37,7 @@ const SideBar = () => {
     <section
       className={`${
         open ? 'w-72' : 'w-16'
-      } bg-black bg-opacity-20 flex flex-col items-center gap-y-4 h-screen pt-4 relative duration-100 shadow-md`}>
+      } bg-neutral flex flex-col items-center gap-y-4 h-screen pt-4 relative duration-100 shadow-md`}>
       <div className='flex items-center justify-between w-full px-2 mx-auto'>
         <div
           className={` ${

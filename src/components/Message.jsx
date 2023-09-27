@@ -25,7 +25,7 @@ const Message = (props) => {
           className={` w-screen overflow-hidden chat ${
             ai ? 'chat-start' : 'chat-end'
           }`}>
-          <div className='chat-bubble'>
+          <div className='chat-bubble text-neutral-content'>
             <Markdown markdownText={text} />
             <div className={`${ai ? 'text-left' : 'text-right'} text-xs`}>
               {moment(createdAt).calendar()}
