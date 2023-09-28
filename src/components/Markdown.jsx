@@ -8,7 +8,7 @@ const Markdown = ({ markdownText }) => {
     <ReactMarkdown
       components={{
         code({ inline, className, children, ...props }) {
-          const match = /language-(\w+)/.exec(className || 'js');
+          const match = /language-(\w+)/.exec(className || 'language-js');
           return !inline ? (
             <SyntaxHighlighter
               {...props}

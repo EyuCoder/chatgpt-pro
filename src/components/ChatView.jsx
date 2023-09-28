@@ -74,9 +74,9 @@ const ChatView = () => {
     console.log(selected);
     try {
       if (aiModel === options[0]) {
-        const response = await davinci(cleanPrompt, key);
-        const data = response.data.choices[0].message.content;
-        data && updateMessage(data, true, aiModel);
+        const LLMresponse = await davinci(cleanPrompt, key);
+        //const data = response.data.choices[0].message.content;
+        LLMresponse && updateMessage(LLMresponse, true, aiModel);
       } else {
         const response = await dalle(cleanPrompt, key);
         const data = response.data.data[0].url;
