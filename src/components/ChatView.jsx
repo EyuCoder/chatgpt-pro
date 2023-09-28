@@ -112,10 +112,11 @@ const ChatView = () => {
 
   return (
     <main className='relative flex flex-col h-screen p-1 overflow-hidden dark:bg-light-grey'>
-      <section className='flex flex-col flex-grow w-full px-10 overflow-y-scroll md:px-32'>
-        {messages.map((message, index) => (
-          <Message key={index} message={{ ...message }} />
-        ))}
+      <section className='flex flex-col flex-grow w-full px-4 overflow-y-scroll sm:px-10 md:px-32'>
+        {messages &&
+          messages.map((message, index) => (
+            <Message key={index} message={{ ...message }} />
+          ))}
 
         {thinking && <Thinking />}
 
