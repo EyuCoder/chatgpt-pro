@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { atomDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const Markdown = ({ markdownText }) => {
   return (
@@ -12,7 +12,7 @@ const Markdown = ({ markdownText }) => {
           return !inline ? (
             <SyntaxHighlighter
               {...props}
-              style={oneDark}
+              style={atomDark}
               language={match[1]}
               PreTag='div'>
               {String(children).replace(/\n$/, '')}
