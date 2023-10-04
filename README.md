@@ -1,4 +1,6 @@
-# ChatGPT and DALL.E image generation model in one
+# ChatGPT-Pro
+
+ChatGPT-Pro is an advanced application that combines the power of ChatGPT and DALL.E. With this app, you have the flexibility to switch between ChatGPT versions. One of the standout features of ChatGPT-Pro is its ability to save chat conversations to local storage.
 
 ## One-Click Deploy
 
