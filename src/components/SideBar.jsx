@@ -1,10 +1,10 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {
   MdClose,
   MdMenu,
-  MdAdd,
   MdOutlineCoffee,
   MdOutlineVpnKey,
+  MdDelete,
 } from 'react-icons/md';
 import { AiOutlineGithub } from 'react-icons/ai';
 import { ChatContext } from '../context/chatContext';
@@ -21,7 +21,7 @@ import Setting from './Setting';
  */
 const SideBar = () => {
   const [open, setOpen] = useState(true);
-  const [, , clearMessages] = useContext(ChatContext);
+  const [, , clearChat] = useContext(ChatContext);
   const [modalOpen, setModalOpen] = useState(false);
 
   function handleResize() {
@@ -32,7 +32,10 @@ const SideBar = () => {
     handleResize();
   }, []);
 
-  const clearChat = () => clearMessages();
+  function clear() {
+    clearChat();
+  }
+
   return (
     <section
       className={`${
@@ -55,9 +58,9 @@ const SideBar = () => {
 
       <ul className='w-full menu rounded-box'>
         <li>
-          <a className='border border-slate-500' onClick={clearChat}>
-            <MdAdd size={15} />
-            <p className={`${!open && 'hidden'}`}>New chat</p>
+          <a className='border border-slate-500' onClick={clear}>
+            <MdDelete size={15} />
+            <p className={`${!open && 'hidden'}`}>Clear chat</p>
           </a>
         </li>
       </ul>
