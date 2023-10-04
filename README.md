@@ -1,4 +1,4 @@
-# ChatGPT clone with DALL.E image generation model
+# ChatGPT and DALL.E image generation model in one
 
 ## One-Click Deploy
 
@@ -18,6 +18,13 @@ _you can checkout the app [here](https://chatgpt.eyucoder.com/)_
 <img src="demo/demo.gif" width="800px" alt="android icon"/>
 
 **Give it a ⭐ if you liked it 😜**
+
+### Features
+
+- [x] gpt 3.5 and 4
+- [x] dall.e image generator
+- [x] save chat to localstorage
+- [x] chat context
 
 ## If you find this project helpful, you can buy me a coffee here
 
