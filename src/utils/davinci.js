@@ -13,7 +13,7 @@ const memory = new BufferMemory({
   memoryKey: 'history',
 });
 
-export const davinci = async (prompt, key) => {
+export const davinci = async (prompt, key, gptVersion) => {
   const chatPrompt = ChatPromptTemplate.fromMessages([
     SystemMessagePromptTemplate.fromTemplate(
       'The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context and always responds in markdown format. If the AI does not know the answer to a question, it truthfully says it does not know.'
@@ -23,7 +23,7 @@ export const davinci = async (prompt, key) => {
   ]);
   const model = new ChatOpenAI({
     openAIApiKey: key,
-    model: 'gpt-3.5-turbo',
+    model: gptVersion,
     temperature: 0.3,
   });
 

@@ -9,6 +9,9 @@ import { dalle } from '../utils/dalle';
 import Modal from './Modal';
 import Setting from './Setting';
 
+const options = ['ChatGPT', 'DALL·E'];
+const gptModel = ['gpt-3.5-turbo', 'gpt-4'];
+
 /**
  * A chat view component that displays a list of messages and a form for sending new messages.
  */
@@ -17,8 +20,8 @@ const ChatView = () => {
   const inputRef = useRef();
   const [formValue, setFormValue] = useState('');
   const [thinking, setThinking] = useState(false);
-  const options = ['ChatGPT', 'DALL·E'];
   const [selected, setSelected] = useState(options[0]);
+  const [gpt, setGpt] = useState(gptModel[0]);
   const [messages, addMessage] = useContext(ChatContext);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -66,15 +69,17 @@ const ChatView = () => {
 
     const newMsg = cleanPrompt;
     const aiModel = selected;
+    const gptVersion = gpt;
 
     setThinking(true);
     setFormValue('');
     updateMessage(newMsg, false, aiModel);
+    console.log(gptVersion);
 
     console.log(selected);
     try {
       if (aiModel === options[0]) {
-        const LLMresponse = await davinci(cleanPrompt, key);
+        const LLMresponse = await davinci(cleanPrompt, key, gptVersion);
         //const data = response.data.choices[0].message.content;
         LLMresponse && updateMessage(LLMresponse, true, aiModel);
       } else {
@@ -112,11 +117,35 @@ const ChatView = () => {
 
   return (
     <main className='relative flex flex-col h-screen p-1 overflow-hidden dark:bg-light-grey'>
+      <div className='mx-auto my-4 tabs tabs-boxed w-fit'>
+        <a
+          onClick={() => setGpt(gptModel[0])}
+          className={`${gpt == gptModel[0] && 'tab-active'} tab`}>
+          GPT-3.5
+        </a>
+        <a
+          onClick={() => setGpt(gptModel[1])}
+          className={`${gpt == gptModel[1] && 'tab-active'} tab`}>
+          GPT-4
+        </a>
+      </div>
       <section className='flex flex-col flex-grow w-full px-4 overflow-y-scroll sm:px-10 md:px-32'>
-        {messages &&
+        {messages.length ? (
           messages.map((message, index) => (
             <Message key={index} message={{ ...message }} />
-          ))}
+          ))
+        ) : (
+          <div className='flex my-2'>
+            <div className='w-screen overflow-hidden'>
+              {/* <ul className='grid grid-cols-2 gap-2 mx-10'>
+                <li className='p-10 border rounded'>plan a trip</li>
+                <li className='p-10 border rounded'>what is cloud</li>
+                <li className='p-10 border rounded'>what is life</li>
+                <li className='p-10 border rounded'>what are cats</li>
+              </ul> */}
+            </div>
+          </div>
+        )}
 
         {thinking && <Thinking />}
 
