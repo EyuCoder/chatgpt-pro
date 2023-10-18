@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 /**
  * A custom hook for managing the conversation between the user and the AI.
@@ -9,18 +9,50 @@ const useMessageCollection = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const storedMessages = JSON.parse(localStorage.getItem('messages'));
-    if (storedMessages) {
+    const storedMessages = JSON.parse(localStorage.getItem("messages"));
+    if (storedMessages && messages == []) {
       setMessages(storedMessages);
     }
   }, []);
 
   useEffect(() => {
-    if (messages.length) {
-      localStorage.setItem('messages', JSON.stringify(messages));
+    const getInitialMessage = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get("initialMessage");
+    };
+    const isInjected =
+      sessionStorage.getItem("initialMessageInjected") ||
+      initialMessageInjected;
+
+    const initialMessage = getInitialMessage();
+    if (
+      initialMessage &&
+      !isInjected &&
+      !messages.some((msg) => msg.text === initialMessage)
+    ) {
+      const initialMsgObj = {
+        id: Date.now(),
+        createdAt: Date.now(),
+        text: initialMessage,
+        ai: false,
+      };
+      setMessages((prev) => [...prev, initialMsgObj]);
     }
   }, [messages]);
 
+  useEffect(() => {
+    if (messages.length) {
+      localStorage.setItem("messages", JSON.stringify(messages));
+    }
+  }, [messages]);
+
+  /**
+   * A function for clearing all messages in the collection and resetting to the initial message.
+   */
+  const clearChat = () => {
+    localStorage.setItem("messages", JSON.stringify([]));
+    setMessages([]);
+  };
   /**
    * A function for adding a new message to the collection.
    *
@@ -28,14 +60,6 @@ const useMessageCollection = () => {
    */
   const addMessage = (message) => {
     setMessages((prev) => [...prev, message]);
-  };
-
-  /**
-   * A function for clearing all messages in the collection and resetting to the initial message.
-   */
-  const clearChat = () => {
-    localStorage.setItem('messages', JSON.stringify([]));
-    setMessages([]);
   };
 
   return { messages, addMessage, clearChat };

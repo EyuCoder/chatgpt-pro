@@ -5,12 +5,8 @@ import Thinking from "./Thinking";
 import { MdSend } from "react-icons/md";
 import { replaceProfanities } from "no-profanity";
 import { completions } from "../utils/engine";
-import { dalle } from "../utils/dalle";
-import Modal from "./Modal";
-import Setting from "./Setting";
-import ReactMarkdown from "react-markdown";
+import ReactDOM from "react-dom";
 
-const options = ["ChatGPT", "DALL·E"];
 const gptModel = ["SciPhi"];
 const template = [
   {
@@ -39,11 +35,12 @@ const ChatView = () => {
   const inputRef = useRef();
   const [formValue, setFormValue] = useState("");
   const [thinking, setThinking] = useState(false);
-  const [selected, setSelected] = useState(options[0]);
   const [gpt, setGpt] = useState(gptModel[0]);
   const [messages, addMessage] = useContext(ChatContext);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [initialMessageInjected, setInitialMessageInjected] = useState(false);
 
+  const initialMessageProcessed = useRef(false);
+  console.log("messages = ", messages);
   /**
    * Scrolls the chat area to the bottom.
    */
@@ -57,16 +54,15 @@ const ChatView = () => {
    * @param {string} newValue - The text of the new message.
    * @param {boolean} [ai=false] - Whether the message was sent by an AI or the user.
    */
-  const updateMessage = (newValue, ai = false, selected) => {
+  const updateMessage = (newValue, ai = false) => {
     const id = Date.now() + Math.floor(Math.random() * 1000000);
     const newMsg = {
       id: id,
       createdAt: Date.now(),
       text: newValue,
       ai: ai,
-      selected: `${selected}`,
     };
-
+    console.log("Adding message: ", newMsg); // Debug log
     addMessage(newMsg);
   };
 
@@ -75,34 +71,59 @@ const ChatView = () => {
    *
    * @param {Event} e - The submit event of the form.
    */
-  const sendMessage = async (e) => {
-    e.preventDefault();
+  const sendMessage = async (e, initialMessage = null) => {
+    e?.preventDefault(); // e will be undefined when called programmatically
 
-    const key = "zz";
-
-    const cleanPrompt = replaceProfanities(formValue);
-
-    const newMsg = cleanPrompt;
-    const aiModel = selected;
-    const gptVersion = gpt;
+    const messageToSend = initialMessage || formValue;
+    const cleanPrompt = replaceProfanities(messageToSend);
 
     setThinking(true);
     setFormValue("");
-    updateMessage(newMsg, false, aiModel);
+    console.log("updating w/ cleanPrompt = ", cleanPrompt);
+    console.log("messages  = ", messages);
+    updateMessage(cleanPrompt, false);
     try {
       const LLMresponse = await completions(
         cleanPrompt,
         messages,
         "emrgnt-cmplxty/Mistral-7b-Phibrarian-32k"
       );
-      LLMresponse && updateMessage(LLMresponse, true, aiModel);
+
+      ReactDOM.unstable_batchedUpdates(() => {
+        LLMresponse && updateMessage(LLMresponse, true);
+        setThinking(false);
+      });
+      console.log("messages  = ", messages);
     } catch (err) {
       window.alert(`Error: ${err} please try again later`);
+      setThinking(false);
     }
 
     setThinking(false);
   };
+  useEffect(() => {
+    const getInitialMessage = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get("initialMessage");
+    };
 
+    const initialMessage = getInitialMessage();
+
+    // Check sessionStorage and state
+    const isInjected =
+      sessionStorage.getItem("initialMessageInjected") ||
+      initialMessageInjected;
+    console.log("isInjected = ", isInjected);
+
+    if (initialMessage && !isInjected) {
+      initialMessageProcessed.current = true;
+      console.log("calling send message");
+      sendMessage(null, initialMessage);
+      // Mark as injected in both sessionStorage and local state
+      sessionStorage.setItem("initialMessageInjected", "true");
+      setInitialMessageInjected(true);
+    }
+  }, []);
   /**
    * Scrolls the chat area to the bottom when the messages array is updated.
    */
@@ -179,10 +200,6 @@ const ChatView = () => {
           </button>
         </div>
       </form>
-
-      {/* <Modal title="Setting" modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      </Modal> */}
     </main>
   );
 };

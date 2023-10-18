@@ -13,7 +13,7 @@ import Markdown from "./Markdown";
  * @param {Object} props - The properties for the component.
  */
 const Message = (props) => {
-  const { id, createdAt, text, ai = false, selected } = props.message;
+  const { id, createdAt, text, ai = false } = props.message;
 
   return (
     <div
@@ -58,6 +58,5 @@ Message.propTypes = {
     createdAt: PropTypes.number.isRequired,
     text: PropTypes.string,
     ai: PropTypes.bool,
-    selected: PropTypes.string,
   }).isRequired,
 };
