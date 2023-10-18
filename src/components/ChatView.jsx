@@ -25,7 +25,7 @@ const template = [
     prompt: "I want to plan a trip to New York City.",
   },
   {
-    title: "how to make a cake",
+    title: "How to make a cake",
     prompt: "How to make a cake with chocolate and strawberries?",
   },
   {
@@ -34,7 +34,7 @@ const template = [
   },
   {
     title: "What is recursion?",
-    prompt: "What is recursion? show me an example in python.",
+    prompt: "What is recursion? Show me an example in Python.",
   },
 ];
 
@@ -173,7 +173,7 @@ const ChatView = () => {
                   <li
                     onClick={() => setFormValue(item.prompt)}
                     key={index}
-                    className="p-6 border rounded-lg border-slate-300 hover:border-slate-500"
+                    className="p-6 border rounded-lg border-slate-300 hover:border-slate-500 cursor-pointer"
                   >
                     <p className="text-base font-semibold">{item.title}</p>
                     <p className="text-sm">{item.prompt}</p>
