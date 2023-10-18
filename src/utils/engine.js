@@ -17,7 +17,7 @@ const memory = new BufferMemory({
 export const completions = async (prompt, messages, gptVersion) => {
   const openai = new OpenAI({
     apiKey: "",
-    baseURL: "http://34.42.56.197:5000/v1",
+    baseURL: "http://api.sciphi.ai:5000/v1",
     dangerouslyAllowBrowser: true,
   });
   // console.log("messages = ", messages);
