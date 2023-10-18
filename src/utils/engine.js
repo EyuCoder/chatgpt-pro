@@ -32,9 +32,9 @@ export const completions = async (prompt, messages, gptVersion) => {
   for (const message of messages) {
     // console.log(message);
     if (message.ai) {
-      conversation += `### Response:\n\n${message.ai}\n`;
+      conversation += `### Response:\n\n${message.text}\n`;
     } else {
-      conversation += `### Instruction:\n\n${message.human}\n`;
+      conversation += `### Instruction:\n\n${message.text}\n`;
     }
   }
   conversation += "### Instruction:\n\n" + prompt + "\n### Response:\n\n";
