@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
  */
 const useMessageCollection = () => {
   const [messages, setMessages] = useState([]);
+  const [initialMessageInjected, setInitialMessageInjected] = useState(false);
 
   useEffect(() => {
     const storedMessages = JSON.parse(localStorage.getItem("messages"));
@@ -37,6 +38,7 @@ const useMessageCollection = () => {
         ai: false,
       };
       setMessages((prev) => [...prev, initialMsgObj]);
+      setInitialMessageInjected(true);
     }
   }, [messages]);
 
