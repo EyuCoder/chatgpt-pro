@@ -39,6 +39,7 @@ export const completions = async (prompt, messages, gptVersion) => {
   }
   conversation += "### Instruction:\n\n" + prompt + "\n### Response:\n\n";
 
+  console.log("Fetching completion with conversation = ", conversation);
   const response = await openai.completions.create({
     prompt: conversation,
     model: gptVersion,
