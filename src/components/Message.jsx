@@ -29,8 +29,14 @@ const Message = (props) => {
       >
         <div className="chat-bubble text-neutral-content">
           <Markdown markdownText={text} />
-          <div className={`${ai ? "text-left" : "text-right"} text-xs`}>
-            {moment(createdAt).calendar()}
+          <div className="flex justify-between">
+            <div className={`${ai ? "text-left" : "text-right"} text-xs`}>
+              {moment(createdAt).calendar()}
+            </div>
+            {ai && <div className="flex gap-2 cursor-pointer">
+              <div> 👍 </div>
+              <div> 👎 </div>
+              </div>}
           </div>
         </div>
       </div>

@@ -1,0 +1,12 @@
+☐ Add MUI to Frontend
+☐ Add RLHF to Frontend
+☐ Add RAG toggle in Frontend
+☐ Add "regenerate" button in Frontend after each message
+
+
+☐ Make an API (Python, Flask)
+☐ Save conversations to database (Local, SQLite - for now)
+☐ Add RLHF to API
+☐ Have each message have a uuid ("before" and "after" uuids for branching)
+☐ Add "branching"/forking conversations
+☐ Transfer prompt logic to API
