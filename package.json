@@ -22,13 +22,15 @@
     "langchain": "^0.0.155",
     "moment": "^2.29.4",
     "no-profanity": "^1.5.1",
-    "openai": "^3.2.1",
+    "openai": "^4.12.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-ga4": "^2.1.0",
     "react-icons": "^4.11.0",
-    "react-markdown": "^8.0.7",
-    "react-syntax-highlighter": "^15.5.0"
+    "react-markdown": "^9.0.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "remark-gfm": "^4.0.0",
+    "remark-math": "^6.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

@@ -21,3 +21,7 @@ body {
 ::-webkit-scrollbar-thumb {
   @apply bg-light-grey dark:bg-dark-grey rounded-xl;
 }
+
+.markdown > * {
+  all: revert;
+}

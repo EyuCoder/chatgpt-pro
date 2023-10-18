@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import useDarkMode from '../hooks/useDarkMode';
-import { MdOutlineNightlight, MdOutlineWbSunny } from 'react-icons/md';
+import PropTypes from "prop-types";
+import useDarkMode from "../hooks/useDarkMode";
+import { MdOutlineNightlight, MdOutlineWbSunny } from "react-icons/md";
 
 /**
  * A toggle for switching between light and dark modes.
@@ -15,12 +15,12 @@ const ToggleTheme = (props) => {
    * Toggles the dark mode.
    */
   const handleToggle = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   return (
     <a onClick={handleToggle}>
-      {theme ? (
+      {/* {theme ? (
         <>
           <MdOutlineWbSunny size={15} />
           <p className={`${!props.open && 'hidden'}`}>Light mode</p>
@@ -30,7 +30,7 @@ const ToggleTheme = (props) => {
           <MdOutlineNightlight size={15} />
           <p className={`${!props.open && 'hidden'}`}>Night mode</p>
         </>
-      )}
+      )} */}
     </a>
   );
 };

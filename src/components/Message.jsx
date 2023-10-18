@@ -1,8 +1,11 @@
-import PropTypes from 'prop-types';
-import { MdComputer, MdPerson } from 'react-icons/md';
-import moment from 'moment';
-import Image from './Image';
-import Markdown from './Markdown';
+import PropTypes from "prop-types";
+import { MdPerson } from "react-icons/md";
+import Logo from "../assets/logo2.png";
+// import Image from "next/image";
+
+import moment from "moment";
+import Image from "./Image";
+import Markdown from "./Markdown";
 
 /**
  * A chat message component that displays a message with a timestamp and an icon.
@@ -16,32 +19,32 @@ const Message = (props) => {
     <div
       key={id}
       className={`flex items-end my-2 gap-2 ${
-        ai ? 'flex-row-reverse justify-end' : 'flex-row justify-end'
-      }`}>
-      {selected === 'DALL·E' && ai ? (
-        <Image url={text} />
-      ) : (
-        <div
-          className={` w-screen overflow-hidden chat ${
-            ai ? 'chat-start' : 'chat-end'
-          }`}>
-          <div className='chat-bubble text-neutral-content'>
-            <Markdown markdownText={text} />
-            <div className={`${ai ? 'text-left' : 'text-right'} text-xs`}>
-              {moment(createdAt).calendar()}
-            </div>
+        ai ? "flex-row-reverse justify-end" : "flex-row justify-end"
+      }`}
+    >
+      <div
+        className={` w-screen overflow-hidden chat ${
+          ai ? "chat-start" : "chat-end"
+        }`}
+      >
+        <div className="chat-bubble text-neutral-content">
+          <Markdown markdownText={text} />
+          <div className={`${ai ? "text-left" : "text-right"} text-xs`}>
+            {moment(createdAt).calendar()}
           </div>
         </div>
-      )}
+      </div>
 
-      <div className='avatar'>
-        <div className='w-8 border rounded-full border-slate-400'>
-          {ai ? (
-            <MdComputer className='w-6 h-full m-auto' />
-          ) : (
-            <MdPerson className='w-6 h-full m-auto' />
-          )}
-        </div>
+      <div className="avatar">
+        {ai ? (
+          <div className="w-16  rounded-full border-slate-400">
+            <img src={Logo} className="w-6 h-full m-auto" />
+          </div>
+        ) : (
+          <div className="w-8 border rounded-full border-slate-400">
+            <MdPerson className="w-6 h-full m-auto" />
+          </div>
+        )}
       </div>
     </div>
   );
