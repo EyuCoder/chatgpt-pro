@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import useDarkMode from "../hooks/useDarkMode";
 import { NightlightOutlined, WbSunnyOutlined } from "@mui/icons-material";
+import { Button } from "@mui/material";
 /**
  * A toggle for switching between light and dark modes.
  *
@@ -18,9 +19,9 @@ const ToggleTheme = (props) => {
   };
 
   return (
-    <a onClick={handleToggle}>
+    <Button onClick={handleToggle}>
       {theme ==="dark" ? <><NightlightOutlined /> <p className={`${!props.open && 'hidden'}`}>Light mode</p> </>: <> <WbSunnyOutlined /> <p className={`${!props.open && 'hidden'}`}>Night mode</p> </>}
-    </a>
+    </Button>
   );
 };
 
