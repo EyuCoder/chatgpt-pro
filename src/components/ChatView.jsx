@@ -157,7 +157,7 @@ const ChatView = () => {
         ) : (
           <div className="flex my-2">
             <div className="w-screen overflow-hidden">
-              <ul className="grid grid-cols-2 gap-2 mx-10">
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mx-10">
                 {template.map((item, index) => (
                   <li
                     onClick={() => setFormValue(item.prompt)}
