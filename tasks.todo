@@ -1,5 +1,6 @@
-☐ Add MUI to Frontend
-☐ Add RLHF to Frontend
+✔ Add MUI to Frontend @done(23-10-19 01:17)
+☐ Rewrite Frontend to use MUI components
+☐ Add RLHF to Frontend (placement determined)
 ☐ Add RAG toggle in Frontend
 ☐ Add "regenerate" button in Frontend after each message
 

@@ -14,6 +14,12 @@ import Modal from "./Modal";
 import Setting from "./Setting";
 
 /**
+ * MUI imports.
+ */
+import Drawer from '@mui/material/Drawer';
+
+
+/**
  * A sidebar component that displays a list of nav items and a toggle
  * for switching between light and dark modes.
  *
@@ -37,11 +43,9 @@ const SideBar = () => {
   }
 
   return (
-    <section
-      className={`${
-        open ? "w-72" : "w-16"
-      } bg-neutral flex flex-col items-center gap-y-4 h-screen pt-4 relative duration-100 shadow-md`}
-    >
+    <>
+    <Drawer variant="persistent" anchor="left" open={open}>
+      
       <ul className="w-full menu rounded-box">
         <li>
           <a className="border border-slate-500" onClick={clear}>
@@ -85,7 +89,8 @@ const SideBar = () => {
       <Modal title="Setting" modalOpen={modalOpen} setModalOpen={setModalOpen}>
         <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </Modal>
-    </section>
+    
+      </Drawer></>
   );
 };
 
