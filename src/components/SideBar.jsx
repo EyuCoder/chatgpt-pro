@@ -17,6 +17,8 @@ import Setting from "./Setting";
  * MUI imports.
  */
 import Drawer from '@mui/material/Drawer';
+import { Delete } from "@mui/icons-material";
+import { Button, List, ListItem } from "@mui/material";
 
 
 /**
@@ -30,12 +32,20 @@ const SideBar = () => {
   const [, , clearChat] = useContext(ChatContext);
   const [modalOpen, setModalOpen] = useState(false);
 
+
+  // const [mobileOpen, setMobileOpen] = useState(false); // MUI example, we can use open/setOpen instead
+
+  const handleDrawerToggle = () => {
+    setOpen(!open);
+  };
+
+
   function handleResize() {
     window.innerWidth <= 720 ? setOpen(false) : setOpen(true);
   }
-
   useEffect(() => {
     handleResize();
+    window.addEventListener("resize", handleResize);
   }, []);
 
   function clear() {
@@ -44,16 +54,23 @@ const SideBar = () => {
 
   return (
     <>
-    <Drawer variant="persistent" anchor="left" open={open}>
-      
-      <ul className="w-full menu rounded-box">
-        <li>
-          <a className="border border-slate-500" onClick={clear}>
-            <MdDelete size={15} />
+    <Drawer variant="persistent" anchor="left" open={open} onClose={handleDrawerToggle} sx={{
+      // width: '320px',
+    }}>
+      <div className="flex justify-end p-2">
+        <Button onClick={handleDrawerToggle}>
+          <MdClose size={25} />
+          </Button>
+      </div>
+      <List>
+        <ListItem>
+
+        <Button onClick={clear}>
+            <Delete />
             <p className={`${!open && "hidden"}`}>Clear chat</p>
-          </a>
-        </li>
-      </ul>
+          </Button>
+        </ListItem>
+      </List>
 
       <ul className="absolute bottom-0 w-full gap-1 menu rounded-box">
         <li>
@@ -90,7 +107,15 @@ const SideBar = () => {
         <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </Modal>
     
-      </Drawer></>
+      </Drawer>
+      <div>
+      {open ? "" : 
+      <Button onClick={handleDrawerToggle}>
+          <MdMenu size={25} />
+      </Button>
+}
+      </div>
+      </>
   );
 };
 
