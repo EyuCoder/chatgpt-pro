@@ -16,10 +16,9 @@ import Setting from "./Setting";
 /**
  * MUI imports.
  */
-import Drawer from '@mui/material/Drawer';
+import Drawer from "@mui/material/Drawer";
 import { Delete } from "@mui/icons-material";
-import { Button, List, ListItem } from "@mui/material";
-
+import { Box, Button, List, ListItem } from "@mui/material";
 
 /**
  * A sidebar component that displays a list of nav items and a toggle
@@ -27,18 +26,16 @@ import { Button, List, ListItem } from "@mui/material";
  *
  * @param {Object} props - The properties for the component.
  */
-const SideBar = () => {
+const SideBar = (theme) => {
   const [open, setOpen] = useState(true);
   const [, , clearChat] = useContext(ChatContext);
   const [modalOpen, setModalOpen] = useState(false);
-
 
   // const [mobileOpen, setMobileOpen] = useState(false); // MUI example, we can use open/setOpen instead
 
   const handleDrawerToggle = () => {
     setOpen(!open);
   };
-
 
   function handleResize() {
     window.innerWidth <= 720 ? setOpen(false) : setOpen(true);
@@ -54,29 +51,43 @@ const SideBar = () => {
 
   return (
     <>
-    <Drawer variant="persistent" anchor="left" open={open} onClose={handleDrawerToggle} sx={{
-      // width: '320px',
-    }}>
-      <div className="flex justify-end p-2">
-        <Button onClick={handleDrawerToggle}>
-          <MdClose size={25} />
+      <Drawer
+        variant="persistent"
+        anchor="left"
+        open={open}
+        onClose={handleDrawerToggle}
+        sx={
+          {
+            // width: '320px',
+          }
+        }
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Button onClick={handleDrawerToggle}>
+            <MdClose size={25} />
           </Button>
-      </div>
-      <List>
-        <ListItem>
+        </div>
 
-        <Button onClick={clear}>
-            <Delete />
-            <p className={`${!open && "hidden"}`}>Clear chat</p>
-          </Button>
-        </ListItem>
-      </List>
+        <List>
+          <ListItem>
+            <Button onClick={clear}>
+              <Delete />
+              <p className={`${!open && "hidden"}`}>Clear chat</p>
+            </Button>
+          </ListItem>
+        </List>
 
-      <ul className="absolute bottom-0 w-full gap-1 menu rounded-box">
-        <li>
-          <ToggleTheme open={open} />
-        </li>
-        {/* <li>
+        <ul className="absolute bottom-0 w-full gap-1 menu rounded-box">
+          {/* <li>
+            <ToggleTheme open={open} />
+          </li> */}
+          {/* <li>
           <a
             href="https://www.buymeacoffee.com/eyuel"
             rel="noreferrer"
@@ -86,7 +97,7 @@ const SideBar = () => {
             <p className={`${!open && "hidden"}`}>Support this project</p>
           </a>
         </li> */}
-        {/* <li>
+          {/* <li>
           <a
             rel="noreferrer"
             target="_blank"
@@ -102,20 +113,28 @@ const SideBar = () => {
             <p className={`${!open && "hidden"}`}>OpenAI Key</p>
           </a>
         </li> */}
-      </ul>
-      <Modal title="Setting" modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      </Modal>
-    
+        </ul>
+        <Modal
+          title="Setting"
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+        >
+          <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        </Modal>
       </Drawer>
-      <div>
-      {open ? "" : 
-      <Button onClick={handleDrawerToggle}>
-          <MdMenu size={25} />
-      </Button>
-}
-      </div>
-      </>
+
+      <Box>
+        {open ? (
+          <Button onClick={handleDrawerToggle}>
+            <MdClose size={25} />
+          </Button>
+         ) : (
+          <Button onClick={handleDrawerToggle}>
+            <MdMenu size={25} />
+          </Button>
+        )}
+      </Box>
+    </>
   );
 };
 
