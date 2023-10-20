@@ -4,20 +4,31 @@ import ChatView from "./components/ChatView";
 import { useState } from "react";
 import Modal from "./components/Modal";
 import Setting from "./components/Setting";
+import { Box, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
 const App = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <ChatContextProvider>
-      <Modal title="Setting" modalOpen={modalOpen} setModalOpen={setModalOpen}>
-        <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
-      </Modal>
-      <div className="flex transition duration-500 ease-in-out">
-        <SideBar />
-        <ChatView />
-      </div>
-    </ChatContextProvider>
+    <ThemeProvider theme={darkTheme}>
+      <ChatContextProvider>
+        {/**
+         * The settings modal is commented out for now because it's an empty component.
+         */}
+        {/*<Modal
+          title="Setting"
+          modalOpen={modalOpen}
+          setModalOpen={setModalOpen}
+        >
+          <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        </Modal> */}
+        <Box sx={{ display: "flex" }}>
+          <CssBaseline />
+          <SideBar />
+          <ChatView />
+        </Box>
+      </ChatContextProvider>
+    </ThemeProvider>
   );
 };
 
