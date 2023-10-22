@@ -15,6 +15,7 @@ import { Person, Refresh, ThumbDown, ThumbUp } from "@mui/icons-material";
 const Message = (props) => {
   const { id, createdAt, text, ai = false } = props.message;
 
+
   return (
     <div
       key={id}
@@ -36,7 +37,7 @@ const Message = (props) => {
             {ai && <div className="flex gap-2 cursor-pointer">
               <div> <ThumbUp /> </div>
               <div> <ThumbDown /> </div>
-              <div> <Refresh /> </div>
+              <div onClick={(e) => props.regen(e)}> <Refresh /> </div>
               </div>}
           </div>
         </div>
@@ -66,5 +67,7 @@ Message.propTypes = {
     createdAt: PropTypes.number.isRequired,
     text: PropTypes.string,
     ai: PropTypes.bool,
+    // regen: PropTypes.func,
   }).isRequired,
+  regen: PropTypes.func,
 };
