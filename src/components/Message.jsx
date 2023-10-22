@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
-import { MdPerson } from "react-icons/md";
 import Logo from "../assets/logo2.png";
 // import Image from "next/image";
 
 import moment from "moment";
 import Image from "./Image";
 import Markdown from "./Markdown";
+import { Person, ThumbDown, ThumbUp } from "@mui/icons-material";
 
 /**
  * A chat message component that displays a message with a timestamp and an icon.
@@ -34,21 +34,22 @@ const Message = (props) => {
               {moment(createdAt).calendar()}
             </div>
             {ai && <div className="flex gap-2 cursor-pointer">
-              <div> 👍 </div>
-              <div> 👎 </div>
+              <div> <ThumbUp /> </div>
+              <div> <ThumbDown /> </div>
               </div>}
           </div>
         </div>
       </div>
-
+      
       <div className="avatar">
         {ai ? (
           <div className="w-16  rounded-full border-slate-400">
             <img src={Logo} className="w-6 h-full m-auto" />
           </div>
         ) : (
-          <div className="w-8 border rounded-full border-slate-400">
-            <MdPerson className="w-6 h-full m-auto" />
+          <div className="border rounded-full border-slate-400 p-2 flex items-center justify-center">
+            <Person />
+            {/* <MdPerson className="w-6 h-full m-auto" /> */}
           </div>
         )}
       </div>
