@@ -1,24 +1,24 @@
-import { useState, useEffect, useContext } from "react";
-import {
-  MdClose,
-  MdMenu,
-  MdOutlineCoffee,
-  MdOutlineVpnKey,
-  MdDelete,
-} from "react-icons/md";
-import { AiOutlineGithub } from "react-icons/ai";
+import { useEffect, useContext } from "react";
 import { ChatContext } from "../context/chatContext";
 // import bot from "../assets/logo.png";
-import ToggleTheme from "./ToggleTheme";
-import Modal from "./Modal";
-import Setting from "./Setting";
+// import ToggleTheme from "./ToggleTheme";
 
 /**
  * MUI imports.
  */
 import Drawer from "@mui/material/Drawer";
-import { Delete } from "@mui/icons-material";
-import { Box, Button, List, ListItem } from "@mui/material";
+import { Close, Delete, Public } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 
 /**
  * A sidebar component that displays a list of nav items and a toggle
@@ -26,19 +26,15 @@ import { Box, Button, List, ListItem } from "@mui/material";
  *
  * @param {Object} props - The properties for the component.
  */
-const SideBar = (theme) => {
-  const [open, setOpen] = useState(true);
+{/* <SideBar drawerOpen={drawerOpen} changeDrawer={handleDrawerToggle} /> */}
+const SideBar = (props) => {
+  const { drawerOpen, changeDrawer, clDrawer, opDrawer } = props;
+  console.log("props: ", props);
   const [, , clearChat] = useContext(ChatContext);
-  const [modalOpen, setModalOpen] = useState(false);
 
-  // const [mobileOpen, setMobileOpen] = useState(false); // MUI example, we can use open/setOpen instead
-
-  const handleDrawerToggle = () => {
-    setOpen(!open);
-  };
 
   function handleResize() {
-    window.innerWidth <= 720 ? setOpen(false) : setOpen(true);
+    window.innerWidth <= 720 ? clDrawer() : opDrawer();
   }
   useEffect(() => {
     handleResize();
@@ -49,91 +45,80 @@ const SideBar = (theme) => {
     clearChat();
   }
 
-  return (
+  const drawerContent = (
     <>
-      <Drawer
-        variant="persistent"
-        anchor="left"
-        open={open}
-        onClose={handleDrawerToggle}
-        sx={
-          {
-            // width: '320px',
-          }
-        }
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-          }}
-        >
-          <Button onClick={handleDrawerToggle}>
-            <MdClose size={25} />
+    <Box sx={{ display: "flex", justifyContent: "space-between", }}>
+          <Typography variant="h6" noWrap sx={{ ml: 1, mt: 1, mb: 1 }}>
+            SciPhi
+          </Typography>
+          <Button onClick={changeDrawer} sx={{display: { xs: 'block', sm: 'none' }}}>
+            <Close size={25} />
           </Button>
-        </div>
-
+        </Box>
+        <Divider />
         <List>
-          <ListItem>
-            <Button onClick={clear}>
-              <Delete />
-              <p className={`${!open && "hidden"}`}>Clear chat</p>
-            </Button>
+          <ListItem disablePadding>
+            <ListItemButton onClick={clear}>
+              <ListItemIcon>
+                <Delete />
+              </ListItemIcon>
+              <ListItemText primary="Clear chat" />
+            </ListItemButton>
           </ListItem>
         </List>
+        <Divider />
+
+        {/* MessageLinks come here */}
+        <List>
+          {/* For each MessageLink: */}
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <Public />
+              </ListItemIcon>
+              Conversation about Python
+              </ListItemButton>
+          </ListItem>
+        </List>
+        <Divider />
 
         <ul className="absolute bottom-0 w-full gap-1 menu rounded-box">
           {/* <li>
             <ToggleTheme open={open} />
           </li> */}
-          {/* <li>
-          <a
-            href="https://www.buymeacoffee.com/eyuel"
-            rel="noreferrer"
-            target="_blank"
-          >
-            <MdOutlineCoffee size={15} />
-            <p className={`${!open && "hidden"}`}>Support this project</p>
-          </a>
-        </li> */}
-          {/* <li>
-          <a
-            rel="noreferrer"
-            target="_blank"
-            href="https://github.com/EyuCoder/chatgpt-clone"
-          >
-            <AiOutlineGithub size={15} />
-            <p className={`${!open && "hidden"}`}>Github</p>
-          </a>
-        </li>
-        <li>
-          <a onClick={() => setModalOpen(true)}>
-            <MdOutlineVpnKey size={15} />
-            <p className={`${!open && "hidden"}`}>OpenAI Key</p>
-          </a>
-        </li> */}
         </ul>
-        <Modal
-          title="Setting"
-          modalOpen={modalOpen}
-          setModalOpen={setModalOpen}
-        >
-          <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
-        </Modal>
-      </Drawer>
+    </>
+  )
 
-      <Box>
-        {open ? (
-          <Button onClick={handleDrawerToggle}>
-            <MdClose size={25} />
-          </Button>
-         ) : (
-          <Button onClick={handleDrawerToggle}>
-            <MdMenu size={25} />
-          </Button>
-        )}
-      </Box>
+  const container = window !== undefined ? () => window.document.body : undefined;
+
+  return (
+    <>
+      <Drawer
+          container={container}
+          variant="temporary"
+          open={drawerOpen}
+          onClose={changeDrawer}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 280 },
+          }}
+        >
+          {drawerContent}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 280 },
+          }}
+          open
+        >
+          {drawerContent}
+        </Drawer>
     </>
   );
 };
