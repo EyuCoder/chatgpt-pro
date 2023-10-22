@@ -7,6 +7,7 @@ import Thinking from "./Thinking";
 import { MdSend } from "react-icons/md";
 import { replaceProfanities } from "no-profanity";
 import ReactDOM from "react-dom";
+import { Box, Toolbar } from "@mui/material";
 
 const fetchCompletion = async (prompt, messages, gptVersion) => {
   const response = await fetch("/api/completions", {
@@ -149,18 +150,19 @@ const ChatView = () => {
     inputRef.current.focus();
   }, []);
 
-  return (
-    <main className="relative flex flex-col h-screen p-1 overflow-hidden dark:bg-light-grey">
-      <div className="mx-auto my-4 tabs tabs-boxed w-fit">
+  return (<>
+  <Box sx={{ height:'100vh', display:'flex', flexDirection:'column' }}>
+    <Box sx={{ height: "96px"}}> </Box>
+    {/*<div className="mx-auto my-4 tabs tabs-boxed w-fit">
         <a
           onClick={() => setGpt(gptModel[0])}
           className={`${gpt == gptModel[0] && "tab-active"} tab`}
         >
           SciPhi
         </a>
-      </div>
+      </div> */}
 
-      <section className="flex flex-col flex-grow w-full px-4 overflow-y-scroll sm:px-10 md:px-32">
+      <section className="flex flex-col flex-grow w-full px-4 overflow-y-scroll sm:px-10 md:px-32 ">
         {messages.length ? (
           messages.map((message, index) => (
             <Message key={index} message={{ ...message }} />
@@ -212,7 +214,8 @@ const ChatView = () => {
           </button>
         </div>
       </form>
-    </main>
+    </Box>
+    </>
   );
 };
 

@@ -5,7 +5,7 @@ import Logo from "../assets/logo2.png";
 import moment from "moment";
 import Image from "./Image";
 import Markdown from "./Markdown";
-import { Person, ThumbDown, ThumbUp } from "@mui/icons-material";
+import { Person, Refresh, ThumbDown, ThumbUp } from "@mui/icons-material";
 
 /**
  * A chat message component that displays a message with a timestamp and an icon.
@@ -36,6 +36,7 @@ const Message = (props) => {
             {ai && <div className="flex gap-2 cursor-pointer">
               <div> <ThumbUp /> </div>
               <div> <ThumbDown /> </div>
+              <div> <Refresh /> </div>
               </div>}
           </div>
         </div>
