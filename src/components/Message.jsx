@@ -6,6 +6,7 @@ import moment from "moment";
 import Image from "./Image";
 import Markdown from "./Markdown";
 import { Person, Refresh, ThumbDown, ThumbUp } from "@mui/icons-material";
+import { IconButton, Tooltip } from "@mui/material";
 
 /**
  * A chat message component that displays a message with a timestamp and an icon.
@@ -35,9 +36,9 @@ const Message = (props) => {
               {moment(createdAt).calendar()}
             </div>
             {ai && <div className="flex gap-2 cursor-pointer">
-              <div> <ThumbUp /> </div>
-              <div> <ThumbDown /> </div>
-              <div onClick={(e) => props.regen(e)}> <Refresh /> </div>
+              <Tooltip placement="top" title="Rate reply as neutral - NOT IMPLEMENTED"><IconButton><ThumbUp /></IconButton></Tooltip>
+              <Tooltip placement="top" title="Rate reply as negative - NOT IMPLEMENTED"> <IconButton><ThumbDown /></IconButton></Tooltip>
+              <Tooltip placement="top" title="Regenerate last message"><IconButton onClick={(e) => props.regen(e)}><Refresh /></IconButton></Tooltip>
               </div>}
           </div>
         </div>
