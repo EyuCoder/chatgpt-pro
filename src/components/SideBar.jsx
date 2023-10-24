@@ -82,11 +82,11 @@ const SideBar = (props) => {
         </List>
         <Divider />
 
-        <ul className="absolute bottom-0 w-full gap-1 menu rounded-box">
+        {/* <ul className="absolute bottom-0 w-full gap-1 menu rounded-box"> */}
           {/* <li>
             <ToggleTheme open={open} />
           </li> */}
-        </ul>
+        {/* </ul> */}
     </>
   )
 

@@ -12,16 +12,6 @@ const App = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <ChatContextProvider>
-        {/**
-         * The settings modal is commented out for now because it's an empty component.
-         */}
-        {/*<Modal
-          title="Setting"
-          modalOpen={modalOpen}
-          setModalOpen={setModalOpen}
-        >
-          <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
-        </Modal> */}
         <Box sx={{ display: "flex" }}>
           <CssBaseline />
           <AppBar position="fixed" sx={{ width: { sm: `calc(100% - ${280}px)` }, ml: { sm: `${280}px` } }}>

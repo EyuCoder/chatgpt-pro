@@ -4,10 +4,10 @@ import { useState, useRef, useEffect, useContext } from "react";
 import Message from "./Message";
 import { ChatContext } from "../context/chatContext";
 import Thinking from "./Thinking";
-import { MdSend } from "react-icons/md";
 import { replaceProfanities } from "no-profanity";
 import ReactDOM from "react-dom";
-import { Box, Toolbar } from "@mui/material";
+import { AppBar, Box, Card, CardActionArea, CardContent, CardHeader, Container, Grid, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
+import { Send } from "@mui/icons-material";
 
 const fetchCompletion = async (prompt, messages, gptVersion) => {
   const response = await fetch("/api/completions", {
@@ -189,67 +189,56 @@ const ChatView = () => {
   return (<>
   <Box sx={{ height:'100vh', display:'flex', flexDirection:'column' }}>
     <Box sx={{ height: "96px"}}> </Box>
-    {/*<div className="mx-auto my-4 tabs tabs-boxed w-fit">
-        <a
-          onClick={() => setGpt(gptModel[0])}
-          className={`${gpt == gptModel[0] && "tab-active"} tab`}
-        >
-          SciPhi
-        </a>
-      </div> */}
-
-      <section className="flex flex-col flex-grow w-full px-4 overflow-y-scroll sm:px-10 md:px-32 ">
+      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', overflow: 'scroll', p:2 }}>
         {messages.length ? (
           messages.map((message, index) => (
             <Message key={index} message={{ ...message }} regen={(e) => regenerateMessage(e)} />
           ))
         ) : (
-          <div className="flex my-2">
-            <div className="w-screen overflow-hidden">
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 mx-10">
+          <Container maxWidth="md" sx={{ my: 2}}>
+              <Grid container spacing={2}>
                 {template.map((item, index) => (
-                  <li
-                    onClick={() => setFormValue(item.prompt)}
-                    key={index}
-                    className="p-6 border rounded-lg border-slate-300 hover:border-slate-500 cursor-pointer"
-                  >
-                    <p className="text-base font-semibold">{item.title}</p>
-                    <p className="text-sm">{item.prompt}</p>
-                  </li>
+                  <Grid item xs={12} sm={6} md={6} key={index}>
+                  <Card variant="outlined" onClick={() => setFormValue(item.prompt)}>
+                    <CardActionArea>
+                      <CardHeader title={item.title} />
+                      <CardContent>
+                        <Typography variant="body2" color="text.secondary" gutterBottom>
+                          {item.prompt}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                  </Grid>
                 ))}
-              </ul>
-            </div>
-          </div>
+              </Grid>
+              </Container>
         )}
 
         {thinking && <Thinking />}
-
         <span ref={messagesEndRef}></span>
-      </section>
-
+        <Box sx={{ height: "96px", marginBottom:"96px"}}> </Box>
+      </Box>
+      
+      <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, width: { sm: `calc(100% - ${280}px)` }, ml: { sm: `${280}px` }, p: 2 }}>
       <form
-        className="flex flex-col px-10 mb-2 md:px-32 join sm:flex-row"
         onSubmit={sendMessage}
         disabled={true}
       >
-        <div className="flex items-stretch justify-between w-full relative">
-          <input
-            ref={inputRef}
-            className="w-full grow pl-3 pr-10 h-12" // Padding right to prevent text going under the button
-            value={formValue}
-            onChange={(e) => setFormValue(e.target.value)}
-          />
-
-          <button
-            type="submit"
-            className="absolute right-1 top-1/2 transform -translate-y-1/2 btn btn-primary"
-            disabled={!formValue}
-            style={{ zIndex: 10 }} // optional, to ensure the button is above the input
-          >
-            <MdSend size={30} />
-          </button>
-        </div>
+        <TextField
+          id="outlined-multiline-static"
+          label="Message"
+          multiline
+          inputRef={inputRef}
+          value={formValue}
+          fullWidth
+          onChange={(e) => setFormValue(e.target.value)}
+          InputProps={{
+            endAdornment:<InputAdornment position="end"> <IconButton onClick={(e) => sendMessage(e)}><Send /></IconButton></InputAdornment>,
+          }}
+        />
       </form>
+      </AppBar>
     </Box>
     </>
   );
