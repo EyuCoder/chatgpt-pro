@@ -5,7 +5,7 @@ import Thinking from "./Thinking";
 import { replaceProfanities } from "no-profanity";
 import { completions, regenerate } from "../utils/engine";
 import ReactDOM from "react-dom";
-import { AppBar, Box, Card, CardActionArea, CardContent, CardHeader, Container, Grid, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
+import { AppBar, Box, Card, CardActionArea, CardContent, CardHeader, Container, Grid, IconButton, InputAdornment, Switch, TextField, Tooltip, Typography } from "@mui/material";
 import { Send } from "@mui/icons-material";
 
 const gptModel = ["SciPhi"];
@@ -39,6 +39,7 @@ const ChatView = () => {
   const [gpt, setGpt] = useState(gptModel[0]);
   const [messages, addMessage, clearChat, removeLastMessage] = useContext(ChatContext);
   const [initialMessageInjected, setInitialMessageInjected] = useState(false);
+  const [ragEnabled, setRagEnabled] = useState(false);
 
   const initialMessageProcessed = useRef(false);
   console.log("messages = ", messages);
@@ -212,6 +213,7 @@ const ChatView = () => {
       <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, width: { sm: `calc(100% - ${280}px)` }, ml: { sm: `${280}px` }, p: 2 }}>
       <form
         onSubmit={sendMessage}
+        style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
       >
         <TextField
           id="outlined-multiline-static"
@@ -225,6 +227,9 @@ const ChatView = () => {
             endAdornment:<InputAdornment position="end"> <IconButton onClick={(e) => sendMessage(e)}><Send /></IconButton></InputAdornment>,
           }}
         />
+        <Tooltip placement="top" title="Toggle RAG">
+          <Switch checked={ragEnabled} onChange={(e) => setRagEnabled(e.target.checked)} />
+        </Tooltip>
       </form>
       </AppBar>
     </Box>
