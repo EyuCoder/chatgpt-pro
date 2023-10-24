@@ -6,7 +6,7 @@ import { ChatContext } from "../context/chatContext";
 import Thinking from "./Thinking";
 import { replaceProfanities } from "no-profanity";
 import ReactDOM from "react-dom";
-import { AppBar, Box, Card, CardActionArea, CardContent, CardHeader, Container, Grid, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
+import { AppBar, Box, Card, CardActionArea, CardContent, CardHeader, Container, Grid, IconButton, InputAdornment, Switch, TextField, Tooltip, Typography } from "@mui/material";
 import { Send } from "@mui/icons-material";
 
 const fetchCompletion = async (prompt, messages, gptVersion) => {
@@ -50,6 +50,7 @@ const ChatView = () => {
   const [gpt, setGpt] = useState(gptModel[0]);
   const [messages, addMessage, clearChat, removeLastMessage] = useContext(ChatContext);
   const [initialMessageInjected, setInitialMessageInjected] = useState(false);
+  const [ragEnabled, setRagEnabled] = useState(false);
 
   const initialMessageProcessed = useRef(false);
   console.log("messages = ", messages);
@@ -237,6 +238,9 @@ const ChatView = () => {
             endAdornment:<InputAdornment position="end"> <IconButton onClick={(e) => sendMessage(e)}><Send /></IconButton></InputAdornment>,
           }}
         />
+        <Tooltip placement="top" title="Toggle RAG">
+          <Switch checked={ragEnabled} onChange={(e) => setRagEnabled(e.target.checked)} />
+        </Tooltip>
       </form>
       </AppBar>
     </Box>
