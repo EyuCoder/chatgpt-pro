@@ -20,8 +20,8 @@ const Message = (props) => {
     <>
     <Stack flexDirection={ai ? 'flex-row-reverse' : 'row'} justifyContent={ai ? "flex-start" : 'flex-end'} alignItems={ai? "flex-start":'flex-end'} gap={2} paddingY={2} key={id}>
       <Stack flexDirection={'column'} justifyContent={ai? 'flex-start':'flex-end'} alignItems={ai ? 'flex-start' : 'flex-end'} gap={2} sx={
-        ai ? { backgroundColor: "secondary.dark", borderRadius: "10px", padding: "10px", maxWidth: "80%" }:
-        { backgroundColor: "primary.dark", borderRadius: "10px", padding: "10px", maxWidth: "80%" }
+        ai ? { backgroundColor: "#80999D", borderRadius: "10px", padding: "10px", maxWidth: "80%" }:
+        { backgroundColor: "#FFEFD3", color:"#212121", borderRadius: "10px", padding: "10px", maxWidth: "80%" }
         }>
         <Markdown markdownText={text} />
 
@@ -29,7 +29,7 @@ const Message = (props) => {
         {/* stack footer */}
         {/* box that is centered, flex, and keeps both items between each other */}
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-        <Typography variant="body2" color="text.secondary" textAlign={ai?'right' :'left'}>
+        <Typography variant="body2" color={ai? "text.secondary" : "text.dark"} textAlign={ai?'right' :'left'}>
         {moment(createdAt).calendar()}
         </Typography>
         {ai && <Box sx={{ display: "flex", alignItems: "center", gap: 2, cursor:"pointer" }}>
