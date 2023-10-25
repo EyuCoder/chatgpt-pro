@@ -221,14 +221,13 @@ const ChatView = () => {
         <Box sx={{ height: "96px", marginBottom:"96px"}}> </Box>
       </Box>
       
-      <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, width: { sm: `calc(100% - ${280}px)` }, ml: { sm: `${280}px` }, p: 2 }}>
+      <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0, width: { sm: `calc(100% - ${280}px)` }, ml: { sm: `${280}px` }, p: 2}}>
       <form
         onSubmit={sendMessage}
         disabled={true}
       >
         <TextField
           id="outlined-multiline-static"
-          label="Message"
           multiline
           inputRef={inputRef}
           value={formValue}
@@ -237,6 +236,7 @@ const ChatView = () => {
           InputProps={{
             endAdornment:<InputAdornment position="end"> <IconButton onClick={(e) => sendMessage(e)}><Send /></IconButton></InputAdornment>,
           }}
+          sx={{ overflow: 'scroll', maxHeight: '96px' }}
         />
         <Tooltip placement="top" title="Toggle RAG">
           <Switch checked={ragEnabled} onChange={(e) => setRagEnabled(e.target.checked)} />

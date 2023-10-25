@@ -14,3 +14,16 @@ BACKEND:
 ☐ Have each message have a uuid ("before" and "after" uuids for branching)
 ☐ Add "branching"/forking conversations
 ☐ Transfer prompt logic to API
+
+
+
+---
+B propposed colorscheme:
+    white: #F0EDEE
+    black: #070707
+    ashgreen: #c9d5c0
+    rosebrown: #C89294
+    ashgrey: #96AFB0
+    babyblue: #8CC3E3
+    parchment: #E8E3C9
+    darkblue: #0D1B2A
