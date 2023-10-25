@@ -20,8 +20,8 @@ const Message = (props) => {
     <>
     <Stack flexDirection={ai ? 'flex-row-reverse' : 'row'} justifyContent={ai ? "flex-start" : 'flex-end'} alignItems={ai? "flex-start":'flex-end'} gap={2} paddingY={2} key={id}>
       <Stack flexDirection={'column'} justifyContent={ai? 'flex-start':'flex-end'} alignItems={ai ? 'flex-start' : 'flex-end'} gap={2} sx={
-        ai ? { backgroundColor: "#80999D", borderRadius: "10px", padding: "10px", maxWidth: "80%" }:
-        { backgroundColor: "#FFEFD3", color:"#212121", borderRadius: "10px", padding: "10px", maxWidth: "80%" }
+        ai ? { backgroundColor: "#c9d5c0",color:"#212121", borderRadius: "10px", padding: "10px", maxWidth: "80%" }:
+        { backgroundColor: "#8CC3E3", color:"#212121", borderRadius: "10px", padding: "10px", maxWidth: "80%" }
         }>
         <Markdown markdownText={text} />
 
@@ -29,13 +29,13 @@ const Message = (props) => {
         {/* stack footer */}
         {/* box that is centered, flex, and keeps both items between each other */}
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-        <Typography variant="body2" color={ai? "text.secondary" : "text.dark"} textAlign={ai?'right' :'left'}>
+        <Typography variant="body2" color={"text.dark"} textAlign={ai?'right' :'left'}>
         {moment(createdAt).calendar()}
         </Typography>
         {ai && <Box sx={{ display: "flex", alignItems: "center", gap: 2, cursor:"pointer" }}>
-              <Tooltip placement="top" title="Rate reply as neutral - NOT IMPLEMENTED"><IconButton><ThumbUp /></IconButton></Tooltip>
-              <Tooltip placement="top" title="Rate reply as negative - NOT IMPLEMENTED"> <IconButton><ThumbDown /></IconButton></Tooltip>
-              <Tooltip placement="top" title="Regenerate last message"><IconButton onClick={(e) => props.regen(e)}><Refresh /></IconButton></Tooltip>
+              <Tooltip placement="top" title="Rate reply as neutral - NOT IMPLEMENTED"><IconButton color="inherit"><ThumbUp /></IconButton></Tooltip>
+              <Tooltip placement="top" title="Rate reply as negative - NOT IMPLEMENTED"> <IconButton color="inherit"><ThumbDown /></IconButton></Tooltip>
+              <Tooltip placement="top" title="Regenerate last message"><IconButton color="inherit" onClick={(e) => props.regen(e)}><Refresh /></IconButton></Tooltip>
              </Box>}
              </Box>
 
