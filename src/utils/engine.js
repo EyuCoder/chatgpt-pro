@@ -1,18 +1,4 @@
 import OpenAI from "openai";
-import { ConversationChain } from "langchain/chains";
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import {
-  ChatPromptTemplate,
-  SystemMessagePromptTemplate,
-  HumanMessagePromptTemplate,
-  MessagesPlaceholder,
-} from "langchain/prompts";
-import { BufferMemory } from "langchain/memory";
-
-const memory = new BufferMemory({
-  returnMessages: true,
-  memoryKey: "history",
-});
 
 export const completions = async (prompt, messages, gptVersion) => {
   const openai = new OpenAI({
@@ -20,12 +6,8 @@ export const completions = async (prompt, messages, gptVersion) => {
     baseURL: "https://api.sciphi.ai/v1",
     dangerouslyAllowBrowser: true,
   });
-  // console.log("messages = ", messages);
-  // let prompt = ""
-  // for message in messages:
-  //   if message.ai {
 
-  //   }
+  
   let conversation =
     "### System:\n\nYou are a helpful assistant which thinks step by step to answer user questions.\n";
 
@@ -39,7 +21,7 @@ export const completions = async (prompt, messages, gptVersion) => {
   }
   conversation += "### Instruction:\n\n" + prompt + "\n### Response:\n\n";
 
-  console.log("Fetching completion with conversation = ", conversation);
+  // console.log("Fetching completion with conversation = ", conversation);
   const response = await openai.completions.create({
     prompt: conversation,
     model: gptVersion,
@@ -83,7 +65,7 @@ export const regenerate = async (messages, gptVersion) => {
     }
   }
 
-  console.log("Fetching completion with conversation = ", conversation);
+  // console.log("Fetching completion with conversation = ", conversation);
 
   const response = await openai.completions.create({
     prompt: conversation,

@@ -1,4 +1,4 @@
-import { ChatContextProvider } from "./context/chatContext";
+import {ChatContextProvider } from "./context/chatContext";
 import SideBar from "./components/SideBar";
 import ChatView from "./components/ChatView";
 import { useState } from "react";
@@ -14,10 +14,10 @@ import {
   createTheme,
 } from "@mui/material";
 import { Menu } from "@mui/icons-material";
+import Title from "./components/Title";
 
 const App = () => {
   // const [modalOpen, setModalOpen] = useState(false);
-
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const openDrawer = () => {
@@ -50,7 +50,7 @@ const App = () => {
                 <Menu />
               </IconButton>
               <Typography variant="h6" noWrap component="div">
-                Message title here
+               <Title />
               </Typography>
             </Toolbar>
           </AppBar>

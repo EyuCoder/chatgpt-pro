@@ -33,9 +33,9 @@ const Message = (props) => {
         {moment(createdAt).calendar()}
         </Typography>
         {ai && <Box sx={{ display: "flex", alignItems: "center", gap: 2, cursor:"pointer" }}>
-              <Tooltip placement="top" title="Rate reply as neutral - NOT IMPLEMENTED"><IconButton color="inherit"><ThumbUp /></IconButton></Tooltip>
-              <Tooltip placement="top" title="Rate reply as negative - NOT IMPLEMENTED"> <IconButton color="inherit"><ThumbDown /></IconButton></Tooltip>
-              <Tooltip placement="top" title="Regenerate last message"><IconButton color="inherit" onClick={(e) => props.regen(e)}><Refresh /></IconButton></Tooltip>
+              <Tooltip placement="top" title="Rate reply as neutral - NOT IMPLEMENTED"><><IconButton color="inherit"><ThumbUp /></IconButton></></Tooltip>
+              <Tooltip placement="top" title="Rate reply as negative - NOT IMPLEMENTED"><><IconButton color="inherit"><ThumbDown /></IconButton></></Tooltip>
+              <Tooltip placement="top" title="Regenerate last message"><><IconButton color="inherit" onClick={(e) => props.regen(e)}><Refresh /></IconButton></></Tooltip>
              </Box>}
              </Box>
 
