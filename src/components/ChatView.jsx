@@ -6,8 +6,24 @@ import { ChatContext } from "../context/chatContext";
 import Thinking from "./Thinking";
 import { replaceProfanities } from "no-profanity";
 import ReactDOM from "react-dom";
-import { AppBar, Box, Card, CardActionArea, CardContent, CardHeader, Container, Grid, IconButton, InputAdornment, Switch, TextField, Tooltip, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  Container,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Switch,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { Send } from "@mui/icons-material";
+import { useMemo } from "react";
 
 const fetchCompletion = async (prompt, messages, gptVersion) => {
   const response = await fetch("/api/completions", {
@@ -47,13 +63,23 @@ const ChatView = () => {
   const inputRef = useRef();
   const [formValue, setFormValue] = useState("");
   const [thinking, setThinking] = useState(false);
-  const [gpt, setGpt] = useState(gptModel[0]);
-  const [messages, addMessage, clearChat, removeLastMessage] = useContext(ChatContext);
   const [initialMessageInjected, setInitialMessageInjected] = useState(false);
   const [ragEnabled, setRagEnabled] = useState(false);
 
   const initialMessageProcessed = useRef(false);
-  console.log("messages = ", messages);
+  const [
+    ,
+    currentConversation,
+    selectConversation,
+    addConversation,
+    ,
+    addMessage,
+    ,
+    removeLastMessage,
+  ] = useContext(ChatContext);
+
+  const messages = useMemo(() => {console.log("currentChanged", currentConversation); return currentConversation ? currentConversation.messages : []}, [currentConversation]);
+  
   /**
    * Scrolls the chat area to the bottom.
    */
@@ -75,11 +101,8 @@ const ChatView = () => {
       text: newValue,
       ai: ai,
     };
-    console.log("Adding message: ", newMsg); // Debug log
     addMessage(newMsg);
   };
-
-
 
   /**
    * Sends our prompt to our API and get response to our request from openai.
@@ -94,8 +117,7 @@ const ChatView = () => {
 
     setThinking(true);
     setFormValue("");
-    console.log("updating w/ cleanPrompt = ", cleanPrompt);
-    console.log("messages  = ", messages);
+
     updateMessage(cleanPrompt, false);
     try {
       const LLMresponse = await fetchCompletion(
@@ -108,7 +130,6 @@ const ChatView = () => {
         LLMresponse && updateMessage(LLMresponse, true);
         setThinking(false);
       });
-      console.log("messages  = ", messages);
     } catch (err) {
       window.alert(`Error: ${err} please try again later`);
       setThinking(false);
@@ -131,48 +152,44 @@ const ChatView = () => {
     // remove last message
     removeLastMessage();
 
-    try{
-    const LLMResponse = await regenerate(messagesCopy, "emrgnt-cmplxty/Mistral-7b-Phibrarian-32k")
+    try {
+      const LLMResponse = await regenerate(
+        messagesCopy,
+        "emrgnt-cmplxty/Mistral-7b-Phibrarian-32k"
+      );
 
-    ReactDOM.unstable_batchedUpdates(() => {
-      LLMResponse && updateMessage(LLMResponse, true);
-      setThinking(false);
-    });
+      ReactDOM.unstable_batchedUpdates(() => {
+        LLMResponse && updateMessage(LLMResponse, true);
+        setThinking(false);
+      });
 
-      console.log("messages  = ", messages);
     } catch (err) {
-      window.alert(`Error: ${err} please try again later`);
       setThinking(false);
     }
-
-    // end thinking process
     setThinking(false);
   };
 
-  
   useEffect(() => {
     const getInitialMessage = () => {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get("initialMessage");
     };
-
     const initialMessage = getInitialMessage();
-
     // Check sessionStorage and state
     const isInjected =
       sessionStorage.getItem("initialMessageInjected") ||
       initialMessageInjected;
-    console.log("isInjected = ", isInjected);
 
     if (initialMessage && !isInjected) {
       initialMessageProcessed.current = true;
-      console.log("calling send message");
       sendMessage(null, initialMessage);
       // Mark as injected in both sessionStorage and local state
       sessionStorage.setItem("initialMessageInjected", "true");
       setInitialMessageInjected(true);
     }
   }, []);
+
+
   /**
    * Scrolls the chat area to the bottom when the messages array is updated.
    */
@@ -187,34 +204,54 @@ const ChatView = () => {
     inputRef.current.focus();
   }, []);
 
-  return (<>
-  <Box sx={{ height:'100vh', display:'flex', flexDirection:'column' }}>
-    <Box sx={{ height: "96px"}}> </Box>
-      <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', overflow: 'scroll', p:2 }}>
-        {messages.length ? (
-          messages.map((message, index) => (
-            <Message key={index} message={{ ...message }} regen={(e) => regenerateMessage(e)} />
-          ))
-        ) : (
-          <Container maxWidth="md" sx={{ my: 2}}>
+  return (
+    <>
+      <Box sx={{ height: "100vh", display: "flex", flexDirection: "column" }}>
+        <Box sx={{ height: "96px" }}> </Box>
+        <Box
+          sx={{
+            flexGrow: 1,
+            display: "flex",
+            flexDirection: "column",
+            overflow: "scroll",
+            p: 2,
+          }}
+        >
+          {messages.length ? (
+            messages.map((message, index) => (
+              <Message
+                key={index}
+                message={{ ...message }}
+                regen={(e) => regenerateMessage(e)}
+              />
+            ))
+          ) : (
+            <Container maxWidth="md" sx={{ my: 2 }}>
               <Grid container spacing={2}>
                 {template.map((item, index) => (
                   <Grid item xs={12} sm={6} md={6} key={index}>
-                  <Card variant="outlined" onClick={() => setFormValue(item.prompt)}>
-                    <CardActionArea>
-                      <CardHeader title={item.title} />
-                      <CardContent>
-                        <Typography variant="body2" color="text.secondary" gutterBottom>
-                          {item.prompt}
-                        </Typography>
-                      </CardContent>
-                    </CardActionArea>
-                  </Card>
+                    <Card
+                      variant="outlined"
+                      onClick={() => setFormValue(item.prompt)}
+                    >
+                      <CardActionArea>
+                        <CardHeader title={item.title} />
+                        <CardContent>
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            gutterBottom
+                          >
+                            {item.prompt}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
                   </Grid>
                 ))}
               </Grid>
-              </Container>
-        )}
+            </Container>
+          )}
 
         {thinking && <Thinking />}
         <span ref={messagesEndRef}></span>
@@ -236,14 +273,48 @@ const ChatView = () => {
           InputProps={{
             endAdornment:<InputAdornment position="end"> <IconButton onClick={(e) => sendMessage(e)}><Send /></IconButton></InputAdornment>,
           }}
-          sx={{ overflow: 'scroll', maxHeight: '96px' }}
-        />
-        <Tooltip placement="top" title="Toggle RAG">
-          <Switch checked={ragEnabled} onChange={(e) => setRagEnabled(e.target.checked)} />
-        </Tooltip>
-      </form>
-      </AppBar>
-    </Box>
+        >
+          <form
+            onSubmit={sendMessage}
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <TextField
+              id="outlined-multiline-static"
+              multiline
+              inputRef={inputRef}
+              value={formValue}
+              fullWidth
+              onChange={(e) => setFormValue(e.target.value)}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    {" "}
+                    <IconButton onClick={(e) => sendMessage(e)}>
+                      <Send />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+              onKeyUp={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  sendMessage(e);
+                }
+              }}
+              sx={{ overflow: "scroll", maxHeight: "96px" }}
+            />
+            <Tooltip placement="top" title="Toggle RAG">
+              <Switch
+                checked={ragEnabled}
+                onChange={(e) => setRagEnabled(e.target.checked)}
+              />
+            </Tooltip>
+          </form>
+        </AppBar>
+      </Box>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { ChatContextProvider } from "./context/chatContext";
+import {ChatContextProvider } from "./context/chatContext";
 import SideBar from "./components/SideBar";
 import ChatView from "./components/ChatView";
 import { useState } from "react";
@@ -20,7 +20,7 @@ const App = () => {
                 <Menu />
               </IconButton>
               <Typography variant="h6" noWrap component="div">
-                Message title here
+               <Title />
               </Typography>
             </Toolbar>
           </AppBar>

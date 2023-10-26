@@ -7,11 +7,12 @@ import { ChatContext } from "../context/chatContext";
  * MUI imports.
  */
 import Drawer from "@mui/material/Drawer";
-import { Close, Delete, Public } from "@mui/icons-material";
+import { Add, Close, Delete, Public } from "@mui/icons-material";
 import {
   Box,
   Button,
   Divider,
+  IconButton,
   List,
   ListItem,
   ListItemButton,
@@ -29,8 +30,7 @@ import {
 {/* <SideBar drawerOpen={drawerOpen} changeDrawer={handleDrawerToggle} /> */}
 const SideBar = (props) => {
   const { drawerOpen, changeDrawer, clDrawer, opDrawer } = props;
-  console.log("props: ", props);
-  const [, , clearChat] = useContext(ChatContext);
+  const [conversations, currentConversation, selectConversation, addConversation, deleteConversation, , clearChat,] = useContext(ChatContext);
 
 
   function handleResize() {
@@ -58,28 +58,38 @@ const SideBar = (props) => {
         <Divider />
         <List>
           <ListItem disablePadding>
+            <ListItemButton onClick={addConversation}>
+              <ListItemIcon>
+                <Add />
+              </ListItemIcon>
+              <ListItemText primary="New conversation" />
+            </ListItemButton>
+          </ListItem>
+          {/* <ListItem disablePadding>
             <ListItemButton onClick={clear}>
               <ListItemIcon>
                 <Delete />
               </ListItemIcon>
               <ListItemText primary="Clear chat" />
             </ListItemButton>
-          </ListItem>
+          </ListItem> */}
         </List>
         <Divider />
 
         {/* MessageLinks come here */}
-        <List>
-          {/* For each MessageLink: */}
-          <ListItem disablePadding>
-            <ListItemButton>
+        {conversations.map((conversation) => (
+          <ListItem disablePadding key={conversation.uuid} selected={currentConversation?.uuid === conversation.uuid}>
+            <ListItemButton onClick={() => selectConversation(conversation.uuid)}>
               <ListItemIcon>
                 <Public />
               </ListItemIcon>
-              Conversation about Python
-              </ListItemButton>
+              {`${conversation.title}`}
+            </ListItemButton>
+            <IconButton onClick={() => deleteConversation(conversation.uuid)}>
+              <Delete />
+            </IconButton>
           </ListItem>
-        </List>
+        ))}
         <Divider />
 
         {/* <ul className="absolute bottom-0 w-full gap-1 menu rounded-box"> */}

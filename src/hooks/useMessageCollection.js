@@ -1,79 +1,127 @@
 import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
-/**
- * A custom hook for managing the conversation between the user and the AI.
- *
- * @returns {Object} An object containing the `messages` array, the `addMessage` function, the `clearMessages` function, and the `loadMessage` function.
- */
 const useMessageCollection = () => {
-  const [messages, setMessages] = useState([]);
-  const [initialMessageInjected, setInitialMessageInjected] = useState(false);
+  const [conversations, setConversations] = useState([]);
+  const [currentConversation, setCurrentConversation] = useState(null);
 
+
+
+  const [firstLoad, setFirstLoad] = useState(false);
+  // Load conversations from local storage
   useEffect(() => {
-    const storedMessages = JSON.parse(localStorage.getItem("messages"));
-    if (storedMessages && messages == []) {
-      setMessages(storedMessages);
-    }
-  }, []);
-
-  useEffect(() => {
-    const getInitialMessage = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get("initialMessage");
-    };
-    const isInjected =
-      sessionStorage.getItem("initialMessageInjected") ||
-      initialMessageInjected;
-
-    const initialMessage = getInitialMessage();
-    if (
-      initialMessage &&
-      !isInjected &&
-      !messages.some((msg) => msg.text === initialMessage)
-    ) {
-      const initialMsgObj = {
-        id: Date.now(),
-        createdAt: Date.now(),
-        text: initialMessage,
-        ai: false,
+    if(firstLoad){
+      localStorage.setItem("conversations", JSON.stringify(conversations));
+    } else {
+    const localConversations = JSON.parse(localStorage.getItem("conversations"));
+    if (localConversations && localConversations.length > 0) {
+      setConversations(localConversations);
+      setCurrentConversation(localConversations[0]);
+    } else {
+      const newConversation = {
+        id: 1,
+        title: "Default Conversation",
+        uuid: uuidv4(),
+        messages: [],
+        timestamp: Date.now()
       };
-      setMessages((prev) => [...prev, initialMsgObj]);
-      setInitialMessageInjected(true);
+      setConversations([newConversation]);
+      setCurrentConversation(newConversation);
     }
-  }, [messages]);
+    setFirstLoad(true);
+  }
+  }, [conversations]);
 
-  useEffect(() => {
-    if (messages.length) {
-      localStorage.setItem("messages", JSON.stringify(messages));
-    }
-  }, [messages]);
 
-  /**
-   * A function for clearing all messages in the collection and resetting to the initial message.
-   */
-  const clearChat = () => {
-    localStorage.setItem("messages", JSON.stringify([]));
-    setMessages([]);
+   
+  
+
+
+  // Select conversation based on uuid
+  const selectConversation = (uuid) => {
+    const selectedConversation = conversations.find(conv => conv.uuid === uuid);
+    setCurrentConversation(selectedConversation);
   };
-  /**
-   * A function for adding a new message to the collection.
-   *
-   * @param {Object} message - The message to add to the collection.
-   */
+
+  // Add a new conversation
+  const addConversation = () => {
+    const newConversation = {
+      id: conversations.length + 1,
+      title: "New Conversation",
+      uuid: uuidv4(),
+      messages: [],
+      timestamp: Date.now()
+    };
+    setConversations(prev => [...prev, newConversation]);
+
+    // important for users that press the add conversation button
+    setCurrentConversation(newConversation);
+  };
+
+  // Delete conversation based on uuid
+  const deleteConversation = (uuid) => {
+    setConversations(prev => prev.filter(conv => conv.uuid !== uuid));
+    if (currentConversation.uuid === uuid) {
+      setCurrentConversation(null);
+    }
+
+    // if there are no conversations left, create a new one
+    if (conversations.length === 1) {
+      const newConversation = {
+        id: 1,
+        title: "Default Conversation",
+        uuid: uuidv4(),
+        messages: [],
+        timestamp: Date.now()
+      };
+      setConversations([newConversation]);
+      setCurrentConversation(newConversation);
+    }
+  };
+
+  // Add a message to the current conversation
   const addMessage = (message) => {
-    setMessages((prev) => [...prev, message]);
+    console.log("addMessage, message", message)
+    console.log("addMessage, currentConversation", currentConversation)
+
+    console.log("addMessage->currentConversation")
+    setConversations(prev => {
+      return prev.map(conv => {
+        if (conv.uuid === currentConversation.uuid) {
+          return { ...conv, messages: [...conv.messages, message] }
+        } else {
+          return conv;
+        }
+      });
+    }
+    );
+
+    setCurrentConversation(prev => {
+      return { ...prev, messages: [...prev.messages, message] }
+    });
   };
 
-  /**
-   * A function for removing the last message from the collection.
-   * 
-   * 
-   */
+
+
+  // Clear all messages in the current conversation
+  const clearChat = () => {
+    if (currentConversation) {
+      setCurrentConversation(prev => {
+        return { ...prev, messages: [] }
+      });
+    }
+  };
+
+  // Remove the last message from the current conversation
   const removeLastMessage = () => {
-    setMessages((prev) => prev.slice(0, -1));
+    if (currentConversation) {
+      setCurrentConversation(prev => {
+        return { ...prev, messages: prev.messages.slice(0, -1) }
+      });
+    }
   }
 
-  return { messages, addMessage, clearChat, removeLastMessage };
+  return { conversations, currentConversation, selectConversation, addConversation, deleteConversation, addMessage, clearChat, removeLastMessage };
 };
 
 export default useMessageCollection;
