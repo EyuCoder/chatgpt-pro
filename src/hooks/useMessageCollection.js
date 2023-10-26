@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
+import { generateTitle } from "../utils/engine";
 
 const useMessageCollection = () => {
   const [conversations, setConversations] = useState([]);
@@ -33,7 +34,28 @@ const useMessageCollection = () => {
   }, [conversations]);
 
 
-   
+  // let's generate and update the title of the current conversation if there is at least 2 messages
+  useEffect(() => {
+    if (currentConversation && currentConversation.messages.length > 1 && (currentConversation.title === "New Conversation" || currentConversation.title === "Default Conversation")) {
+      generateTitle(currentConversation.messages, "emrgnt-cmplxty/Mistral-7b-Phibrarian-32k").then((response) => {
+        setCurrentConversation(prev => {
+          return { ...prev, title: response }
+        });
+
+        setConversations(prev => {
+          return prev.map(conv => {
+            if (conv.uuid === currentConversation.uuid) {
+              return { ...conv, title: response }
+            } else {
+              return conv;
+            }
+          });
+        }
+        );
+      }
+      );
+    }
+  }, [currentConversation]);
   
 
 
