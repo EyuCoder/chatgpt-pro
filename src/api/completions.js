@@ -13,7 +13,7 @@ export default async (req, res) => {
 
   const openai = new OpenAI({
     apiKey: process.env.SCIPHI_API_KEY,
-    baseURL: "https://api.sciphi.ai/v1",
+    baseURL: process.env.SCIPHI_API_URL,
   });
 
   let conversation =
