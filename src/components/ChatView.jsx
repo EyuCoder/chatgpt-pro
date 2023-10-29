@@ -28,6 +28,7 @@ const fetchCompletion = async (prompt, messages, gptVersion) => {
   //   if message.ai {
 
   //   }
+  console.log("process.env = ", process.env);
   let conversation =
     "### System:\n\nYou are a helpful assistant which thinks step by step to answer user questions.\n";
 
