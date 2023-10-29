@@ -1,28 +1,19 @@
 import OpenAI from "openai";
-import { ConversationChain } from "langchain/chains";
-import { ChatOpenAI } from "langchain/chat_models/openai";
-import {
-  ChatPromptTemplate,
-  SystemMessagePromptTemplate,
-  HumanMessagePromptTemplate,
-  MessagesPlaceholder,
-} from "langchain/prompts";
-import { BufferMemory } from "langchain/memory";
 
-const memory = new BufferMemory({
-  returnMessages: true,
-  memoryKey: "history",
-});
+export default async (req, res) => {
+  if (req.method !== "POST") {
+    return res.status(405).send("Method Not Allowed");
+  }
 
-if (!process.env.SCIPHI_API_KEY) {
-  throw new Error("The SCIPHI_API_KEY is missing!");
-}
+  const { prompt, messages, gptVersion } = req.body;
 
-export const completions = async (prompt, messages, gptVersion) => {
+  if (!process.env.SCIPHI_API_KEY) {
+    return res.status(500).send("The SCIPHI_API_KEY is missing!");
+  }
+
   const openai = new OpenAI({
     apiKey: process.env.SCIPHI_API_KEY,
     baseURL: "https://api.sciphi.ai/v1",
-    dangerouslyAllowBrowser: true,
   });
 
   let conversation =
@@ -48,5 +39,5 @@ export const completions = async (prompt, messages, gptVersion) => {
   let response_str = response.choices[0].text;
   response_str = response_str.trim();
 
-  return response_str;
+  res.status(200).json({ response: response_str });
 };

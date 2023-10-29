@@ -4,8 +4,18 @@ import { ChatContext } from "../context/chatContext";
 import Thinking from "./Thinking";
 import { MdSend } from "react-icons/md";
 import { replaceProfanities } from "no-profanity";
-import { completions } from "../utils/engine";
 import ReactDOM from "react-dom";
+
+const fetchCompletion = async (prompt, messages, gptVersion) => {
+  const response = await fetch("/api/completions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt, messages, gptVersion }),
+  });
+
+  const data = await response.json();
+  return data.response;
+};
 
 const gptModel = ["SciPhi"];
 const template = [
@@ -83,7 +93,7 @@ const ChatView = () => {
     console.log("messages  = ", messages);
     updateMessage(cleanPrompt, false);
     try {
-      const LLMresponse = await completions(
+      const LLMresponse = await fetchCompletion(
         cleanPrompt,
         messages,
         "SciPhi/SciPhi-Mistral-7B-32k"
