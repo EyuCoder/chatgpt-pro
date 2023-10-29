@@ -14,6 +14,7 @@ const fetchCompletion = async (prompt, messages, gptVersion) => {
   //   headers: { "Content-Type": "application/json" },
   //   body: JSON.stringify({ prompt, messages, gptVersion }),
   // });
+  console.log("process.env = ", process.env);
 
   // const data = await response.json();
   // return data.response;
@@ -28,7 +29,6 @@ const fetchCompletion = async (prompt, messages, gptVersion) => {
   //   if message.ai {
 
   //   }
-  console.log("process.env = ", process.env);
   let conversation =
     "### System:\n\nYou are a helpful assistant which thinks step by step to answer user questions.\n";
 
