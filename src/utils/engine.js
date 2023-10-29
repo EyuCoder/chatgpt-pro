@@ -14,7 +14,9 @@ const memory = new BufferMemory({
   memoryKey: "history",
 });
 
-console.log("process.env.SCIPHI_API_KEY = ", process.env.SCIPHI_API_KEY);
+if (!process.env.SCIPHI_API_KEY) {
+  throw new Error("The SCIPHI_API_KEY is missing!");
+}
 
 export const completions = async (prompt, messages, gptVersion) => {
   const openai = new OpenAI({
