@@ -15,7 +15,8 @@ const fetchCompletion = async (prompt, messages, gptVersion) => {
     body: JSON.stringify({ prompt, messages, gptVersion }),
   });
   console.log("response = ", response);
-  // console.log("process.env = ", process.env);
+  response_str = await response.text();
+  console.log("response_str = ", response_str);
 
   // // const data = await response.json();
   // // return data.response;
