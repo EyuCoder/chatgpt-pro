@@ -16,16 +16,11 @@ const memory = new BufferMemory({
 
 export const completions = async (prompt, messages, gptVersion) => {
   const openai = new OpenAI({
-    apiKey: "",
+    apiKey: process.env.SCIPHI_API_KEY,
     baseURL: "https://api.sciphi.ai/v1",
     dangerouslyAllowBrowser: true,
   });
-  // console.log("messages = ", messages);
-  // let prompt = ""
-  // for message in messages:
-  //   if message.ai {
 
-  //   }
   let conversation =
     "### System:\n\nYou are a helpful assistant which thinks step by step to answer user questions.\n";
 
@@ -39,24 +34,15 @@ export const completions = async (prompt, messages, gptVersion) => {
   }
   conversation += "### Instruction:\n\n" + prompt + "\n### Response:\n\n";
 
-  console.log("Fetching completion with conversation = ", conversation);
   const response = await openai.completions.create({
     prompt: conversation,
     model: gptVersion,
     temperature: 0.1,
     max_tokens: 16_348,
-    // stream: true,
   });
-  // for await (const completion of response) {
-  //   // handle each completion here, for example, display it to the user
-  //   console.log(completion);
-  // }
 
-  // console.log("response = ", response);
   let response_str = response.choices[0].text;
   response_str = response_str.trim();
-  console.log("response_str = ", response_str);
 
-  // console.log("response_str/ =", response_str);
   return response_str;
 };
