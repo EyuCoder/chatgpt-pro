@@ -1,3 +1,5 @@
+import OpenAI from "openai";
+
 import { useState, useRef, useEffect, useContext } from "react";
 import Message from "./Message";
 import { ChatContext } from "../context/chatContext";
