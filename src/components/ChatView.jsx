@@ -97,7 +97,7 @@ const ChatView = () => {
       const LLMresponse = await fetchCompletion(
         cleanPrompt,
         messages,
-        "SciPhi/SciPhi-Mistral-7B-32k"
+        "SciPhi/SciPhi-Self-RAG-Mistral-7B-32k"
       );
 
       ReactDOM.unstable_batchedUpdates(() => {
