@@ -9,59 +9,60 @@ import { replaceProfanities } from "no-profanity";
 import ReactDOM from "react-dom";
 
 const fetchCompletion = async (prompt, messages, gptVersion) => {
-  // const response = await fetch("/api/completions", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify({ prompt, messages, gptVersion }),
+  const response = await fetch("/api/completions", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt, messages, gptVersion }),
+  });
+  console.log("response = ", response);
+  // console.log("process.env = ", process.env);
+
+  // // const data = await response.json();
+  // // return data.response;
+  // const openai = new OpenAI({
+  //   // apiKey: "",
+  //   baseURL: "https://api.sciphi.ai/v1",
+  //   dangerouslyAllowBrowser: true,
   // });
-  console.log("process.env = ", process.env);
+  // // console.log("messages = ", messages);
+  // // let prompt = ""
+  // // for message in messages:
+  // //   if message.ai {
 
-  // const data = await response.json();
-  // return data.response;
-  const openai = new OpenAI({
-    // apiKey: "",
-    baseURL: "https://api.sciphi.ai/v1",
-    dangerouslyAllowBrowser: true,
-  });
-  // console.log("messages = ", messages);
-  // let prompt = ""
-  // for message in messages:
-  //   if message.ai {
+  // //   }
+  // let conversation =
+  //   "### System:\n\nYou are a helpful assistant which thinks step by step to answer user questions.\n";
 
+  // for (const message of messages) {
+  //   // console.log(message);
+  //   if (message.ai) {
+  //     conversation += `### Response:\n\n${message.text}\n`;
+  //   } else {
+  //     conversation += `### Instruction:\n\n${message.text}\n`;
   //   }
-  let conversation =
-    "### System:\n\nYou are a helpful assistant which thinks step by step to answer user questions.\n";
-
-  for (const message of messages) {
-    // console.log(message);
-    if (message.ai) {
-      conversation += `### Response:\n\n${message.text}\n`;
-    } else {
-      conversation += `### Instruction:\n\n${message.text}\n`;
-    }
-  }
-  conversation += "### Instruction:\n\n" + prompt + "\n### Response:\n\n";
-
-  console.log("Fetching completion with conversation = ", conversation);
-  const response = await openai.completions.create({
-    prompt: conversation,
-    model: gptVersion,
-    temperature: 0.1,
-    max_tokens: 16_348,
-    // stream: true,
-  });
-  // for await (const completion of response) {
-  //   // handle each completion here, for example, display it to the user
-  //   console.log(completion);
   // }
+  // conversation += "### Instruction:\n\n" + prompt + "\n### Response:\n\n";
 
-  // console.log("response = ", response);
-  let response_str = response.choices[0].text;
-  response_str = response_str.trim();
-  console.log("response_str = ", response_str);
+  // console.log("Fetching completion with conversation = ", conversation);
+  // const response = await openai.completions.create({
+  //   prompt: conversation,
+  //   model: gptVersion,
+  //   temperature: 0.1,
+  //   max_tokens: 16_348,
+  //   // stream: true,
+  // });
+  // // for await (const completion of response) {
+  // //   // handle each completion here, for example, display it to the user
+  // //   console.log(completion);
+  // // }
 
-  // console.log("response_str/ =", response_str);
-  return response_str;
+  // // console.log("response = ", response);
+  // let response_str = response.choices[0].text;
+  // response_str = response_str.trim();
+  // console.log("response_str = ", response_str);
+
+  // // console.log("response_str/ =", response_str);
+  // return response_str;
 };
 
 const gptModel = ["SciPhi"];
