@@ -3,7 +3,7 @@ import Message from "./Message";
 import { ChatContext } from "../context/chatContext";
 import Thinking from "./Thinking";
 import { replaceProfanities } from "no-profanity";
-import { completions, regenerate } from "../utils/engine";
+import { completions } from "../utils/engine";
 import ReactDOM from "react-dom";
 import {
   AppBar,
