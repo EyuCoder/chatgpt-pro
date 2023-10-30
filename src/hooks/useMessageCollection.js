@@ -5,10 +5,10 @@ import { generateTitle } from "../utils/engine";
 const useMessageCollection = () => {
   const [conversations, setConversations] = useState([]);
   const [currentConversation, setCurrentConversation] = useState(null);
-
-
-
   const [firstLoad, setFirstLoad] = useState(false);
+
+
+
   // Load conversations from local storage
   useEffect(() => {
     if(firstLoad){

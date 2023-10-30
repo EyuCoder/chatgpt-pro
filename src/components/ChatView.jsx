@@ -64,7 +64,7 @@ const ChatView = () => {
   const [formValue, setFormValue] = useState("");
   const [thinking, setThinking] = useState(false);
   const [initialMessageInjected, setInitialMessageInjected] = useState(false);
-  const [ragEnabled, setRagEnabled] = useState(false);
+  // const [ragEnabled, setRagEnabled] = useState(false);
 
   const initialMessageProcessed = useRef(false);
   const [
@@ -306,12 +306,12 @@ const ChatView = () => {
               }}
               sx={{ overflow: "scroll", maxHeight: "96px" }}
             />
-            <Tooltip placement="top" title="Toggle RAG">
+            {/* <Tooltip placement="top" title="Toggle RAG">
               <Switch
                 checked={ragEnabled}
                 onChange={(e) => setRagEnabled(e.target.checked)}
               />
-            </Tooltip>
+            </Tooltip> */}
           </form>
         </AppBar>
       </Box>
