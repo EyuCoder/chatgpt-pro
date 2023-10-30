@@ -16,7 +16,6 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  Switch,
   TextField,
   Tooltip,
   Typography,
@@ -112,8 +111,7 @@ const ChatView = () => {
       console.log("messages is", messages)
       const LLMresponse = await completions(
         cleanPrompt,
-        messages,
-        "emrgnt-cmplxty/Mistral-7b-Phibrarian-32k"
+        messages
       );
 
       ReactDOM.unstable_batchedUpdates(() => {
@@ -143,9 +141,9 @@ const ChatView = () => {
     removeLastMessage();
 
     try {
-      const LLMResponse = await regenerate(
-        messagesCopy,
-        "emrgnt-cmplxty/Mistral-7b-Phibrarian-32k"
+      const LLMResponse = await completions(
+        messagesCopy[messagesCopy.length - 1].text,
+        messagesCopy
       );
 
       ReactDOM.unstable_batchedUpdates(() => {
