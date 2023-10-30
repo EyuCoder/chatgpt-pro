@@ -37,7 +37,7 @@ const useMessageCollection = () => {
   // let's generate and update the title of the current conversation if there is at least 2 messages
   useEffect(() => {
     if (currentConversation && currentConversation.messages.length > 1 && (currentConversation.title === "New Conversation" || currentConversation.title === "Default Conversation")) {
-      generateTitle(currentConversation.messages, "emrgnt-cmplxty/Mistral-7b-Phibrarian-32k").then((response) => {
+      generateTitle(currentConversation.messages).then((response) => {
         setCurrentConversation(prev => {
           return { ...prev, title: response }
         });

@@ -1,14 +1,16 @@
 // import OpenAI from "openai";
 
-export const completions = async(prompt, messages, gptVersion = "SciPhi/SciPhi-Self-RAG-Mistral-7B-32k" ) => {
-const response = await fetch('https://chat.sciphi.ai/api/completions', {
+import { AppData } from "./constants";
+
+export const completions = async(prompt, messages, gptVersion = AppData.model ) => {
+const response = await fetch(AppData.baseURL, {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
     prompt: prompt,
-    messages: messages.map(message => ({
+    messages: messages?.map(message => ({
       id: message.id,
       createdAt: message.createdAt,
       text: message.text,
@@ -62,7 +64,7 @@ return responseJson?.response.trim();
 // }
 
 // this function generates a title based on the messages array, and returns the title
-export const generateTitle = async (messages, gptVersion = "SciPhi/SciPhi-Self-RAG-Mistral-7B-32k") => {
+export const generateTitle = async (messages, gptVersion = AppData.model) => {
 
   let messageSet = "You are a title writing assistant. Summarize the text conversation below with a 3 word title.\n";
   
