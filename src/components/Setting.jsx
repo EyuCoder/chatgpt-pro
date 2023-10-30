@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { checkApiKey } from "../utils/checkKeys";
 
 import PropTypes from "prop-types";
 
