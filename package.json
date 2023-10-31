@@ -24,6 +24,7 @@
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.14.14",
     "@mui/material": "^5.14.14",
+    "axios": "^1.6.0",
     "langchain": "^0.0.155",
     "moment": "^2.29.4",
     "no-profanity": "^1.5.1",

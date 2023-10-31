@@ -1,73 +1,52 @@
-// import OpenAI from "openai";
+import axios from 'axios';
 
 import { AppData } from "./constants";
 
-export const completions = async(prompt, messages, gptVersion = AppData.model ) => {
-const response = await fetch(AppData.baseURL, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    prompt: prompt,
-    messages: messages?.map(message => ({
-      id: message.id,
-      createdAt: message.createdAt,
-      text: message.text,
-      ai: message.ai,
-    })),
-    gptVersion: gptVersion
-  }),
-});
+export const completions = async (prompt, messages, gptVersion = AppData.model) => {
 
-const responseJson = await response.json();
-return responseJson?.response.trim();
+  // print the fetch request as CURL:
+  // console.log(`curl -X POST -H "Content-Type: application/json" -d '{"prompt": "${prompt}", "messages": ${JSON.stringify(messages)}, "gptVersion": "${gptVersion}"}' ${AppData.baseURL}`);
+
+  try {
+    let stringed = JSON.stringify({
+      prompt: prompt,
+      messages: messages?.map(message => ({
+        id: message.id,
+        createdAt: message.createdAt,
+        text: message.text,
+        ai: message.ai,
+      })) || [],
+      gptVersion: gptVersion
+    })
+
+    console.log("stringed = ", stringed);
+
+    const response = await axios.post("https://chat.sciphi.ai/api/completions", stringed);
+    console.log("response = ", response);
+
+    // const response = await fetch(AppData.baseURL, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json; charset=utf-8',
+    //   },
+    //   body: stringed,
+    // });
+    // console.log("response = ", response);
+
+
+    // const responseJson = await response.json();
+    // return responseJson?.response.trim();
+  }
+  catch (error) {
+    console.error(error);
+  }
 }
-
-// this function removes the last message from messages array, and resends the messages to the engine, the response is then returned
-// export const regenerate = async (messages, gptVersion) => {
-//   const openai = new OpenAI({
-//     apiKey: "",
-//     baseURL: "https://api.sciphi.ai/v1",
-//     dangerouslyAllowBrowser: true,
-//   });
-//   // console.log("messages = ", messages);
-
-//   let conversation =
-//     "### System:\n\nYou are a helpful assistant which thinks step by step to answer user questions.\n";
-
-
-//   for (const message of messages) {
-//     // console.log(message);
-//     if (message.ai) {
-//       conversation += `### Response:\n\n${message.text}\n`;
-//     } else {
-//       conversation += `### Instruction:\n\n${message.text}\n`;
-//     }
-//   }
-
-//   // console.log("Fetching completion with conversation = ", conversation);
-
-//   const response = await openai.completions.create({
-//     prompt: conversation,
-//     model: gptVersion,
-//     temperature: 0.1,
-//     max_tokens: 16_348,
-//     // stream: true,
-//   });
-
-//   let response_str = response.choices[0].text;
-//   response_str = response_str.trim();
-//   console.log("response_str = ", response_str);
-
-//   return response_str;
-// }
 
 // this function generates a title based on the messages array, and returns the title
 export const generateTitle = async (messages, gptVersion = AppData.model) => {
 
   let messageSet = "You are a title writing assistant. Summarize the text conversation below with a 3 word title.\n";
-  
+
   console.log("messages = ", messages);
   console.log("messageSet = ", messageSet);
 
@@ -79,7 +58,7 @@ export const generateTitle = async (messages, gptVersion = AppData.model) => {
       messageSet += `User: ${message.text}\n`;
     }
   }
-  
+
   // console.log("Fetching completion with conversation = ", conversation);
 
   const response = await completions(messageSet, [], gptVersion);
