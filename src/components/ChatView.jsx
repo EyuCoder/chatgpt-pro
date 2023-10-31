@@ -192,6 +192,7 @@ const ChatView = () => {
       <form
         className="flex flex-col px-10 mb-2 md:px-32 join sm:flex-row"
         onSubmit={sendMessage}
+        disabled={true}
       >
         <div className="flex items-stretch justify-between w-full relative">
           <input
