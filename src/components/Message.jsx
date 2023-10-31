@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
-import Logo from "../assets/logo2.png";
-
 
 import moment from "moment";
 import Markdown from "./Markdown";
-import { Person, Refresh, ThumbDown, ThumbUp } from "@mui/icons-material";
+import { Refresh, ThumbDown, ThumbUp, ZoomIn } from "@mui/icons-material";
 import { Box, IconButton, Stack, Tooltip, Typography } from "@mui/material";
+import { AppData } from "../utils/constants";
 
 /**
  * A chat message component that displays a message with a timestamp and an icon.
@@ -35,6 +34,7 @@ const Message = (props) => {
         {ai && <Box sx={{ display: "flex", alignItems: "center", gap: 2, cursor:"pointer" }}>
               <Tooltip placement="top" title="Rate reply as neutral - NOT IMPLEMENTED"><><IconButton color="inherit"><ThumbUp /></IconButton></></Tooltip>
               <Tooltip placement="top" title="Rate reply as negative - NOT IMPLEMENTED"><><IconButton color="inherit"><ThumbDown /></IconButton></></Tooltip>
+              {AppData.enabledRAG === true && <Tooltip placement="top" title="View context sources"><><IconButton color="inherit" onClick={()=>{props.viewModal(id)}}> <ZoomIn /> </IconButton></></Tooltip>}
               <Tooltip placement="top" title="Regenerate last message"><><IconButton color="inherit" onClick={(e) => props.regen(e)}><Refresh /></IconButton></></Tooltip>
              </Box>}
              </Box>
@@ -59,4 +59,5 @@ Message.propTypes = {
     // regen: PropTypes.func,
   }).isRequired,
   regen: PropTypes.func,
+  viewModal: PropTypes.func,
 };
