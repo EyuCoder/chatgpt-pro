@@ -19,23 +19,23 @@ export const completions = async (prompt, messages, gptVersion = AppData.model) 
       gptVersion: gptVersion
     })
 
-    console.log("stringed = ", stringed);
+    // console.log("stringed = ", stringed);
 
-    const response = await axios.post("https://chat.sciphi.ai/api/completions", stringed);
-    console.log("response = ", response);
-
-    // const response = await fetch(AppData.baseURL, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json; charset=utf-8',
-    //   },
-    //   body: stringed,
-    // });
+    // const response = await axios.post("https://chat.sciphi.ai/api/completions", stringed);
     // console.log("response = ", response);
 
+    const response = await fetch(AppData.baseURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: stringed,
+    });
+    console.log("response = ", response);
 
-    // const responseJson = await response.json();
-    // return responseJson?.response.trim();
+
+    const responseJson = await response.json();
+    return responseJson?.response.trim();
   }
   catch (error) {
     console.error(error);
