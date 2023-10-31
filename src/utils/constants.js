@@ -1,4 +1,6 @@
 export const AppData = {
+    // baseURL: "http://127.0.0.1:8099/api/completions",
     baseURL: "https://chat.sciphi.ai/api/completions",
-    model: "SciPhi/SciPhi-Self-RAG-Mistral-7B-32k"
+    model: "SciPhi/SciPhi-Self-RAG-Mistral-7B-32k",
+    enabledRAG: true
 }
