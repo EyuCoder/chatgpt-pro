@@ -161,13 +161,14 @@ const ChatView = () => {
     removeLastMessage();
 
     try {
-      const LLMResponse = await completions(
+      const regeneratedMessage = await fetchCompletion(
         messagesCopy[messagesCopy.length - 1].text,
-        messagesCopy
+        messagesCopy,
+        "SciPhi/SciPhi-Self-RAG-Mistral-7B-32k"
       );
 
       ReactDOM.unstable_batchedUpdates(() => {
-        LLMResponse && updateMessage(LLMResponse, true);
+        regeneratedMessage && updateMessage(regeneratedMessage, true);
         setThinking(false);
       });
     } catch (err) {
