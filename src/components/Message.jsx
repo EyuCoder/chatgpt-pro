@@ -14,36 +14,119 @@ import { AppData } from "../utils/constants";
 const Message = (props) => {
   const { id, createdAt, text, ai = false } = props.message;
 
-
   return (
     <>
-    <Stack flexDirection={ai ? 'flex-row-reverse' : 'row'} justifyContent={ai ? "flex-start" : 'flex-end'} alignItems={ai? "flex-start":'flex-end'} gap={2} paddingY={2} key={id}>
-      <Stack flexDirection={'column'} justifyContent={ai? 'flex-start':'flex-end'} alignItems={ai ? 'flex-start' : 'flex-end'} gap={2} sx={
-        ai ? { backgroundColor: "#c9d5c0",color:"#212121", borderRadius: "10px", padding: "10px", maxWidth: "80%" }:
-        { backgroundColor: "#8CC3E3", color:"#212121", borderRadius: "10px", padding: "10px", maxWidth: "80%" }
-        }>
-        <Markdown markdownText={text} />
+      <Stack
+        flexDirection={ai ? "flex-row-reverse" : "row"}
+        justifyContent={ai ? "flex-start" : "flex-end"}
+        alignItems={ai ? "flex-start" : "flex-end"}
+        gap={2}
+        paddingY={2}
+        key={id}
+      >
+        <Stack
+          flexDirection={"column"}
+          justifyContent={ai ? "flex-start" : "flex-end"}
+          alignItems={ai ? "flex-start" : "flex-end"}
+          gap={2}
+          sx={
+            ai
+              ? {
+                  background: "linear-gradient(to right, #31246e, #3920c7)", // Use linear-gradient with "to right" direction
+                  color: "#ffffff",
+                  // backgroundColor: "#2b205e",
+                  // backgroundColor: "#AEC6F6",
+                  // color: "#000000",
+                  borderRadius: "10px",
+                  padding: "10px",
+                  maxWidth: "80%",
+                }
+              : {
+                  backgroundColor: "#2d333a",
+                  color: "#ffffff",
+                  borderRadius: "10px",
+                  padding: "10px",
+                  maxWidth: "80%",
+                }
+          }
+        >
+          <Markdown markdownText={text} />
 
-
-        {/* stack footer */}
-        {/* box that is centered, flex, and keeps both items between each other */}
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
-        <Typography variant="body2" color={"text.dark"} textAlign={ai?'right' :'left'}>
-        {moment(createdAt).calendar()}
-        </Typography>
-        {ai && <Box sx={{ display: "flex", alignItems: "center", gap: 2, cursor:"pointer" }}>
-              <Tooltip placement="top" title="Rate reply as neutral - NOT IMPLEMENTED"><><IconButton color="inherit"><ThumbUp /></IconButton></></Tooltip>
-              <Tooltip placement="top" title="Rate reply as negative - NOT IMPLEMENTED"><><IconButton color="inherit"><ThumbDown /></IconButton></></Tooltip>
-              {AppData.enabledRAG === true && <Tooltip placement="top" title="View context sources"><><IconButton color="inherit" onClick={()=>{props.viewModal(id)}}> <ZoomIn /> </IconButton></></Tooltip>}
-              <Tooltip placement="top" title="Regenerate last message"><><IconButton color="inherit" onClick={(e) => props.regen(e)}><Refresh /></IconButton></></Tooltip>
-             </Box>}
-             </Box>
-
+          {/* stack footer */}
+          {/* box that is centered, flex, and keeps both items between each other */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            <Typography
+              variant="body2"
+              color={"text.dark"}
+              textAlign={ai ? "right" : "left"}
+            >
+              {moment(createdAt).calendar()}
+            </Typography>
+            {ai && (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 2,
+                  cursor: "pointer",
+                }}
+              >
+                <Tooltip
+                  placement="top"
+                  title="Rate reply as neutral - NOT IMPLEMENTED"
+                >
+                  <>
+                    <IconButton color="inherit">
+                      <ThumbUp />
+                    </IconButton>
+                  </>
+                </Tooltip>
+                <Tooltip
+                  placement="top"
+                  title="Rate reply as negative - NOT IMPLEMENTED"
+                >
+                  <>
+                    <IconButton color="inherit">
+                      <ThumbDown />
+                    </IconButton>
+                  </>
+                </Tooltip>
+                {AppData.enabledRAG === true && (
+                  <Tooltip placement="top" title="View context sources">
+                    <>
+                      <IconButton
+                        color="inherit"
+                        onClick={() => {
+                          props.viewModal(id);
+                        }}
+                      >
+                        {" "}
+                        <ZoomIn />{" "}
+                      </IconButton>
+                    </>
+                  </Tooltip>
+                )}
+                <Tooltip placement="top" title="Regenerate last message">
+                  <>
+                    <IconButton color="inherit" onClick={(e) => props.regen(e)}>
+                      <Refresh />
+                    </IconButton>
+                  </>
+                </Tooltip>
+              </Box>
+            )}
+          </Box>
+        </Stack>
       </Stack>
-    </Stack>
-    {/* <img src={Logo} style={{ width: "50px", height: "50px", marginRight:"auto" }} alt="logo" /> */}
-    {/* <Person sx={{ color: "primary.main", fontSize: "50px", marginLeft:"auto" }} /> */}
-
+      {/* <img src={Logo} style={{ width: "50px", height: "50px", marginRight:"auto" }} alt="logo" /> */}
+      {/* <Person sx={{ color: "primary.main", fontSize: "50px", marginLeft:"auto" }} /> */}
     </>
   );
 };

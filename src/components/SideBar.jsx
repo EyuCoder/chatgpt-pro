@@ -12,6 +12,7 @@ import {
   Divider,
   IconButton,
   List,
+  Link,
   ListItem,
   ListItemButton,
   ListItemIcon,
@@ -19,6 +20,7 @@ import {
   Typography,
 } from "@mui/material";
 
+import logo from "../assets/logo.png";
 /**
  * A sidebar component that displays a list of nav items and a toggle
  * for switching between light and dark modes.
@@ -55,9 +57,41 @@ const SideBar = (props) => {
   const drawerContent = (
     <>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Link href="https://sciphi.ai" underline="none">
+          <Box
+            sx={{
+              display: "flex",
+              pt: 2,
+              pb: 1.9,
+              ml: 2,
+              justifyContent: "space-between",
+              alignItems: "center", // To align items perfectly inline.
+            }}
+          >
+            <img
+              src={logo}
+              alt="logo"
+              width="32px"
+              height="32px"
+              sx={{ marginRight: 1 }}
+            />{" "}
+            {/* Added marginRight for slight separation */}
+            <Typography variant="h6" noWrap sx={{ pl: 1, color: "white" }}>
+              SciPhi
+            </Typography>
+            <Button
+              onClick={changeDrawer}
+              sx={{ display: { xs: "block", sm: "none" } }}
+            >
+              {/* Your button content here */}
+            </Button>
+          </Box>
+        </Link>
+
+        {/* <img src={logo} alt="logo" width="50px" height="50px" />
         <Typography variant="h6" noWrap sx={{ ml: 1, mt: 1, mb: 1 }}>
           SciPhi
-        </Typography>
+        </Typography> */}
         <Button
           onClick={changeDrawer}
           sx={{ display: { xs: "block", sm: "none" } }}
