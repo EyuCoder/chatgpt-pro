@@ -34,9 +34,6 @@ const Message = (props) => {
               ? {
                   background: "linear-gradient(to right, #31246e, #3920c7)", // Use linear-gradient with "to right" direction
                   color: "#ffffff",
-                  // backgroundColor: "#2b205e",
-                  // backgroundColor: "#AEC6F6",
-                  // color: "#000000",
                   borderRadius: "10px",
                   padding: "10px",
                   maxWidth: "80%",

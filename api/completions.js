@@ -32,12 +32,10 @@ export default async (req, res) => {
   const response = await openai.completions.create({
     prompt: conversation,
     model: gptVersion,
-    temperature: 0.1,
+    temperature: 0.2,
     max_tokens: 16_348,
   });
-
-  let response_str = response.choices[0].text;
-  response_str = response_str.trim();
-
-  res.status(200).json({ response: response_str });
+  res
+    .status(200)
+    .json({ response: response.completion, context: response.context });
 };

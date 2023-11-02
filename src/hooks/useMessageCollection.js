@@ -33,6 +33,7 @@ const useMessageCollection = () => {
         const newConversation = {
           id: 1,
           title: "Default Conversation",
+          context: {},
           uuid: uuidv4(),
           messages: [],
           timestamp: Date.now(),
@@ -89,6 +90,7 @@ const useMessageCollection = () => {
     const newConversation = {
       id: conversations.length + 1,
       title: "New Conversation",
+      context: {},
       uuid: uuidv4(),
       messages: [],
       timestamp: Date.now(),
@@ -111,6 +113,7 @@ const useMessageCollection = () => {
       const newConversation = {
         id: 1,
         title: "Default Conversation",
+        context: {},
         uuid: uuidv4(),
         messages: [],
         timestamp: Date.now(),
