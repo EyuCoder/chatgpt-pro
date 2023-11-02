@@ -64,7 +64,16 @@ const useMessageCollection = () => {
     setMessages((prev) => [...prev, message]);
   };
 
-  return { messages, addMessage, clearChat };
+  /**
+   * A function for removing the last message from the collection.
+   * 
+   * 
+   */
+  const removeLastMessage = () => {
+    setMessages((prev) => prev.slice(0, -1));
+  }
+
+  return { messages, addMessage, clearChat, removeLastMessage };
 };
 
 export default useMessageCollection;

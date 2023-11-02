@@ -48,7 +48,7 @@ const ChatView = () => {
   const [formValue, setFormValue] = useState("");
   const [thinking, setThinking] = useState(false);
   const [gpt, setGpt] = useState(gptModel[0]);
-  const [messages, addMessage] = useContext(ChatContext);
+  const [messages, addMessage, clearChat, removeLastMessage] = useContext(ChatContext);
   const [initialMessageInjected, setInitialMessageInjected] = useState(false);
 
   const initialMessageProcessed = useRef(false);
@@ -77,6 +77,8 @@ const ChatView = () => {
     console.log("Adding message: ", newMsg); // Debug log
     addMessage(newMsg);
   };
+
+
 
   /**
    * Sends our prompt to our API and get response to our request from openai.
@@ -113,6 +115,40 @@ const ChatView = () => {
 
     setThinking(false);
   };
+
+  const regenerateMessage = async (e) => {
+    e?.preventDefault(); // e will be undefined when called programmatically
+
+    // start thinking process
+    setThinking(true);
+    // do we want to reset user input?
+    setFormValue("");
+
+    const messagesCopy = [...messages];
+    messagesCopy.pop();
+
+    // remove last message
+    removeLastMessage();
+
+    try{
+    const LLMResponse = await regenerate(messagesCopy, "emrgnt-cmplxty/Mistral-7b-Phibrarian-32k")
+
+    ReactDOM.unstable_batchedUpdates(() => {
+      LLMResponse && updateMessage(LLMResponse, true);
+      setThinking(false);
+    });
+
+      console.log("messages  = ", messages);
+    } catch (err) {
+      window.alert(`Error: ${err} please try again later`);
+      setThinking(false);
+    }
+
+    // end thinking process
+    setThinking(false);
+  };
+
+  
   useEffect(() => {
     const getInitialMessage = () => {
       const urlParams = new URLSearchParams(window.location.search);
@@ -165,7 +201,7 @@ const ChatView = () => {
       <section className="flex flex-col flex-grow w-full px-4 overflow-y-scroll sm:px-10 md:px-32 ">
         {messages.length ? (
           messages.map((message, index) => (
-            <Message key={index} message={{ ...message }} />
+            <Message key={index} message={{ ...message }} regen={(e) => regenerateMessage(e)} />
           ))
         ) : (
           <div className="flex my-2">
