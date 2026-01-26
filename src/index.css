@@ -12,6 +12,85 @@ body {
   .tabs-boxed .tab-active {
     @apply bg-slate-800 bg-opacity-50 text-slate-200 !important;
   }
+
+  .markdown-content {
+    @apply text-sm leading-relaxed;
+  }
+
+  .markdown-content :where(p) {
+    @apply mb-3;
+  }
+
+  .markdown-content :where(ul) {
+    @apply list-disc pl-5 mb-3;
+  }
+
+  .markdown-content :where(ol) {
+    @apply list-decimal pl-5 mb-3;
+  }
+
+  .markdown-content :where(li) {
+    @apply mb-1;
+  }
+
+  .markdown-content :where(blockquote) {
+    @apply border-l-4 border-slate-500 pl-4 italic opacity-90;
+  }
+
+  .markdown-content :where(code) {
+    @apply bg-slate-900 bg-opacity-60 px-1.5 py-0.5 rounded;
+  }
+
+  .markdown-content :where(img) {
+    @apply max-w-full rounded-lg shadow-lg my-3;
+  }
+
+  .markdown-content :where(table) {
+    @apply w-full border-collapse text-sm my-3;
+  }
+
+  .markdown-content :where(th, td) {
+    @apply border border-slate-600 px-2 py-1 text-left;
+  }
+
+  .markdown-content :where(hr) {
+    @apply my-4 border-slate-600;
+  }
+
+  .thought-sidebar {
+    @apply relative w-full md:w-80 rounded-2xl bg-dark-grey bg-opacity-95 text-slate-200 border border-slate-700 border-opacity-60 shadow-2xl p-4 backdrop-blur h-[calc(100vh-2rem)] sticky top-4;
+    animation: thought-slide 260ms ease-out;
+  }
+
+  .thought-card {
+    @apply rounded-xl bg-slate-900 bg-opacity-60 border border-slate-700 border-opacity-60 p-3 shadow;
+  }
+
+  .thought-pop {
+    animation: thought-pop 220ms ease-out;
+  }
+}
+
+@keyframes thought-slide {
+  from {
+    transform: translateX(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes thought-pop {
+  from {
+    transform: translateY(6px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
 }
 
 ::-webkit-scrollbar {

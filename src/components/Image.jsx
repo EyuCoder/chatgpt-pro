@@ -12,7 +12,7 @@ const Image = (props) => {
       <img
         className='bg-cover rounded-lg shadow-lg'
         src={props.url}
-        alt='dalle generated picture'
+        alt='generated image'
         loading='lazy'
       />
     </>

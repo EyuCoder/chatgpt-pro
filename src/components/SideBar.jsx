@@ -1,12 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
-import {
-  MdClose,
-  MdMenu,
-  MdOutlineCoffee,
-  MdOutlineVpnKey,
-  MdDelete,
-} from 'react-icons/md';
-import { AiOutlineGithub } from 'react-icons/ai';
+import { MdClose, MdMenu, MdDelete, MdAdd, MdChat } from 'react-icons/md';
+import { MdSettings } from 'react-icons/md';
 import { ChatContext } from '../context/chatContext';
 import bot from '../assets/logo.svg';
 import ToggleTheme from './ToggleTheme';
@@ -21,7 +15,14 @@ import Setting from './Setting';
  */
 const SideBar = () => {
   const [open, setOpen] = useState(true);
-  const [, , clearChat] = useContext(ChatContext);
+  const {
+    clearChat,
+    chats,
+    currentChatId,
+    selectChat,
+    createNewChat,
+    deleteChat,
+  } = useContext(ChatContext);
   const [modalOpen, setModalOpen] = useState(false);
 
   function handleResize() {
@@ -56,45 +57,83 @@ const SideBar = () => {
         </div>
       </div>
 
-      <ul className='w-full menu rounded-box'>
+      <div className='w-full px-2'>
+        <button
+          type='button'
+          className='btn btn-outline btn-sm w-full'
+          onClick={createNewChat}>
+          <MdAdd size={16} />
+          <span className={`${!open && 'hidden'}`}>New chat</span>
+        </button>
+      </div>
+
+      <div className='w-full px-2 flex-1 overflow-hidden'>
+        <p
+          className={`text-xs uppercase text-slate-500 px-2 mb-2 ${
+            !open && 'hidden'
+          }`}>
+          Chats
+        </p>
+        <ul className='w-full menu rounded-box overflow-y-auto max-h-full'>
+          {chats.map((chat) => {
+            const active = String(chat.id) === String(currentChatId);
+            return (
+              <li key={chat.id}>
+                <a
+                  className={active ? 'active' : undefined}
+                  onClick={() => selectChat(chat.id)}>
+                  <MdChat size={15} />
+                  <span className={`${!open && 'hidden'}`}>
+                    {chat.title || 'New chat'}
+                  </span>
+                  {open && (
+                    <button
+                      type='button'
+                      className='btn btn-ghost btn-xs ml-auto'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        deleteChat(chat.id);
+                      }}
+                      aria-label='Delete chat'>
+                      <MdDelete size={14} />
+                    </button>
+                  )}
+                </a>
+              </li>
+            );
+          })}
+          {!chats.length && (
+            <li>
+              <span className='text-xs text-slate-500 px-2'>
+                No chats yet
+              </span>
+            </li>
+          )}
+        </ul>
+      </div>
+
+      <ul className='absolute bottom-0 w-full gap-1 menu rounded-box'>
         <li>
           <a className='border border-slate-500' onClick={clear}>
             <MdDelete size={15} />
             <p className={`${!open && 'hidden'}`}>Clear chat</p>
           </a>
         </li>
-      </ul>
-
-      <ul className='absolute bottom-0 w-full gap-1 menu rounded-box'>
         <li>
           <ToggleTheme open={open} />
         </li>
         <li>
-          <a
-            href='https://www.buymeacoffee.com/eyuel'
-            rel='noreferrer'
-            target='_blank'>
-            <MdOutlineCoffee size={15} />
-            <p className={`${!open && 'hidden'}`}>Support this project</p>
-          </a>
-        </li>
-        <li>
-          <a
-            rel='noreferrer'
-            target='_blank'
-            href='https://github.com/EyuCoder/chatgpt-clone'>
-            <AiOutlineGithub size={15} />
-            <p className={`${!open && 'hidden'}`}>Github</p>
-          </a>
-        </li>
-        <li>
           <a onClick={() => setModalOpen(true)}>
-            <MdOutlineVpnKey size={15} />
-            <p className={`${!open && 'hidden'}`}>OpenAI Key</p>
+            <MdSettings size={15} />
+            <p className={`${!open && 'hidden'}`}>Ollama Settings</p>
           </a>
         </li>
       </ul>
-      <Modal title='Setting' modalOpen={modalOpen} setModalOpen={setModalOpen}>
+      <Modal
+        title='Ollama Settings'
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}>
         <Setting modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </Modal>
     </section>

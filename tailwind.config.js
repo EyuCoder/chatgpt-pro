@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import daisyui from 'daisyui';
-import light from 'daisyui/src/theming/themes';
-import dark from 'daisyui/src/theming/themes';
+import themes from 'daisyui/src/theming/themes.js';
 
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
@@ -23,12 +22,12 @@ export default {
       'dark',
       {
         light: {
-          ...light['[data-theme=light]'],
+          ...themes['[data-theme=light]'],
           neutral: '#cbd5e1',
           'neutral-content': '#475569',
         },
         dark: {
-          ...dark['[data-theme=dark]'],
+          ...themes['[data-theme=dark]'],
           neutral: '#171c21',
           'neutral-content': '#94a3b8',
         },
